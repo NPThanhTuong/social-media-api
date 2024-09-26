@@ -24,6 +24,7 @@ public class Comment implements Serializable {
     private String content;
     private Date createdAt;
     private Date updatedAt;
+    private Date deleteAt;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
