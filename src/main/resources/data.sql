@@ -5,7 +5,7 @@ VALUES
 ('User', 'Người dùng thường với quyền hạn hạn chế') ;
 
 
-INSERT INTO user( role_id, name, dob, phone, email, password, avatar, bio, coverimage, createdat, updatedat, deletedat, unblockedat)
+INSERT INTO user( role_id, name, dob, phone, email, password, avatar, bio, cover_image, created_at, updated_at, deleted_at, unblocked_at)
 VALUES
 ( 1, 'Nguyễn Ngọc Ánh', '1990-01-01', '0912000001', 'nnanh124@gmail.com', '12345', 'hinh1.jpg', 'Lập trình viên', 'hinh1-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
 ( 2, 'Trần Thị Kim Liên', '1992-02-02', '0912000002', 'ttkl92@gmail.com', '12345', 'hinh2.jpg', 'Nhà thiết kế', 'hinh2-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
@@ -136,17 +136,17 @@ VALUES
 
 INSERT INTO room_call ( user_id, room_id, status, started_at, ended_at)
 VALUES
-( 1, 1, 'Đang hoạt động', CURRENT_TIMESTAMP, NULL),
+( 1, 1, 'Không bắt máy', CURRENT_TIMESTAMP, NULL),
 ( 2, 1, 'Hoàn tất', '2024-09-25 10:00:00', '2024-09-25 11:00:00'),
-( 3, 2, 'Đang hoạt động', CURRENT_TIMESTAMP, NULL),
+( 3, 2, 'Không bắt máy', CURRENT_TIMESTAMP, NULL),
 ( 4, 2, 'Hoàn tất', '2024-09-25 09:00:00', '2024-09-25 10:00:00'),
 ( 5, 3, 'Hoàn tất', '2024-09-25 08:00:00', '2024-09-25 09:00:00'),
-( 6, 3, 'Đang hoạt động', CURRENT_TIMESTAMP, NULL),
-(7, 4, 'Đang hoạt động', CURRENT_TIMESTAMP, NULL),
+( 6, 3, 'Không bắt máy', CURRENT_TIMESTAMP, NULL),
+(7, 4, 'Không bắt máy', CURRENT_TIMESTAMP, NULL),
 ( 8, 4, 'Hoàn tất', '2024-09-24 15:00:00', '2024-09-24 16:00:00'),
 ( 9, 5, 'Hoàn tất', '2024-09-23 14:00:00', '2024-09-23 15:00:00'),
 ( 10, 5, 'Hoàn tất', '2024-09-23 13:00:00', '2024-09-23 14:00:00'),
-( 11, 6, 'Đang hoạt động', CURRENT_TIMESTAMP, NULL),
+( 11, 6, 'Không bắt máy', CURRENT_TIMESTAMP, NULL),
 (12, 6, 'Hoàn tất', '2024-09-22 12:00:00', '2024-09-22 13:00:00'),
 ( 13, 7, 'Hoàn tất', '2024-09-21 11:00:00', '2024-09-21 12:00:00'),
 ( 14, 7, 'Hoàn tất', '2024-09-20 10:00:00', '2024-09-20 11:00:00'),
@@ -184,8 +184,8 @@ VALUES
 INSERT INTO relationship_type ( name)
 VALUES
 ( 'Bạn bè'),
-('Chưa kết bạn'),
-('Chặn');
+('Yêu cầu'),
+('Đang chờ xác nhận');
 
 INSERT INTO relationship (user_owner_id, user_referenced_id, relationship_type_id, updated_at)
 VALUES
