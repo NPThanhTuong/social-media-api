@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+</head>
+<body>
+<div class="iq-sidebar  sidebar-default " th:fragment="sidebar">
+    <div id="sidebar-scrollbar">
+        <nav class="iq-sidebar-menu">
+            <ul id="iq-sidebar-toggle" class="iq-menu">
+
+                <li class="active">
+                    <a href="#post" data-bs-toggle="collapse" class="  collapsed" aria-expanded="false" style="width: 220px">
+                        <i class="fa-solid fa-newspaper" style="font-size: 18px"></i></i><span>Bài đăng</span>
+                        <i class="fa-solid fa-chevron-right iq-arrow-right" style="font-size: 16px; text-align: center; margin-right: -3px"></i>
+                    </a>
+                    <ul id="post" class="iq-submenu collapse" data-bs-parent="#iq-sidebar-toggle">
+                        <li class="">
+                            <a href="../app/email.html"><i class="  ri-inbox-line"></i>Inbox</a>
+                        </li>
+                        <li class="">
+                            <a href="../app/email-compose.html"><i class="ri-edit-line"></i>Email Compose</a>
+                        </li>
+                    </ul>
+
+                </li>
+                <li class="">
+                    <a href="#ui-element" data-bs-toggle="collapse" class="  collapsed" aria-expanded="false">
+                        <i class="ri-mail-line"></i><span>Email</span><i
+                            class="ri-arrow-right-s-line iq-arrow-right"></i>
+                    </a>
+                    <ul id="ui-element" class="iq-submenu collapse" data-bs-parent="#iq-sidebar-toggle">
+                        <li class="">
+                            <a href="../app/email.html"><i class="  ri-inbox-line"></i>Inbox</a>
+                        </li>
+                        <li class="">
+                            <a href="../app/email-compose.html"><i class="ri-edit-line"></i>Email Compose</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+
+                            </ul>
+                        </li>
+            </ul>
+        </nav>
+        <div class="p-5"></div>
+    </div>
+</div>
+</body>
+</html>
