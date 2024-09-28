@@ -16,14 +16,15 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Comment implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
     private Date createdAt;
     private Date updatedAt;
+    private Date deletedAt;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
@@ -40,4 +41,3 @@ public class Comment implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentComment")
     private List<Comment> replies = new ArrayList<>();
 }
-
