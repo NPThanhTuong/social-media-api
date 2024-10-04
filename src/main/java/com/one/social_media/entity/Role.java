@@ -10,8 +10,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
 
 @Entity
+@Getter
 public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
