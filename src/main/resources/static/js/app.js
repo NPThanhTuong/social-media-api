@@ -875,3 +875,39 @@ Editable Table
     });
     });
 })(jQuery);
+// document.addEventListener("DOMContentLoaded", function() {
+//     const images = document.querySelectorAll('.check-orientation');
+//
+//     images.forEach(img => {
+//         img.onload = function() {
+//             const width = img.naturalWidth;
+//             const height = img.naturalHeight;
+//
+//             if (width > height) {
+//                 // Ảnh ngang
+//                 img.classList.add('landscape');
+//             } else {
+//                 // Ảnh dọc
+//                 img.classList.add('portrait');
+//             }
+//         };
+//     });
+// });
+document.addEventListener("DOMContentLoaded", function() {
+    const images = document.querySelectorAll('.grid-item');
+    const container = document.querySelector('.grid-container');
+
+    const imageCount = images.length;
+
+    if (imageCount === 1) {
+        container.classList.add('one-image');
+    } else if (imageCount === 2) {
+        container.classList.add('two-images');
+    } else if (imageCount === 3) {
+        container.classList.add('three-images');
+    } else if (imageCount === 4) {
+        container.classList.add('four-images');
+    } else if (imageCount >= 5) {
+        container.classList.add('five-images');
+    }
+});

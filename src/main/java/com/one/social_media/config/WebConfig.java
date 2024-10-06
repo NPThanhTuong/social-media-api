@@ -17,7 +17,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/avatars/**")
                 .addResourceLocations("classpath:/avatars/");
-                }
+        registry.addResourceHandler("/cover_images/**")
+                .addResourceLocations("classpath:/cover_images/");
+
+    }
 
     @Bean
     public HiddenHttpMethodFilter hiddenHttpMethodFilter() {

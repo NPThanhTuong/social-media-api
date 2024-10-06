@@ -8,6 +8,321 @@
 </head>Title</title>
 </head>
 <body>
-    <p>Hello</p>
+    <div layout:fragment="content">
+        <div id="content-page" class="content-page">
+
+            <div class="container pb-4">
+                <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body profile-page p-0">
+                            <div class="profile-header">
+                                <div class="position-relative">
+                                    <img th:src="@{'/cover_images/' + ${user.coverImage}}" style="width: 100%; height: 250px; object-fit: cover; overflow: hidden" alt="profile-bg" class="rounded img-fluid">
+                                    <ul class="header-nav list-inline d-flex flex-wrap justify-end p-0 m-0">
+                                        <li><a href="#"><i class="ri-pencil-line"></i></a></li>
+                                        <li><a href="#"><i class="ri-settings-4-line"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="user-detail text-center mb-3">
+                                    <div class="profile-img">
+                                        <img th:src="@{'/avatars/' + ${user.avatar}}" src="" alt="profile-img" class="avatar-130 img-fluid">
+                                    </div>
+                                    <div class="profile-detail">
+                                        <h3 class="" th:text="${user.name}"></h3>
+                                    </div>
+                                </div>
+                                <div class="profile-info p-3 d-flex align-items-center justify-content-between position-relative">
+                                    <div class="social-links">
+                                    </div>
+                                    <div class="social-info">
+                                        <ul class="social-data-block d-flex align-items-center justify-content-between list-inline p-0 m-0">
+                                            <li class="text-center ps-3">
+                                                <h6>Posts</h6>
+                                                <p class="mb-0">690</p>
+                                            </li>
+                                            <li class="text-center ps-3">
+                                                <h6>Followers</h6>
+                                                <p class="mb-0">206</p>
+                                            </li>
+                                            <li class="text-center ps-3">
+                                                <h6>Following</h6>
+                                                <p class="mb-0">100</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-12">
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="timeline" role="tabpanel">
+                            <div class="card-body p-0">
+                                <div class="row">
+                                    <div class="col-lg-4">
+
+                                        <div class="card">
+                                            <div class="card-header d-flex justify-content-between">
+                                                <div class="user-post-data pb-3">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="me-3">
+                                                            <img class="rounded-circle  avatar-60" th:src="@{'/avatars/' + ${user.avatar}}" alt="">
+                                                        </div>
+                                                        <div class="w-100">
+                                                            <div class="d-flex justify-content-between flex-wrap">
+                                                                <div class="">
+                                                                    <h5 class="mb-0 d-inline-block"><a href="#" class="" th:text="${user.name}"></a></h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-sm-12 mb-4 mt-4">
+                                                        <div class="event-post position-relative">
+<!--                                                            <a href="#"><img src="../assets/images/page-img/07.jpg" alt="gallary-image" class="img-fluid rounded"></a>-->
+                                                            <div class="job-icon-position">
+                                                                <div class="job-icon bg-primary p-2 d-inline-block rounded-circle"><i class="ri-briefcase-line text-white"></i></div>
+                                                            </div>
+                                                            <div class="card-body text-center p-2">
+                                                                <h5 th:text="${user.bio}"></h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12 mb-4">
+                                                        <div class="event-post position-relative">
+                                                            <div class="job-icon-position">
+                                                                <div class="job-icon bg-primary p-2 d-inline-block rounded-circle"><i class="ri-briefcase-line text-white"></i></div>
+                                                            </div>
+                                                            <div class="card-body text-center p-2">
+                                                                <h5 th:text="${user.email}"></h5>
+                                                                <p class="mb-0">January 24, 2019</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="post-item">
+                                                    <div class="user-post-data pb-3">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="w-100">
+                                                                <div class="d-flex justify-content-between flex-wrap">
+                                                                    <div class="">
+                                                                        <p class="mb-0" th:text="${post.createdAt}"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+<!--                                                    <div class="user-post">-->
+<!--                                                        <p th:text="${post.content}"></p>-->
+<!--                                                        <div class="row">-->
+<!--                                                            <div th:each="image, iterStat : ${images}" class="col-md-4">-->
+<!--                                                                <div class="image-container">-->
+<!--                                                                    <img th:src="@{${image.path}}" alt="Image" class="img-fluid" />-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="user-post">-->
+<!--                                                        <p th:text="${post.content}"></p>-->
+<!--                                                        <div class="row">-->
+<!--                                                            <div th:each="image, iterStat : ${images}" th:if="${iterStat.index < 4}" class="col-md-4 mb-4">-->
+<!--                                                                <div class="image-container">-->
+<!--                                                                    <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded" />-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                            &lt;!&ndash; Hiển thị dấu cộng nếu có hơn 5 ảnh &ndash;&gt;-->
+<!--                                                            <div th:if="${images.size() > 5}" class="col-md-4 mb-4">-->
+<!--                                                                <div class="image-container position-relative">-->
+<!--                                                                    <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid rounded" />-->
+<!--                                                                    <div class="overlay">-->
+<!--                                                                        <span th:text="'+' + (${images.size()} - 5)"></span> &lt;!&ndash; Dấu cộng và số lượng ảnh còn lại &ndash;&gt;-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="user-post">-->
+<!--                                                        <p th:text="${post.content}"></p>-->
+<!--                                                        <div class="grid-container">-->
+<!--                                                            &lt;!&ndash; Hiển thị tối đa 4 ảnh đầu &ndash;&gt;-->
+<!--                                                            <div th:each="image, iterStat : ${images}" th:if="${iterStat.index < 4}" class="grid-item">-->
+<!--                                                                <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded" />-->
+<!--                                                            </div>-->
+<!--                                                            &lt;!&ndash; Hiển thị dấu cộng nếu có hơn 5 ảnh &ndash;&gt;-->
+<!--                                                            <div th:if="${images.size() > 5}" class="grid-item position-relative">-->
+<!--                                                                <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid rounded" />-->
+<!--                                                                <div class="overlay">-->
+<!--                                                                    <span th:text="'+' + (${images.size()} - 5)"></span>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+                                                    <div class="user-post">
+                                                        <p th:text="${post.content}"></p>
+                                                        <div class="grid-container ">
+                                                            <div th:each="image, iterStat : ${images}" th:if="${iterStat.index < 4}" class="grid-item">
+                                                                <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded check-orientation" />
+                                                            </div>
+                                                            <div th:if="${images.size() > 4}" class="grid-item position-relative">
+                                                                <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid" />
+                                                                <div class="overlay">
+                                                                    <span th:text="'+' + (${images.size()} - 4)"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+<!--                                                    <div class="user-post">-->
+<!--                                                        <p th:text="${post.content}"></p>-->
+<!--                                                        <div class="grid-container" th:class="${gridClass}">-->
+
+<!--                                                            <div th:each="image, iterStat : ${images}" th:if="${iterStat.index < 5}" class="grid-item">-->
+<!--                                                                <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded" />-->
+<!--                                                            </div>-->
+
+<!--                                                            &lt;!&ndash; Hiển thị dấu cộng nếu có hơn 5 ảnh &ndash;&gt;-->
+<!--                                                            <div th:if="${images.size() > 5}" class="grid-item position-relative">-->
+<!--                                                                <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid" />-->
+<!--                                                                <div class="overlay">-->
+<!--                                                                    <span th:text="'+' + (${images.size()} - 5)"></span>-->
+<!--                                                                </div>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+
+
+                                                    <div class="comment-area mt-3">
+                                                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                                            <div class="like-block position-relative d-flex align-items-center">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="like-data">
+                                                                        <div class="dropdown">
+                                                   <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                   <img src="../assets/images/icon/01.png" class="img-fluid" alt="">
+                                                   </span>
+                                                                            <div class="dropdown-menu py-2">
+                                                                                <a class="ms-2 me-2" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Like" aria-label="Like"><img src="../assets/images/icon/01.png" class="img-fluid" alt=""></a>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="total-like-block ms-2 me-3">
+                                                                        <div class="dropdown">
+                                                   <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                   140 Likes
+                                                   </span>
+                                                                            <div class="dropdown-menu">
+                                                                                <a class="dropdown-item" href="#">Max Emum</a>
+                                                                                <a class="dropdown-item" href="#">Bill Yerds</a>
+                                                                                <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                                                                <a class="dropdown-item" href="#">Tara Misu</a>
+                                                                                <a class="dropdown-item" href="#">Midge Itz</a>
+                                                                                <a class="dropdown-item" href="#">Sal Vidge</a>
+                                                                                <a class="dropdown-item" href="#">Other</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="total-comment-block">
+                                                                    <div class="dropdown">
+                                                <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                20 Comment
+                                                </span>
+                                                                        <div class="dropdown-menu">
+                                                                            <a class="dropdown-item" href="#">Max Emum</a>
+                                                                            <a class="dropdown-item" href="#">Bill Yerds</a>
+                                                                            <a class="dropdown-item" href="#">Hap E. Birthday</a>
+                                                                            <a class="dropdown-item" href="#">Tara Misu</a>
+                                                                            <a class="dropdown-item" href="#">Midge Itz</a>
+                                                                            <a class="dropdown-item" href="#">Sal Vidge</a>
+                                                                            <a class="dropdown-item" href="#">Other</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="share-block d-flex align-items-center feather-icon mt-2 mt-md-0">
+                                                                <a href="#" data-bs-toggle="offcanvas" data-bs-target="#share-btn" aria-controls="share-btn"><i class="ri-share-line"></i>
+                                                                    <span class="ms-1">99 Share</span></a>
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <ul class="post-comments p-0 m-0">
+                                                            <li class="mb-2">
+                                                                <div class="d-flex flex-wrap">
+                                                                    <div class="user-img">
+                                                                        <img src="../assets/images/user/02.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid">
+                                                                    </div>
+                                                                    <div class="comment-data-block ms-3">
+                                                                        <h6>Monty Carlo</h6>
+                                                                        <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                                                        <div class="d-flex flex-wrap align-items-center comment-activity">
+                                                                            <a href="#">like</a>
+                                                                            <a href="#">reply</a>
+                                                                            <a href="#">translate</a>
+                                                                            <span> 5 min </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="d-flex flex-wrap">
+                                                                    <div class="user-img">
+                                                                        <img src="../assets/images/user/03.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid">
+                                                                    </div>
+                                                                    <div class="comment-data-block ms-3">
+                                                                        <h6>Paul Molive</h6>
+                                                                        <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                                                        <div class="d-flex flex-wrap align-items-center comment-activity">
+                                                                            <a href="#">like</a>
+                                                                            <a href="#">reply</a>
+                                                                            <a href="#">translate</a>
+                                                                            <span> 5 min </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <form class="comment-text d-flex align-items-center mt-3" action="javascript:void(0);">
+                                                            <input type="text" class="form-control rounded" placeholder="Enter Your Comment">
+                                                            <div class="comment-attagement d-flex">
+                                                                <a href="#"><i class="ri-link me-3"></i></a>
+                                                                <a href="#"><i class="ri-user-smile-line me-3"></i></a>
+                                                                <a href="#"><i class="ri-camera-line me-3"></i></a>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <img src="../assets/images/page-img/page-load-loader.gif" alt="loader" style="height: 100px;">
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+
+    </script>
 </body>
 </html>

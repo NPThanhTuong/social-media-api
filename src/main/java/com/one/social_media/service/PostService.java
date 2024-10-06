@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,11 @@ public class PostService implements PostServiceImpl{
     public Void deletePostById(long id) {
         postRepository.deleteById(id);
         return null;
+    }
+
+    @Override
+    public Optional<Post> findById(Long id) {
+        return postRepository.findById(id);
     }
 
 

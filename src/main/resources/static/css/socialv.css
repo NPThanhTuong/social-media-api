@@ -28296,3 +28296,78 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
     justify-content: center;
     gap: 6px;
 }
+
+.user-post {
+    /*max-width: 610px; !* Chiều rộng tối đa cho toàn bộ khung *!*/
+    margin: auto; /* Canh giữa khung */
+    /*max-height: 400px;*/
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap; /* Để hình ảnh có thể xuống dòng khi không đủ chỗ */
+    gap: 10px; /* Khoảng cách giữa các hình ảnh */
+}
+
+.grid-item {
+    position: relative;
+    overflow: hidden; /* Ẩn phần thừa của hình ảnh */
+}
+
+/* Điều chỉnh kích thước cho các hình ảnh */
+.grid-item img {
+    width: 100%; /* Đảm bảo hình ảnh chiếm 100% chiều rộng */
+    height: auto; /* Chiều cao tự động để giữ tỷ lệ */
+    border-radius: 8px; /* Bo góc cho hình ảnh */
+    object-fit: cover; /* Đảm bảo hình ảnh đầy đủ trong khung */
+}
+
+/* Các kiểu cho các số lượng hình khác nhau */
+.grid-container .grid-item {
+    flex: 1 1 calc(50% - 10px); /* Mặc định 2 hình trên 1 dòng */
+}
+
+.grid-container .grid-item:nth-child(1) {
+    flex: 1 1 100%; /* 1 hình chiếm toàn bộ chiều rộng */
+}
+
+.grid-container .grid-item:nth-child(n + 2):nth-child(-n + 3) {
+    flex: 1 1 calc(50% - 10px); /* 2 hình, mỗi hình chiếm 50% */
+}
+
+.grid-container .grid-item:nth-child(n + 4):nth-child(-n + 5) {
+    flex: 1 1 calc(33.33% - 10px); /* 3 hình, mỗi hình chiếm 33.33% */
+}
+
+/* Điều chỉnh cho 5 hình */
+.grid-container .grid-item:nth-child(6) {
+    flex: 1 1 calc(25% - 10px); /* 4 hình, mỗi hình chiếm 25% */
+}
+
+.grid-container .grid-item:nth-child(n + 7) {
+    flex: 1 1 calc(20% - 10px); /* 5 hình, mỗi hình chiếm 20% */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: 8px; /* Bo góc cho overlay */
+}
+
+/* Media Queries để điều chỉnh hiển thị trên các kích thước màn hình khác nhau */
+@media (max-width: 768px) {
+    .grid-container .grid-item {
+        flex: 1 1 100%; /* Trên màn hình nhỏ hơn, mỗi hình ảnh chiếm toàn bộ chiều rộng */
+    }
+}
+
