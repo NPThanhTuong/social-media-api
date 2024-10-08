@@ -911,3 +911,97 @@ document.addEventListener("DOMContentLoaded", function() {
         container.classList.add('five-images');
     }
 });
+document.getElementById('loadMore').addEventListener('click', function() {
+    // Lấy tất cả các bình luận ẩn
+    const hiddenComments = document.querySelectorAll('#commentList .d-none');
+
+    // Hiển thị thêm 5 bình luận mỗi lần nhấn nút
+    const commentsToShow = 5;
+
+    for (let i = 0; i < commentsToShow && i < hiddenComments.length; i++) {
+        hiddenComments[i].classList.remove('d-none');
+    }
+
+    // Nếu không còn bình luận ẩn, ẩn nút "Xem thêm"
+    if (hiddenComments.length <= commentsToShow) {
+        document.getElementById('loadMoreContainer').style.display = 'none';
+    }
+});
+
+// Lắng nghe sự kiện khi modal được hiển thị
+document.addEventListener('DOMContentLoaded', function() {
+    const imageModal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0; // Chỉ mục hình ảnh hiện tại
+    const images = []; // Mảng để lưu đường dẫn hình ảnh
+
+    // Hàm để cập nhật hình ảnh trong modal
+    function updateImage(index) {
+        modalImage.src = images[index];
+        currentIndex = index;
+        prevBtn.style.display = index === 0 ? 'none' : 'inline-block';
+        nextBtn.style.display = index === images.length - 1 ? 'none' : 'inline-block';
+    }
+
+    // Lắng nghe sự kiện khi modal mở
+    imageModal.addEventListener('show.bs.modal', function(event) {
+        const button = event.relatedTarget; // Thẻ <a> được bấm vào
+        const imagePath = button.getAttribute('data-bs-image'); // Lấy đường dẫn hình ảnh
+
+        // Lưu tất cả đường dẫn hình ảnh vào mảng
+        images.length = 0; // Xóa mảng trước đó
+        const imageElements = document.querySelectorAll('.grid-item a[data-bs-image]');
+        imageElements.forEach(imgElement => {
+            images.push(imgElement.getAttribute('data-bs-image'));
+        });
+
+        currentIndex = images.indexOf(imagePath); // Cập nhật chỉ mục hiện tại
+        updateImage(currentIndex); // Cập nhật hình ảnh ban đầu
+    });
+
+    // Lắng nghe sự kiện khi bấm nút "Tiếp theo"
+    nextBtn.addEventListener('click', function() {
+        if (currentIndex < images.length - 1) {
+            updateImage(currentIndex + 1);
+        }
+    });
+
+    // Lắng nghe sự kiện khi bấm nút "Quay lại"
+    prevBtn.addEventListener('click', function() {
+        if (currentIndex > 0) {
+            updateImage(currentIndex - 1);
+        }
+    });
+});
+
+let postIdToDelete;
+
+function openModal(postId) {
+    postIdToDelete = postId; // Lưu ID bài viết cần xóa
+    $('#deleteModal').modal('show'); // Hiện popup
+}
+
+function closeModal() {
+    $('#deleteModal').modal('hide'); // Ẩn popup
+}
+
+document.getElementById('confirmDelete').addEventListener('click', function() {
+    // Gửi yêu cầu xóa bài viết
+    // Cập nhật hành động của form xóa
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = `/dashboard/post/delete/${postIdToDelete}`; // Thay đổi URL theo ID
+
+    // Thêm input _method
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = '_method';
+    input.value = 'delete';
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit(); // Gửi yêu cầu xóa
+});

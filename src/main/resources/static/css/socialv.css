@@ -28307,6 +28307,7 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
     display: flex;
     flex-wrap: wrap; /* Để hình ảnh có thể xuống dòng khi không đủ chỗ */
     gap: 10px; /* Khoảng cách giữa các hình ảnh */
+    justify-content: center;
 }
 
 .grid-item {
@@ -28316,19 +28317,25 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
 
 /* Điều chỉnh kích thước cho các hình ảnh */
 .grid-item img {
-    width: 100%; /* Đảm bảo hình ảnh chiếm 100% chiều rộng */
-    height: auto; /* Chiều cao tự động để giữ tỷ lệ */
-    border-radius: 8px; /* Bo góc cho hình ảnh */
-    object-fit: cover; /* Đảm bảo hình ảnh đầy đủ trong khung */
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    max-height: 500px;
 }
-
+.one-image img{
+    max-height: 600px;
+    object-fit: contain;
+}
 /* Các kiểu cho các số lượng hình khác nhau */
 .grid-container .grid-item {
     flex: 1 1 calc(50% - 10px); /* Mặc định 2 hình trên 1 dòng */
 }
 
 .grid-container .grid-item:nth-child(1) {
-    flex: 1 1 100%; /* 1 hình chiếm toàn bộ chiều rộng */
+    /*flex: 1 1 100%; !* 1 hình chiếm toàn bộ chiều rộng *!*/
+    flex: 1 1 calc(50% - 10px); /* Mỗi item chiếm 50% chiều rộng trừ đi khoảng cách */
+
 }
 
 .grid-container .grid-item:nth-child(n + 2):nth-child(-n + 3) {
@@ -28371,3 +28378,83 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
     }
 }
 
+.d-none {
+    display: none;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 1px solid #007bff;
+    color: #007bff;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+}
+.modal {
+    display: none; /* Ẩn modal mặc định */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-image {
+    max-width: 80%;
+    max-height: 80%;
+    margin: auto;
+    display: block;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    user-select: none;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}

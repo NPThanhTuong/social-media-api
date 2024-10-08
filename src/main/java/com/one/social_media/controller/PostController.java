@@ -1,53 +1,70 @@
 package com.one.social_media.controller;
-import com.one.social_media.entity.Image;
-import com.one.social_media.entity.Post;
-import com.one.social_media.entity.User;
-import com.one.social_media.service.ImageService;
-import com.one.social_media.service.PostService;
-import com.one.social_media.service.UserService;
+import com.one.social_media.entity.*;
+import com.one.social_media.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("/dashboard/post")
 @RequiredArgsConstructor
 public class PostController {
-
     private final PostService postService;
     private final UserService userService;
     private final ImageService imageService;
+    private final CommentService commentService;
+    private final LikeService likeService;
 
-
+//    @GetMapping("/list")
+//    @PreAuthorize("hasRole('ADMIN')")
+//    public String list(Model model) {
+//        List<Post> posts = postService.getAllPosts();
+//        model.addAttribute("posts", posts);
+//        return "post/list";
+//    }
     @GetMapping("/list")
     @PreAuthorize("hasRole('ADMIN')")
-    public String list(Model model) {
-        List<Post> posts = postService.getAllPosts();
+    public String list(@RequestParam(defaultValue = "0") int page,
+                       @RequestParam(defaultValue = "30") int size,
+                       Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> posts = postService.getAllPosts(pageable);
         model.addAttribute("posts", posts);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", posts.getTotalPages());
         return "post/list";
     }
-
     @GetMapping("/view/{post_id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String view(Model model, @PathVariable("post_id") long postId) {
+
         Post post = postService.findById(postId).orElse(null);
         User user = userService.findById(post.getOwner().getId()).orElse(null);
         List<Image> images = imageService.findByPost(post);
+        List<Comment> comments =commentService.findByPost(post);
+        List<Like> likes = likeService.findByPostId(post.getId()).orElseGet(() -> new ArrayList<>());;
+        String gridClass = getGridClass(images.size());
 
         model.addAttribute("post", post);
         model.addAttribute("images", images);
         model.addAttribute("user", user);
-        String gridClass = getGridClass(images.size());
+        model.addAttribute("images", images);
+        model.addAttribute("user", user);
+        model.addAttribute("likes", likes);
+        model.addAttribute("comments", comments);
         model.addAttribute("gridClass", gridClass);
 
         return "post/view";
     }
+
     private String getGridClass(int size) {
         switch (size) {
             case 1: return "one-image";
@@ -57,6 +74,7 @@ public class PostController {
             default: return "five-images"; // for 5 or more images
         }
     }
+
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String delete(@PathVariable("id") Long id) {

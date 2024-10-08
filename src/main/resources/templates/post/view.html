@@ -66,7 +66,7 @@
 
                                         <div class="card">
                                             <div class="card-header d-flex justify-content-between">
-                                                <div class="user-post-data pb-3">
+                                                <div class="user-post-data pb-0">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="me-3">
                                                             <img class="rounded-circle  avatar-60" th:src="@{'/avatars/' + ${user.avatar}}" alt="">
@@ -125,83 +125,56 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
 <!--                                                    <div class="user-post">-->
 <!--                                                        <p th:text="${post.content}"></p>-->
-<!--                                                        <div class="row">-->
-<!--                                                            <div th:each="image, iterStat : ${images}" class="col-md-4">-->
-<!--                                                                <div class="image-container">-->
-<!--                                                                    <img th:src="@{${image.path}}" alt="Image" class="img-fluid" />-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="user-post">-->
-<!--                                                        <p th:text="${post.content}"></p>-->
-<!--                                                        <div class="row">-->
-<!--                                                            <div th:each="image, iterStat : ${images}" th:if="${iterStat.index < 4}" class="col-md-4 mb-4">-->
-<!--                                                                <div class="image-container">-->
-<!--                                                                    <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded" />-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
-<!--                                                            &lt;!&ndash; Hiển thị dấu cộng nếu có hơn 5 ảnh &ndash;&gt;-->
-<!--                                                            <div th:if="${images.size() > 5}" class="col-md-4 mb-4">-->
-<!--                                                                <div class="image-container position-relative">-->
-<!--                                                                    <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid rounded" />-->
-<!--                                                                    <div class="overlay">-->
-<!--                                                                        <span th:text="'+' + (${images.size()} - 5)"></span> &lt;!&ndash; Dấu cộng và số lượng ảnh còn lại &ndash;&gt;-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                    <div class="user-post">-->
-<!--                                                        <p th:text="${post.content}"></p>-->
-<!--                                                        <div class="grid-container">-->
-<!--                                                            &lt;!&ndash; Hiển thị tối đa 4 ảnh đầu &ndash;&gt;-->
+<!--                                                        <div class="grid-container ">-->
 <!--                                                            <div th:each="image, iterStat : ${images}" th:if="${iterStat.index < 4}" class="grid-item">-->
-<!--                                                                <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded" />-->
+<!--                                                                <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded check-orientation" />-->
 <!--                                                            </div>-->
-<!--                                                            &lt;!&ndash; Hiển thị dấu cộng nếu có hơn 5 ảnh &ndash;&gt;-->
-<!--                                                            <div th:if="${images.size() > 5}" class="grid-item position-relative">-->
-<!--                                                                <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid rounded" />-->
+<!--                                                            <div th:if="${images.size() > 4}" class="grid-item position-relative">-->
+<!--                                                                <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid" />-->
 <!--                                                                <div class="overlay">-->
-<!--                                                                    <span th:text="'+' + (${images.size()} - 5)"></span>-->
+<!--                                                                    <span th:text="'+' + (${images.size()} - 4)"></span>-->
 <!--                                                                </div>-->
 <!--                                                            </div>-->
 <!--                                                        </div>-->
 <!--                                                    </div>-->
                                                     <div class="user-post">
                                                         <p th:text="${post.content}"></p>
-                                                        <div class="grid-container ">
+                                                        <div class="grid-container">
                                                             <div th:each="image, iterStat : ${images}" th:if="${iterStat.index < 4}" class="grid-item">
-                                                                <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded check-orientation" />
+                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" th:data-bs-image="${image.path}">
+                                                                    <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded check-orientation" />
+                                                                </a>
                                                             </div>
                                                             <div th:if="${images.size() > 4}" class="grid-item position-relative">
-                                                                <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid" />
-                                                                <div class="overlay">
-                                                                    <span th:text="'+' + (${images.size()} - 4)"></span>
+                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" th:data-bs-image="${images[4].path}">
+                                                                    <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid" />
+                                                                    <div class="overlay">
+                                                                        <span th:text="'+' + (${images.size()} - 4)"></span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Modal để hiển thị hình ảnh lớn -->
+                                                    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <img id="modalImage" src="" alt="Large Image" class="img-fluid" />
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button id="prevBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="display: none;">Quay lại</button>
+                                                                    <button id="nextBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="display: none;">Tiếp theo</button>
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
 
-<!--                                                    <div class="user-post">-->
-<!--                                                        <p th:text="${post.content}"></p>-->
-<!--                                                        <div class="grid-container" th:class="${gridClass}">-->
-
-<!--                                                            <div th:each="image, iterStat : ${images}" th:if="${iterStat.index < 5}" class="grid-item">-->
-<!--                                                                <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded" />-->
-<!--                                                            </div>-->
-
-<!--                                                            &lt;!&ndash; Hiển thị dấu cộng nếu có hơn 5 ảnh &ndash;&gt;-->
-<!--                                                            <div th:if="${images.size() > 5}" class="grid-item position-relative">-->
-<!--                                                                <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid" />-->
-<!--                                                                <div class="overlay">-->
-<!--                                                                    <span th:text="'+' + (${images.size()} - 5)"></span>-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
 
 
                                                     <div class="comment-area mt-3">
@@ -210,9 +183,9 @@
                                                                 <div class="d-flex align-items-center">
                                                                     <div class="like-data">
                                                                         <div class="dropdown">
-                                                   <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                   <img src="../assets/images/icon/01.png" class="img-fluid" alt="">
-                                                   </span>
+                                                                           <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                                                <img src="../assets/images/icon/01.png" class="img-fluid" alt="">
+                                                                           </span>
                                                                             <div class="dropdown-menu py-2">
                                                                                 <a class="ms-2 me-2" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Like" aria-label="Like"><img src="../assets/images/icon/01.png" class="img-fluid" alt=""></a>
 
@@ -221,34 +194,24 @@
                                                                     </div>
                                                                     <div class="total-like-block ms-2 me-3">
                                                                         <div class="dropdown">
-                                                   <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                   140 Likes
-                                                   </span>
+                                                                           <span th:text="${likes.size()}" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                                                Tương tác
+                                                                           </span>
                                                                             <div class="dropdown-menu">
-                                                                                <a class="dropdown-item" href="#">Max Emum</a>
-                                                                                <a class="dropdown-item" href="#">Bill Yerds</a>
-                                                                                <a class="dropdown-item" href="#">Hap E. Birthday</a>
-                                                                                <a class="dropdown-item" href="#">Tara Misu</a>
-                                                                                <a class="dropdown-item" href="#">Midge Itz</a>
-                                                                                <a class="dropdown-item" href="#">Sal Vidge</a>
-                                                                                <a class="dropdown-item" href="#">Other</a>
+                                                                                <a th:each="like, iterStat : ${likes}" th:text="${like.user.name}" class="dropdown-item" >Tên người dùng</a>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="total-comment-block">
                                                                     <div class="dropdown">
-                                                <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                20 Comment
-                                                </span>
+                                                                        <span th:text="${comments.size()}" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                                            Bình luận
+                                                                        </span>
                                                                         <div class="dropdown-menu">
-                                                                            <a class="dropdown-item" href="#">Max Emum</a>
-                                                                            <a class="dropdown-item" href="#">Bill Yerds</a>
-                                                                            <a class="dropdown-item" href="#">Hap E. Birthday</a>
-                                                                            <a class="dropdown-item" href="#">Tara Misu</a>
-                                                                            <a class="dropdown-item" href="#">Midge Itz</a>
-                                                                            <a class="dropdown-item" href="#">Sal Vidge</a>
-                                                                            <a class="dropdown-item" href="#">Other</a>
+                                                                            <a th:each="comment, iterStat : ${comments}" th:text="${comment.content}" class="dropdown-item" href="#"></a>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -259,50 +222,49 @@
                                                             </div>
                                                         </div>
                                                         <hr>
-                                                        <ul class="post-comments p-0 m-0">
-                                                            <li class="mb-2">
+<!--                                                        <ul class="post-comments p-0 m-0">-->
+<!--                                                            <li th:each="comment, iterStat : ${comments}" class="mb-2">-->
+<!--                                                                <div class="d-flex flex-wrap">-->
+<!--                                                                    <div class="user-img">-->
+<!--                                                                        <img th:src="@{'/avatars/' + ${comment.user.avatar}}" alt="userimg" class="avatar-35 rounded-circle img-fluid">-->
+<!--                                                                    </div>-->
+<!--                                                                    <div class="comment-data-block ms-3">-->
+<!--                                                                        <h6 th:text="${comment.user.name}"></h6>-->
+<!--                                                                        <p class="mb-0" th:text="${comment.content}"></p>-->
+<!--                                                                        <div class="d-flex flex-wrap align-items-center comment-activity">-->
+<!--                                                                            <a href="#">Delete</a>-->
+<!--                                                                            <span th:text="${comment.createdAt}"></span>-->
+<!--                                                                        </div>-->
+<!--                                                                    </div>-->
+<!--                                                                </div>-->
+<!--                                                            </li>-->
+<!--                                                        </ul>-->
+                                                        <ul class="post-comments p-0 m-0" id="commentList">
+                                                            <li th:each="comment, iterStat : ${comments}"
+                                                                th:classappend="${iterStat.index < 10} ? '' : 'd-none'"
+                                                                class="mb-2">
                                                                 <div class="d-flex flex-wrap">
                                                                     <div class="user-img">
-                                                                        <img src="../assets/images/user/02.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid">
+                                                                        <img th:src="@{'/avatars/' + ${comment.user.avatar}}" alt="userimg" class="avatar-35 rounded-circle img-fluid">
                                                                     </div>
                                                                     <div class="comment-data-block ms-3">
-                                                                        <h6>Monty Carlo</h6>
-                                                                        <p class="mb-0">Lorem ipsum dolor sit amet</p>
+                                                                        <h6 th:text="${comment.user.name}"></h6>
+                                                                        <p class="mb-0" th:text="${comment.content}"></p>
                                                                         <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                            <a href="#">like</a>
-                                                                            <a href="#">reply</a>
-                                                                            <a href="#">translate</a>
-                                                                            <span> 5 min </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="d-flex flex-wrap">
-                                                                    <div class="user-img">
-                                                                        <img src="../assets/images/user/03.jpg" alt="userimg" class="avatar-35 rounded-circle img-fluid">
-                                                                    </div>
-                                                                    <div class="comment-data-block ms-3">
-                                                                        <h6>Paul Molive</h6>
-                                                                        <p class="mb-0">Lorem ipsum dolor sit amet</p>
-                                                                        <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                            <a href="#">like</a>
-                                                                            <a href="#">reply</a>
-                                                                            <a href="#">translate</a>
-                                                                            <span> 5 min </span>
+                                                                            <a href="#">Delete</a>
+                                                                            <span th:text="${comment.createdAt}"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </li>
                                                         </ul>
-                                                        <form class="comment-text d-flex align-items-center mt-3" action="javascript:void(0);">
-                                                            <input type="text" class="form-control rounded" placeholder="Enter Your Comment">
-                                                            <div class="comment-attagement d-flex">
-                                                                <a href="#"><i class="ri-link me-3"></i></a>
-                                                                <a href="#"><i class="ri-user-smile-line me-3"></i></a>
-                                                                <a href="#"><i class="ri-camera-line me-3"></i></a>
-                                                            </div>
-                                                        </form>
+
+                                                        <!-- Nút "Xem thêm" -->
+                                                        <div id="loadMoreContainer" class="text-center mt-3">
+                                                            <button id="loadMore" class="btn btn-primary">Xem thêm</button>
+                                                        </div>
+
+
                                                     </div>
                                                 </div>
 

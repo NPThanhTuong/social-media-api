@@ -9,9 +9,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
+import lombok.Getter;
 
 @Entity
 @Table(name = "post_like")  // Đổi tên bảng từ 'like' thành 'post_like'
+@Getter
 public class Like implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
