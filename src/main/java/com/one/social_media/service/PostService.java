@@ -1,6 +1,7 @@
 package com.one.social_media.service;
 
 import com.one.social_media.entity.Post;
+import com.one.social_media.entity.User;
 import com.one.social_media.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,5 +32,8 @@ public class PostService implements PostServiceImpl{
         return postRepository.findById(id);
     }
 
+    public int totalPostOfUser(User user) {
+        return  postRepository.countByUser(user);
+    }
 
 }

@@ -2,9 +2,9 @@
   <div class="iq-navbar-custom">
     <nav class="navbar navbar-expand-lg navbar-light p-0">
       <div class="iq-navbar-logo d-flex justify-content-between">
-        <a href="../dashboard/index.html">
+        <a th:href="@{/admin/dashboard}">
           <img src="../assets/images/logo.png" class="img-fluid" alt="">
-          <span>SocialV</span>
+          <span>Social</span>
         </a>
         <div class="iq-menu-bt align-self-center">
           <div class="wrapper-menu">
@@ -14,10 +14,7 @@
       </div>
 
       <div class="iq-search-bar device-search">
-        <form action="#" class="searchbox">
-          <a class="search-link" href="#"><i class="ri-search-line"></i></a>
-          <input type="text" class="text search-input" placeholder="Search here...">
-        </form>
+
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
         <i class="ri-menu-3-line"></i>
@@ -51,7 +48,6 @@
                       </div>
                       <div class="ms-3">
                         <h6 class="mb-0 ">Tài khoản của tôi</h6>
-<!--                        <p class="mb-0 font-size-12">View personal profile details.</p>-->
                       </div>
                     </div>
                   </a>
@@ -60,10 +56,7 @@
                       <div class="rounded card-icon bg-soft-warning">
                         <i class="ri-profile-line"></i>
                       </div>
-                      <div class="ms-3">
-                        <h6 class="mb-0 ">Chỉnh sửa</h6>
-<!--                        <p class="mb-0 font-size-12">Modify your personal details.</p>-->
-                      </div>
+
                     </div>
                   </a>
 

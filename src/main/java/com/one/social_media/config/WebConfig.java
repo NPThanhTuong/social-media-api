@@ -22,8 +22,5 @@ public class WebConfig implements WebMvcConfigurer {
 
     }
 
-    @Bean
-    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
-        return new HiddenHttpMethodFilter();
-    }
+
 }

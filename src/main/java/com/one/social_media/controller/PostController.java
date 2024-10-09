@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +23,8 @@ public class PostController {
     private final ImageService imageService;
     private final CommentService commentService;
     private final LikeService likeService;
+    private final RelationshipService relationshipService;
 
-//    @GetMapping("/list")
-//    @PreAuthorize("hasRole('ADMIN')")
-//    public String list(Model model) {
-//        List<Post> posts = postService.getAllPosts();
-//        model.addAttribute("posts", posts);
-//        return "post/list";
-//    }
     @GetMapping("/list")
     @PreAuthorize("hasRole('ADMIN')")
     public String list(@RequestParam(defaultValue = "0") int page,
@@ -42,6 +37,7 @@ public class PostController {
         model.addAttribute("totalPages", posts.getTotalPages());
         return "post/list";
     }
+
     @GetMapping("/view/{post_id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String view(Model model, @PathVariable("post_id") long postId) {
@@ -52,7 +48,8 @@ public class PostController {
         List<Comment> comments =commentService.findByPost(post);
         List<Like> likes = likeService.findByPostId(post.getId()).orElseGet(() -> new ArrayList<>());;
         String gridClass = getGridClass(images.size());
-
+        int totalPost = postService.totalPostOfUser(user);
+        int totalFriend = relationshipService.totalFriendsOfUser(user);
         model.addAttribute("post", post);
         model.addAttribute("images", images);
         model.addAttribute("user", user);
@@ -61,6 +58,8 @@ public class PostController {
         model.addAttribute("likes", likes);
         model.addAttribute("comments", comments);
         model.addAttribute("gridClass", gridClass);
+        model.addAttribute("totalPost", totalPost);
+        model.addAttribute("totalFriend", totalFriend);
 
         return "post/view";
     }
@@ -71,15 +70,17 @@ public class PostController {
             case 2: return "two-images";
             case 3: return "three-images";
             case 4: return "four-images";
-            default: return "five-images"; // for 5 or more images
+            default: return "five-images";
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String delete(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         postService.deletePostById(id);
-        return "redirect:/post/list";
+        redirectAttributes.addFlashAttribute("message", "Xóa bài viết thành công!");
+        return "redirect:/dashboard/post/list";
     }
+
 
 }

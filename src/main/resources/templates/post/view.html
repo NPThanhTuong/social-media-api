@@ -10,7 +10,6 @@
 <body>
     <div layout:fragment="content">
         <div id="content-page" class="content-page">
-
             <div class="container pb-4">
                 <div class="row">
                 <div class="col-sm-12">
@@ -19,10 +18,6 @@
                             <div class="profile-header">
                                 <div class="position-relative">
                                     <img th:src="@{'/cover_images/' + ${user.coverImage}}" style="width: 100%; height: 250px; object-fit: cover; overflow: hidden" alt="profile-bg" class="rounded img-fluid">
-                                    <ul class="header-nav list-inline d-flex flex-wrap justify-end p-0 m-0">
-                                        <li><a href="#"><i class="ri-pencil-line"></i></a></li>
-                                        <li><a href="#"><i class="ri-settings-4-line"></i></a></li>
-                                    </ul>
                                 </div>
                                 <div class="user-detail text-center mb-3">
                                     <div class="profile-img">
@@ -38,17 +33,14 @@
                                     <div class="social-info">
                                         <ul class="social-data-block d-flex align-items-center justify-content-between list-inline p-0 m-0">
                                             <li class="text-center ps-3">
-                                                <h6>Posts</h6>
-                                                <p class="mb-0">690</p>
+                                                <h6>Bài đăng</h6>
+                                                <p class="mb-0" th:text="${totalPost}"></p>
                                             </li>
                                             <li class="text-center ps-3">
-                                                <h6>Followers</h6>
-                                                <p class="mb-0">206</p>
+                                                <h6>Bạn bè</h6>
+                                                <p class="mb-0" th:text="${totalFriend}"></p>
                                             </li>
-                                            <li class="text-center ps-3">
-                                                <h6>Following</h6>
-                                                <p class="mb-0">100</p>
-                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -85,7 +77,6 @@
                                                 <div class="row">
                                                     <div class="col-sm-12 mb-4 mt-4">
                                                         <div class="event-post position-relative">
-<!--                                                            <a href="#"><img src="../assets/images/page-img/07.jpg" alt="gallary-image" class="img-fluid rounded"></a>-->
                                                             <div class="job-icon-position">
                                                                 <div class="job-icon bg-primary p-2 d-inline-block rounded-circle"><i class="ri-briefcase-line text-white"></i></div>
                                                             </div>
@@ -101,7 +92,6 @@
                                                             </div>
                                                             <div class="card-body text-center p-2">
                                                                 <h5 th:text="${user.email}"></h5>
-                                                                <p class="mb-0">January 24, 2019</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -117,29 +107,43 @@
                                                     <div class="user-post-data pb-3">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="w-100">
-                                                                <div class="d-flex justify-content-between flex-wrap">
-                                                                    <div class="">
-                                                                        <p class="mb-0" th:text="${post.createdAt}"></p>
+                                                                <div class="d-flex justify-content-between align-items-center">
+                                                                    <div>
+                                                                        <p class="mb-0" th:text="${#dates.format(post.createdAt, 'HH:mm dd/MM/yyyy')}"></p>
                                                                     </div>
+                                                                    <div class="text-end ">
+                                                                        <a th:href="@{/dashboard/post/delete/{id}(id=${post.id})}" class="trigger-btn" data-toggle="modal" th:data-target="'#myModal' + ${post.id}" >
+                                                                            <button class="btn btn-primary">Xóa bài viết</button>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                <!-- Modal HTML for each post -->
+                                                <div th:id="'myModal' + ${post.id}" class="modal fade">
+                                                    <div class="modal-dialog modal-confirm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header flex-column">
 
-<!--                                                    <div class="user-post">-->
-<!--                                                        <p th:text="${post.content}"></p>-->
-<!--                                                        <div class="grid-container ">-->
-<!--                                                            <div th:each="image, iterStat : ${images}" th:if="${iterStat.index < 4}" class="grid-item">-->
-<!--                                                                <img th:src="@{${image.path}}" alt="Image" class="img-fluid rounded check-orientation" />-->
-<!--                                                            </div>-->
-<!--                                                            <div th:if="${images.size() > 4}" class="grid-item position-relative">-->
-<!--                                                                <img th:src="@{${images[4].path}}" alt="Image" class="img-fluid" />-->
-<!--                                                                <div class="overlay">-->
-<!--                                                                    <span th:text="'+' + (${images.size()} - 4)"></span>-->
-<!--                                                                </div>-->
-<!--                                                            </div>-->
-<!--                                                        </div>-->
-<!--                                                    </div>-->
+                                                                <h4 class="modal-title w-100">Xóa bài viết</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times; </i></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Bạn có muốn xóa bài viết của tài khoản <span style="color: red; font-size: 17px" th:text="${post.owner.name}"></span>?</p>
+                                                            </div>
+                                                            <div class="modal-footer justify-content-center">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                                                                <a th:href="@{/dashboard/post/delete/{id}(id=${post.id})}" >
+                                                                    <input type="hidden" name="_method" value="delete" />
+                                                                    <button type="submit" class="btn btn-danger">Xóa</button>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                     <div class="user-post">
                                                         <p th:text="${post.content}"></p>
                                                         <div class="grid-container">
@@ -163,20 +167,17 @@
                                                     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
-                                                                <div class="modal-body">
+                                                                <div class="modal-body" style="text-align: center">
                                                                     <img id="modalImage" src="" alt="Large Image" class="img-fluid" />
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button id="prevBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="display: none;">Quay lại</button>
-                                                                    <button id="nextBtn" type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="display: none;">Tiếp theo</button>
+                                                                    <button id="prevBtn" type="button" class="btn btn-secondary" style="display: none;">Quay lại</button>
+                                                                    <button id="nextBtn" type="button" class="btn btn-secondary" style="display: none;">Tiếp theo</button>
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-
                                                     <div class="comment-area mt-3">
                                                         <div class="d-flex justify-content-between align-items-center flex-wrap">
                                                             <div class="like-block position-relative d-flex align-items-center">
@@ -194,9 +195,9 @@
                                                                     </div>
                                                                     <div class="total-like-block ms-2 me-3">
                                                                         <div class="dropdown">
-                                                                           <span th:text="${likes.size()}" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                                                Tương tác
-                                                                           </span>
+                                                                           <span th:text="${likes.size()} + ' Tương tác'" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
+                                                                        </span>
+
                                                                             <div class="dropdown-menu">
                                                                                 <a th:each="like, iterStat : ${likes}" th:text="${like.user.name}" class="dropdown-item" >Tên người dùng</a>
 
@@ -206,39 +207,17 @@
                                                                 </div>
                                                                 <div class="total-comment-block">
                                                                     <div class="dropdown">
-                                                                        <span th:text="${comments.size()}" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                                            Bình luận
-                                                                        </span>
+                                                                        <span th:text="${comments.size()} + ' Bình luận'" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button"></span>
+
                                                                         <div class="dropdown-menu">
                                                                             <a th:each="comment, iterStat : ${comments}" th:text="${comment.content}" class="dropdown-item" href="#"></a>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="share-block d-flex align-items-center feather-icon mt-2 mt-md-0">
-                                                                <a href="#" data-bs-toggle="offcanvas" data-bs-target="#share-btn" aria-controls="share-btn"><i class="ri-share-line"></i>
-                                                                    <span class="ms-1">99 Share</span></a>
-                                                            </div>
+
                                                         </div>
                                                         <hr>
-<!--                                                        <ul class="post-comments p-0 m-0">-->
-<!--                                                            <li th:each="comment, iterStat : ${comments}" class="mb-2">-->
-<!--                                                                <div class="d-flex flex-wrap">-->
-<!--                                                                    <div class="user-img">-->
-<!--                                                                        <img th:src="@{'/avatars/' + ${comment.user.avatar}}" alt="userimg" class="avatar-35 rounded-circle img-fluid">-->
-<!--                                                                    </div>-->
-<!--                                                                    <div class="comment-data-block ms-3">-->
-<!--                                                                        <h6 th:text="${comment.user.name}"></h6>-->
-<!--                                                                        <p class="mb-0" th:text="${comment.content}"></p>-->
-<!--                                                                        <div class="d-flex flex-wrap align-items-center comment-activity">-->
-<!--                                                                            <a href="#">Delete</a>-->
-<!--                                                                            <span th:text="${comment.createdAt}"></span>-->
-<!--                                                                        </div>-->
-<!--                                                                    </div>-->
-<!--                                                                </div>-->
-<!--                                                            </li>-->
-<!--                                                        </ul>-->
                                                         <ul class="post-comments p-0 m-0" id="commentList">
                                                             <li th:each="comment, iterStat : ${comments}"
                                                                 th:classappend="${iterStat.index < 10} ? '' : 'd-none'"
@@ -276,15 +255,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 text-center">
-                    <img src="../assets/images/page-img/page-load-loader.gif" alt="loader" style="height: 100px;">
-                </div>
+
             </div>
         </div>
         </div>
     </div>
-    <script>
 
-    </script>
 </body>
 </html>

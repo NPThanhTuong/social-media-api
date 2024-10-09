@@ -28321,7 +28321,7 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
     height: auto;
     border-radius: 8px;
     object-fit: cover;
-    max-height: 500px;
+    max-height: 300px;
 }
 .one-image img{
     max-height: 600px;
@@ -28354,7 +28354,11 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
 .grid-container .grid-item:nth-child(n + 7) {
     flex: 1 1 calc(20% - 10px); /* 5 hình, mỗi hình chiếm 20% */
 }
-
+.img-view{
+    max-width: 100%;
+    object-fit: contain;
+    max-height: 500px;
+}
 .overlay {
     position: absolute;
     top: 0;
@@ -28400,61 +28404,147 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
     background-color: #007bff;
     color: white;
 }
-.modal {
-    display: none; /* Ẩn modal mặc định */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-}
+/*.modal {*/
+/*    display: none; !* Ẩn modal mặc định *!*/
+/*    position: fixed;*/
+/*    z-index: 1000;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    overflow: auto;*/
+/*    background-color: rgba(0, 0, 0, 0.8);*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
 
-.modal-content {
+/*.modal-content {*/
+/*    position: relative;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.modal-image {*/
+/*    max-width: 80%;*/
+/*    max-height: 80%;*/
+/*    margin: auto;*/
+/*    display: block;*/
+/*}*/
+
+/*.prev, .next {*/
+/*    cursor: pointer;*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    width: auto;*/
+/*    padding: 16px;*/
+/*    color: white;*/
+/*    font-weight: bold;*/
+/*    font-size: 18px;*/
+/*    transition: 0.6s ease;*/
+/*    user-select: none;*/
+/*}*/
+
+/*.prev {*/
+/*    left: 0;*/
+/*}*/
+
+/*.next {*/
+/*    right: 0;*/
+/*}*/
+
+/*.close {*/
+/*    position: absolute;*/
+/*    top: 10px;*/
+/*    right: 25px;*/
+/*    color: white;*/
+/*    font-size: 35px;*/
+/*    font-weight: bold;*/
+/*    cursor: pointer;*/
+/*}*/
+.modal-confirm {
+    color: #636363;
+    width: 400px;
+}
+.modal-confirm .modal-content {
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+}
+.modal-confirm .modal-header {
+    border-bottom: none;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
-
-.modal-image {
-    max-width: 80%;
-    max-height: 80%;
-    margin: auto;
-    display: block;
+.modal-confirm h4 {
+    text-align: center;
+    font-size: 26px;
+    margin: 30px 0 -10px;
 }
-
-.prev, .next {
-    cursor: pointer;
+.modal-confirm .close {
     position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    user-select: none;
-}
+    background: transparent;
+    top: -30px;
+    right: -17px;
 
-.prev {
-    left: 0;
-}
-
-.next {
-    right: 0;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    color: white;
+    border: transparent;
     font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
+}
+
+.modal-confirm .modal-body {
+    color: #999;
+}
+.modal-confirm .modal-footer {
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+    color: #999;
+}
+.modal-confirm .icon-box {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    z-index: 9;
+    text-align: center;
+    border: 3px solid #f15e5e;
+}
+.modal-confirm .icon-box i {
+    color: #f15e5e;
+    font-size: 46px;
+    display: inline-block;
+    margin-top: 13px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+    color: #fff;
+    border-radius: 4px;
+    background: #60c7c1;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    min-width: 120px;
+    border: none;
+    min-height: 40px;
+    border-radius: 3px;
+    margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+    background: #c1c1c1;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+    background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+    background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+    background: #ee3535;
+}
+.trigger-btn {
+    display: inline-block;
 }

@@ -929,79 +929,65 @@ document.getElementById('loadMore').addEventListener('click', function() {
 });
 
 // Lắng nghe sự kiện khi modal được hiển thị
-document.addEventListener('DOMContentLoaded', function() {
-    const imageModal = document.getElementById('imageModal');
+document.addEventListener('DOMContentLoaded', function () {
+    const images = [...document.querySelectorAll('.grid-item img')]; // Lấy tất cả hình ảnh
     const modalImage = document.getElementById('modalImage');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
 
-    let currentIndex = 0; // Chỉ mục hình ảnh hiện tại
-    const images = []; // Mảng để lưu đường dẫn hình ảnh
-
-    // Hàm để cập nhật hình ảnh trong modal
-    function updateImage(index) {
-        modalImage.src = images[index];
-        currentIndex = index;
-        prevBtn.style.display = index === 0 ? 'none' : 'inline-block';
-        nextBtn.style.display = index === images.length - 1 ? 'none' : 'inline-block';
-    }
-
-    // Lắng nghe sự kiện khi modal mở
-    imageModal.addEventListener('show.bs.modal', function(event) {
-        const button = event.relatedTarget; // Thẻ <a> được bấm vào
-        const imagePath = button.getAttribute('data-bs-image'); // Lấy đường dẫn hình ảnh
-
-        // Lưu tất cả đường dẫn hình ảnh vào mảng
-        images.length = 0; // Xóa mảng trước đó
-        const imageElements = document.querySelectorAll('.grid-item a[data-bs-image]');
-        imageElements.forEach(imgElement => {
-            images.push(imgElement.getAttribute('data-bs-image'));
+    // Mở modal và hiển thị hình ảnh
+    document.querySelectorAll('.grid-item a').forEach((link, index) => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            currentIndex = index; // Cập nhật chỉ số hình ảnh hiện tại
+            modalImage.src = link.getAttribute('data-bs-image'); // Lấy hình ảnh từ data attribute
+            updateButtonVisibility();
+            $('#imageModal').modal('show'); // Hiển thị modal
         });
-
-        currentIndex = images.indexOf(imagePath); // Cập nhật chỉ mục hiện tại
-        updateImage(currentIndex); // Cập nhật hình ảnh ban đầu
     });
 
-    // Lắng nghe sự kiện khi bấm nút "Tiếp theo"
-    nextBtn.addEventListener('click', function() {
-        if (currentIndex < images.length - 1) {
-            updateImage(currentIndex + 1);
+    // Cập nhật trạng thái hiển thị của nút "Quay lại" và "Tiếp theo"
+    function updateButtonVisibility() {
+        prevBtn.style.display = currentIndex > 0 ? 'inline-block' : 'none';
+        nextBtn.style.display = currentIndex < images.length - 1 ? 'inline-block' : 'none';
+    }
+
+    // Sự kiện cho nút "Quay lại"
+    prevBtn.addEventListener('click', function () {
+        if (currentIndex > 0) {
+            currentIndex--;
+            modalImage.src = images[currentIndex].src; // Cập nhật hình ảnh trong modal
+            updateButtonVisibility();
         }
     });
 
-    // Lắng nghe sự kiện khi bấm nút "Quay lại"
-    prevBtn.addEventListener('click', function() {
-        if (currentIndex > 0) {
-            updateImage(currentIndex - 1);
+    // Sự kiện cho nút "Tiếp theo"
+    nextBtn.addEventListener('click', function () {
+        if (currentIndex < images.length - 1) {
+            currentIndex++;
+            modalImage.src = images[currentIndex].src; // Cập nhật hình ảnh trong modal
+            updateButtonVisibility();
+        }
+    });
+
+    // Ngăn chặn modal đóng khi nhấn nút "Quay lại" hoặc "Tiếp theo"
+    $('#imageModal').on('hide.bs.modal', function (e) {
+        // Kiểm tra nếu hiện tại là nhấn nút "Quay lại" hoặc "Tiếp theo"
+        if (prevBtn.contains(e.target) || nextBtn.contains(e.target)) {
+            e.preventDefault();
         }
     });
 });
 
-let postIdToDelete;
 
-function openModal(postId) {
-    postIdToDelete = postId; // Lưu ID bài viết cần xóa
-    $('#deleteModal').modal('show'); // Hiện popup
-}
-
-function closeModal() {
-    $('#deleteModal').modal('hide'); // Ẩn popup
-}
-
-document.getElementById('confirmDelete').addEventListener('click', function() {
-    // Gửi yêu cầu xóa bài viết
-    // Cập nhật hành động của form xóa
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = `/dashboard/post/delete/${postIdToDelete}`; // Thay đổi URL theo ID
-
-    // Thêm input _method
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = '_method';
-    input.value = 'delete';
-    form.appendChild(input);
-
-    document.body.appendChild(form);
-    form.submit(); // Gửi yêu cầu xóa
+document.addEventListener('DOMContentLoaded', function () {
+    const message = /*[[${message}]]*/ '';
+    if (message) {
+        toastr.success(message, 'Thông báo', {
+            "positionClass": "toast-top-right", // Vị trí hiển thị
+            "timeOut": "5000", // Thời gian hiển thị
+            "closeButton": true // Hiện nút đóng
+        });
+    }
 });
