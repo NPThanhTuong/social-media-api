@@ -10,17 +10,15 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserServiceImpl{
+public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
 
-    @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    @Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }

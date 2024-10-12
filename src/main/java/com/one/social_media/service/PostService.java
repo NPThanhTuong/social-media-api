@@ -13,21 +13,18 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class PostService implements PostServiceImpl{
+public class PostService  {
     private final PostRepository postRepository;
 
-    @Override
     public Page<Post> getAllPosts(Pageable pageable) {
         return postRepository.findAll(pageable);
     }
 
-    @Override
     public Void deletePostById(long id) {
         postRepository.deleteById(id);
         return null;
     }
 
-    @Override
     public Optional<Post> findById(Long id) {
         return postRepository.findById(id);
     }

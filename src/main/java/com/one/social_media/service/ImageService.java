@@ -10,10 +10,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ImageService implements ImageServiceImpl{
+public class ImageService {
     private final ImageRepository imageRepository;
 
-    @Override
     public List<Image> findByPost(Post post) {
         return imageRepository.findByPost(post);
     }

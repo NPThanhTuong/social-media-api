@@ -11,10 +11,9 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class LikeService implements LikeServiceImpl{
+public class LikeService {
     private final LikeRepository likeRepository;
 
-    @Override
     public Optional<List<Like>> findByPostId(Long id) {
         return likeRepository.findByPostId(id);
     }

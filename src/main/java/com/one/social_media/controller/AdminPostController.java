@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/dashboard/post")
 @RequiredArgsConstructor
-public class PostController {
+public class AdminPostController {
     private final PostService postService;
     private final UserService userService;
     private final ImageService imageService;
@@ -27,7 +27,7 @@ public class PostController {
     private final RelationshipService relationshipService;
 
     @GetMapping("/list")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public String list(@RequestParam(defaultValue = "0") int page,
                        @RequestParam(defaultValue = "30") int size,
                        Model model) {
@@ -41,7 +41,7 @@ public class PostController {
     }
 
     @GetMapping("/view/{post_id}")
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     public String view(Model model, @PathVariable("post_id") long postId) {
 
         Post post = postService.findById(postId).orElse(null);

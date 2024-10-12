@@ -11,11 +11,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CommentService implements CommentServiceImpl{
+public class CommentService {
     private final CommentRepository commentRepository;
     private final PostRepository postRepository;
 
-    @Override
+
     public List<Comment> findByPost(Post post) {
         return commentRepository.findByPost(post);
     }
