@@ -4,9 +4,11 @@ import com.one.social_media.dto.response.UserResDto;
 import com.one.social_media.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT new com.one.social_media.dto.response.UserResDto(r.userReferenced.id, r.userReferenced.name, r.userReferenced.email, r.userReferenced.dob, r.userReferenced.phone, r.userReferenced.avatar, r.userReferenced.coverImage, r.userReferenced.bio, r.userReferenced.createdAt, r.userReferenced.updatedAt, r.userReferenced.deletedAt, r.userReferenced.unblockedAt)" +
             "FROM User u, Relationship r, RelationshipType rt " +

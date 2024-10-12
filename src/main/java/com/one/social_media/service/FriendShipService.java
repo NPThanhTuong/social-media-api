@@ -20,10 +20,14 @@ public class FriendShipService {
 
     public List<UserResDto> getAllFriends(Long userId) {
         // 1 is friend in database
-        Long relationshipTypeId = 1L;
-        List<UserResDto> userFriends = userRepository.findAllFriends(userId, relationshipTypeId);
 
-        return userFriends;
+        // get user login.
+        // var context = SecurityContextHolder.getContext();
+        // String name = context.getAuthentication().getName();
+
+        Long relationshipTypeId = 1L;
+
+        return userRepository.findAllFriends(userId, relationshipTypeId);
     }
 
 }
