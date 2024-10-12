@@ -74,12 +74,12 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
-<!--		layout-->
+		<!--layout-->
 		<dependency>
 			<groupId>nz.net.ultraq.thymeleaf</groupId>
 			<artifactId>thymeleaf-layout-dialect</artifactId>
 		</dependency>
-<!--	toastr	-->
+		<!--toastr	-->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>toastr</artifactId>

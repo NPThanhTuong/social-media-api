@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/dashboard/post")
@@ -32,6 +34,7 @@ public class PostController {
                        Model model) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Post> posts = postService.getAllPosts(pageable);
+
         model.addAttribute("posts", posts);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", posts.getTotalPages());
@@ -50,6 +53,7 @@ public class PostController {
         String gridClass = getGridClass(images.size());
         int totalPost = postService.totalPostOfUser(user);
         int totalFriend = relationshipService.totalFriendsOfUser(user);
+
         model.addAttribute("post", post);
         model.addAttribute("images", images);
         model.addAttribute("user", user);
@@ -65,22 +69,38 @@ public class PostController {
     }
 
     private String getGridClass(int size) {
-        switch (size) {
-            case 1: return "one-image";
-            case 2: return "two-images";
-            case 3: return "three-images";
-            case 4: return "four-images";
-            default: return "five-images";
-        }
+        return switch (size) {
+            case 1 -> "one-image";
+            case 2 -> "two-images";
+            case 3 -> "three-images";
+            case 4 -> "four-images";
+            default -> "five-images";
+        };
     }
 
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String delete(@PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        Post post = postService.findById(id).orElse(null);
+        if (post == null) {
+            redirectAttributes.addFlashAttribute("error", "Bài viết không tồn tại!");
+            return "redirect:/dashboard/post/list";
+        }
+
+        List<Image> images = imageService.findByPost(post);
+        for (Image image : images) {
+            String imagePath = "src/main/resources/static" + image.getPath();
+            File imageFile = new File(imagePath);
+            if (imageFile.exists()) {
+                boolean deleted = imageFile.delete();
+            }
+        }
+
         postService.deletePostById(id);
         redirectAttributes.addFlashAttribute("message", "Xóa bài viết thành công!");
         return "redirect:/dashboard/post/list";
     }
+
 
 
 }

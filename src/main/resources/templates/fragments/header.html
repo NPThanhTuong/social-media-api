@@ -13,22 +13,19 @@
         </div>
       </div>
 
-      <div class="iq-search-bar device-search">
-
-      </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
+      <div class="iq-search-bar device-search"></div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+              aria-label="Toggle navigation">
         <i class="ri-menu-3-line"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav  ms-auto navbar-list">
-          <li>
-            <a href="../dashboard/index.html" class="  d-flex align-items-center">
-              <i class="ri-home-line"></i>
-            </a>
-          </li>
           <li class="nav-item dropdown">
-            <a href="#" class="   d-flex align-items-center dropdown-toggle" id="drop-down-arrow" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img th:src="@{'/avatars/' + ${session.user.avatar}}" class="img-fluid rounded-circle me-3" alt="user" />
+            <a href="#" class="   d-flex align-items-center dropdown-toggle" id="drop-down-arrow"
+               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img th:src="@{'/avatars/' + ${session.user.avatar}}" class="img-fluid rounded-circle me-3"
+                   alt="user" />
               <div class="caption">
                 <h6 class="mb-0 line-height" th:text="${session.user.name}"></h6>
               </div>
@@ -37,31 +34,13 @@
               <div class="card shadow-none m-0">
                 <div class="card-header  bg-primary">
                   <div class="header-title">
-                    <h5 class="mb-0 text-white" ></h5>
+                    <h5 class="mb-0 text-white"></h5>
                   </div>
                 </div>
                 <div class="card-body p-0 ">
-                  <a href="../app/profile.html" class="iq-sub-card iq-bg-primary-hover">
-                    <div class="d-flex align-items-center">
-                      <div class="rounded card-icon bg-soft-primary">
-                        <i class="ri-file-user-line"></i>
-                      </div>
-                      <div class="ms-3">
-                        <h6 class="mb-0 ">Tài khoản của tôi</h6>
-                      </div>
-                    </div>
-                  </a>
-                  <a href="../app/profile-edit.html" class="iq-sub-card iq-bg-warning-hover">
-                    <div class="d-flex align-items-center">
-                      <div class="rounded card-icon bg-soft-warning">
-                        <i class="ri-profile-line"></i>
-                      </div>
-
-                    </div>
-                  </a>
-
                   <div class="d-inline-block w-100 text-center p-3">
-                    <a class="btn btn-primary iq-sign-btn" th:href="@{/admin/logout}" role="button">Đăng xuất<i class="ri-login-box-line ms-2"></i></a>
+                    <a class="btn btn-primary iq-sign-btn" th:href="@{/admin/logout}"
+                       role="button">Đăng xuất<i class="ri-login-box-line ms-2"></i></a>
                   </div>
                 </div>
               </div>

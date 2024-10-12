@@ -875,24 +875,8 @@ Editable Table
     });
     });
 })(jQuery);
-// document.addEventListener("DOMContentLoaded", function() {
-//     const images = document.querySelectorAll('.check-orientation');
-//
-//     images.forEach(img => {
-//         img.onload = function() {
-//             const width = img.naturalWidth;
-//             const height = img.naturalHeight;
-//
-//             if (width > height) {
-//                 // Ảnh ngang
-//                 img.classList.add('landscape');
-//             } else {
-//                 // Ảnh dọc
-//                 img.classList.add('portrait');
-//             }
-//         };
-//     });
-// });
+
+// đặt class cho số lượng hình ảnh được hiển thi
 document.addEventListener("DOMContentLoaded", function() {
     const images = document.querySelectorAll('.grid-item');
     const container = document.querySelector('.grid-container');
@@ -911,24 +895,23 @@ document.addEventListener("DOMContentLoaded", function() {
         container.classList.add('five-images');
     }
 });
+// hiển thị các bình luận ẩn
 document.getElementById('loadMore').addEventListener('click', function() {
     // Lấy tất cả các bình luận ẩn
     const hiddenComments = document.querySelectorAll('#commentList .d-none');
 
-    // Hiển thị thêm 5 bình luận mỗi lần nhấn nút
     const commentsToShow = 5;
 
     for (let i = 0; i < commentsToShow && i < hiddenComments.length; i++) {
         hiddenComments[i].classList.remove('d-none');
     }
 
-    // Nếu không còn bình luận ẩn, ẩn nút "Xem thêm"
     if (hiddenComments.length <= commentsToShow) {
         document.getElementById('loadMoreContainer').style.display = 'none';
     }
 });
 
-// Lắng nghe sự kiện khi modal được hiển thị
+// sự kiện khi modal ảnh hiển thị
 document.addEventListener('DOMContentLoaded', function () {
     const images = [...document.querySelectorAll('.grid-item img')]; // Lấy tất cả hình ảnh
     const modalImage = document.getElementById('modalImage');
@@ -940,14 +923,13 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.grid-item a').forEach((link, index) => {
         link.addEventListener('click', function (event) {
             event.preventDefault();
-            currentIndex = index; // Cập nhật chỉ số hình ảnh hiện tại
-            modalImage.src = link.getAttribute('data-bs-image'); // Lấy hình ảnh từ data attribute
+            currentIndex = index;
+            modalImage.src = link.getAttribute('data-bs-image');
             updateButtonVisibility();
-            $('#imageModal').modal('show'); // Hiển thị modal
+            $('#imageModal').modal('show');
         });
     });
 
-    // Cập nhật trạng thái hiển thị của nút "Quay lại" và "Tiếp theo"
     function updateButtonVisibility() {
         prevBtn.style.display = currentIndex > 0 ? 'inline-block' : 'none';
         nextBtn.style.display = currentIndex < images.length - 1 ? 'inline-block' : 'none';
@@ -957,12 +939,11 @@ document.addEventListener('DOMContentLoaded', function () {
     prevBtn.addEventListener('click', function () {
         if (currentIndex > 0) {
             currentIndex--;
-            modalImage.src = images[currentIndex].src; // Cập nhật hình ảnh trong modal
+            modalImage.src = images[currentIndex].src;
             updateButtonVisibility();
         }
     });
 
-    // Sự kiện cho nút "Tiếp theo"
     nextBtn.addEventListener('click', function () {
         if (currentIndex < images.length - 1) {
             currentIndex++;
@@ -971,9 +952,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Ngăn chặn modal đóng khi nhấn nút "Quay lại" hoặc "Tiếp theo"
     $('#imageModal').on('hide.bs.modal', function (e) {
-        // Kiểm tra nếu hiện tại là nhấn nút "Quay lại" hoặc "Tiếp theo"
         if (prevBtn.contains(e.target) || nextBtn.contains(e.target)) {
             e.preventDefault();
         }
@@ -991,3 +970,39 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+//tăng giảm ảnh
+document.addEventListener('DOMContentLoaded', function() {
+    const modalImage = document.getElementById('modalImage');
+    let currentScale = 1;
+    const maxScale = 1.5;
+    const minScale = 0.5;
+
+    document.getElementById('zoomInBtn').addEventListener('click', function() {
+        if (currentScale < maxScale) {
+            currentScale += 0.1;
+            modalImage.style.transform = `scale(${currentScale})`;
+        }
+    });
+
+    document.getElementById('zoomOutBtn').addEventListener('click', function() {
+        if (currentScale > minScale) {
+            currentScale -= 0.1;
+            modalImage.style.transform = `scale(${currentScale})`;
+        }
+    });
+
+    function resetImageScale() {
+        currentScale = 1;
+        modalImage.style.transform = `scale(${currentScale})`;
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', function() {
+        resetImageScale();
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', function() {
+        resetImageScale();
+    });
+});
+

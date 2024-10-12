@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Chi tiết bài viết</title>
-</head>Title</title>
 </head>
 <body>
     <div layout:fragment="content">
@@ -88,7 +87,8 @@
                                                     <div class="col-sm-12 mb-4">
                                                         <div class="event-post position-relative">
                                                             <div class="job-icon-position">
-                                                                <div class="job-icon bg-primary p-2 d-inline-block rounded-circle"><i class="ri-briefcase-line text-white"></i></div>
+                                                                <div class="job-icon bg-primary p-2 d-inline-block rounded-circle">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(255,255,255,1)"><path d="M3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3ZM20 7.23792L12.0718 14.338L4 7.21594V19H20V7.23792ZM4.51146 5L12.0619 11.662L19.501 5H4.51146Z"></path></svg>                                                                </div>
                                                             </div>
                                                             <div class="card-body text-center p-2">
                                                                 <h5 th:text="${user.email}"></h5>
@@ -122,7 +122,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                <!-- Modal HTML for each post -->
+                                                <!-- Modal hiển thị popup xác nhận xóa bài viết -->
                                                 <div th:id="'myModal' + ${post.id}" class="modal fade">
                                                     <div class="modal-dialog modal-confirm">
                                                         <div class="modal-content">
@@ -163,44 +163,36 @@
                                                         </div>
                                                     </div>
 
-                                                    <!-- Modal để hiển thị hình ảnh lớn -->
+                                                    <!-- Modal để hiển thị chi tiết hình ảnh  -->
                                                     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
-                                                                <div class="modal-body" style="text-align: center">
-                                                                    <img id="modalImage" src="" alt="Large Image" class="img-fluid" />
+                                                                <div class="modal-img-body" style="text-align: center">
+                                                                    <img id="modalImage" src="" alt="Large Image" class="img-fluid-modal" />
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button id="prevBtn" type="button" class="btn btn-secondary" style="display: none;">Quay lại</button>
-                                                                    <button id="nextBtn" type="button" class="btn btn-secondary" style="display: none;">Tiếp theo</button>
+                                                                    <button id="zoomInBtn" type="button" class="btn btn-secondary"><i class="ri-zoom-in-line"></i> </button>
+                                                                    <button id="zoomOutBtn" type="button" class="btn btn-secondary"><i class="ri-zoom-out-line"></i> </button>
+                                                                    <button id="prevBtn" type="button" class="btn btn-secondary" style="display: none;"><i class="ri-arrow-left-s-line"></i></button>
+                                                                    <button id="nextBtn" type="button" class="btn btn-secondary" style="display: none;"><i class="ri-arrow-right-s-line"></i></button>
                                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!-- -->
+
                                                     <div class="comment-area mt-3">
                                                         <div class="d-flex justify-content-between align-items-center flex-wrap">
                                                             <div class="like-block position-relative d-flex align-items-center">
                                                                 <div class="d-flex align-items-center">
-                                                                    <div class="like-data">
-                                                                        <div class="dropdown">
-                                                                           <span class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                                                <img src="../assets/images/icon/01.png" class="img-fluid" alt="">
-                                                                           </span>
-                                                                            <div class="dropdown-menu py-2">
-                                                                                <a class="ms-2 me-2" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Like" aria-label="Like"><img src="../assets/images/icon/01.png" class="img-fluid" alt=""></a>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
                                                                     <div class="total-like-block ms-2 me-3">
                                                                         <div class="dropdown">
                                                                            <span th:text="${likes.size()} + ' Tương tác'" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button">
-                                                                        </span>
+                                                                           </span>
 
                                                                             <div class="dropdown-menu">
                                                                                 <a th:each="like, iterStat : ${likes}" th:text="${like.user.name}" class="dropdown-item" >Tên người dùng</a>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -210,7 +202,7 @@
                                                                         <span th:text="${comments.size()} + ' Bình luận'" class="dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="button"></span>
 
                                                                         <div class="dropdown-menu">
-                                                                            <a th:each="comment, iterStat : ${comments}" th:text="${comment.content}" class="dropdown-item" href="#"></a>
+                                                                            <a th:each="comment, iterStat : ${comments}" th:text="${comment.user.name}" class="dropdown-item" href="#"></a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -230,8 +222,8 @@
                                                                         <h6 th:text="${comment.user.name}"></h6>
                                                                         <p class="mb-0" th:text="${comment.content}"></p>
                                                                         <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                            <a href="#">Delete</a>
-                                                                            <span th:text="${comment.createdAt}"></span>
+                                                                            <a href="#">Xóa</a>
+                                                                            <span th:text="${#dates.format(comment.createdAt, 'HH:mm dd/MM/yyyy ')}"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>

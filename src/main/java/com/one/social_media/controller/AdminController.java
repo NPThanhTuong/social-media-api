@@ -1,7 +1,6 @@
 package com.one.social_media.controller;
 
 import com.one.social_media.entity.User;
-import com.one.social_media.repository.UserRepository;
 import com.one.social_media.service.UserDetailsImpl;
 import com.one.social_media.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
