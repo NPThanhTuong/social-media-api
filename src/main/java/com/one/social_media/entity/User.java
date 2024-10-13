@@ -1,11 +1,10 @@
 package com.one.social_media.entity;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -19,8 +18,15 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 
+
+import java.io.Serializable;
+import java.util.*;
+
 @Entity
-@Getter
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -48,24 +54,37 @@ public class User implements Serializable {
     @JoinTable(name = "user_room", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
     private Set<Room> rooms = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender", fetch = FetchType.LAZY)
     private List<Message> messages = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "caller")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "caller", fetch = FetchType.LAZY)
     private Set<Call> calls = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Like> likes = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userOwner")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userOwner", fetch = FetchType.LAZY)
     private Set<Relationship> ownerRelationships = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userReferenced")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userReferenced", fetch = FetchType.LAZY)
     private Set<Relationship> referencedRelationships = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
