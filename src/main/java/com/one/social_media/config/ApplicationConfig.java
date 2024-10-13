@@ -5,9 +5,27 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class ApplicationConfig {
+@EnableWebMvc
+public class ApplicationConfig implements WebMvcConfigurer {
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**")
+                .addResourceLocations("classpath:/resources/");
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/avatars/**")
+                .addResourceLocations("classpath:/avatars/");
+        registry.addResourceHandler("/cover_images/**")
+                .addResourceLocations("classpath:/cover_images/");
+
+    }
+
+
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -21,4 +39,6 @@ public class ApplicationConfig {
 
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
+
+
 }

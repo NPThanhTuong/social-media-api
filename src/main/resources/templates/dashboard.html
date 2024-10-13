@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/libs.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="/css/socialv.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="wrapper">
+
+    <!--sidebar-->
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    <!--header-->
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <!--main content-->
+    <div layout:fragment="content"></div>
+
+</div>
+<script src="/js/libs.min.js" defer></script>
+<script src="/js/slider.js" defer></script>
+<script src="/js/app.js" defer></script>
+<script src="/js/lottie.js" defer></script>
+
+</body>
+</html>

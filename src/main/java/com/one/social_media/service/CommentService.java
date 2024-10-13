@@ -1,5 +1,6 @@
 package com.one.social_media.service;
 
+
 import com.one.social_media.dto.request.CommentReqDto;
 import com.one.social_media.dto.request.UpdateCommentReqDto;
 import com.one.social_media.dto.response.CommentResDto;
@@ -96,5 +97,9 @@ public class CommentService {
                 })
                 .filter(comment -> comment.getDeletedAt() == null) // Ensure parent is not deleted
                 .collect(Collectors.toList());
+    }
+
+    public List<Comment> findByPost(Post post) {
+        return commentRepository.findByPost(post);
     }
 }
