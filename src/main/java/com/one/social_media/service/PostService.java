@@ -1,14 +1,5 @@
 package com.one.social_media.service;
 
-import com.one.social_media.entity.Post;
-import com.one.social_media.entity.User;
-import com.one.social_media.repository.PostRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-import java.util.Optional;
-
 import com.one.social_media.dto.request.LikePostReqDto;
 import com.one.social_media.dto.request.PostReqDto;
 import com.one.social_media.dto.response.LikePostResDto;
@@ -23,11 +14,14 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -128,9 +122,6 @@ public class PostService {
         posts.forEach(post -> listId.add(post.getId()));
         return listId;
     }
-  
-  
-  private final PostRepository postRepository;
 
     public Page<Post> getAllPosts(Pageable pageable) {
         return postRepository.findAll(pageable);
@@ -146,6 +137,6 @@ public class PostService {
     }
 
     public int totalPostOfUser(User user) {
-        return  postRepository.countByUser(user);
+        return postRepository.countByUser(user);
     }
 }

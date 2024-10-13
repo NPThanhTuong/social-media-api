@@ -1,7 +1,5 @@
 package com.one.social_media.repository;
 
-import java.util.Optional;
-
 import com.one.social_media.dto.response.UserResDto;
 import com.one.social_media.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -20,7 +19,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "r.relationshipType.id = :relationshipType AND " +
             "r.userOwner.id = :userId")
     List<UserResDto> findAllFriends(Long userId, Long relationshipType);
-  
-  Optional<User> findByEmail(String email);
-  Optional<User> findById(Long id);
+
+    Optional<User> findByEmail(String email);
+
+    Optional<User> findById(Long id);
 }

@@ -1,4 +1,5 @@
 package com.one.social_media.controller;
+
 import com.one.social_media.entity.*;
 import com.one.social_media.service.*;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
@@ -27,7 +31,7 @@ public class AdminPostController {
     private final RelationshipService relationshipService;
 
     @GetMapping("/list")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String list(@RequestParam(defaultValue = "0") int page,
                        @RequestParam(defaultValue = "30") int size,
                        Model model) {
@@ -41,14 +45,15 @@ public class AdminPostController {
     }
 
     @GetMapping("/view/{post_id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String view(Model model, @PathVariable("post_id") long postId) {
 
         Post post = postService.findById(postId).orElse(null);
         User user = userService.findById(post.getOwner().getId()).orElse(null);
         List<Image> images = imageService.findByPost(post);
-        List<Comment> comments =commentService.findByPost(post);
-        List<Like> likes = likeService.findByPostId(post.getId()).orElseGet(() -> new ArrayList<>());;
+        List<Comment> comments = commentService.findByPost(post);
+        List<Like> likes = likeService.findByPostId(post.getId()).orElseGet(() -> new ArrayList<>());
+        ;
         String gridClass = getGridClass(images.size());
         int totalPost = postService.totalPostOfUser(user);
         int totalFriend = relationshipService.totalFriendsOfUser(user);
@@ -99,7 +104,6 @@ public class AdminPostController {
         redirectAttributes.addFlashAttribute("message", "Xóa bài viết thành công!");
         return "redirect:/dashboard/post/list";
     }
-
 
 
 }

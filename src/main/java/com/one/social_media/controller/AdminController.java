@@ -11,7 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,7 +27,7 @@ public class AdminController {
 
     @GetMapping("/dashboard")
     @PreAuthorize("(hasRole('ADMIN'))")
-    public String dashboard( HttpSession session){
+    public String dashboard(HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
@@ -44,8 +45,4 @@ public class AdminController {
         SecurityContextHolder.clearContext();
         return "redirect:/login";
     }
-
-
-
-
 }

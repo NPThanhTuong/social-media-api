@@ -97,13 +97,7 @@ public class CommentService {
                 })
                 .filter(comment -> comment.getDeletedAt() == null) // Ensure parent is not deleted
                 .collect(Collectors.toList());
-      
-      
     }
-  
-      private final CommentRepository commentRepository;
-      private final PostRepository postRepository;
-
 
     public List<Comment> findByPost(Post post) {
         return commentRepository.findByPost(post);

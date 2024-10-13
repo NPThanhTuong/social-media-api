@@ -2,8 +2,6 @@ package com.one.social_media.repository;
 
 import com.one.social_media.entity.Comment;
 import com.one.social_media.entity.Post;
-
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +15,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     List<Comment> findByPostIdAndDeletedAtIsNull(Long postId);
 
     List<Comment> findByPostIdAndParentCommentIsNullAndDeletedAtIsNull(Long postId);
-  
-      List<Comment> findByPost(Post post);
 
+    List<Comment> findByPost(Post post);
 }
