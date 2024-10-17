@@ -1,7 +1,9 @@
 package com.one.social_media.controller;
 
 
+import com.one.social_media.dto.response.FriendshipResponseDto;
 import com.one.social_media.dto.response.UserResDto;
+import com.one.social_media.entity.Relationship;
 import com.one.social_media.service.FriendShipService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +24,12 @@ public class FriendshipController {
     FriendShipService friendShipService;
 
     @GetMapping("{userId}")
-    public ResponseEntity<List<UserResDto>> getAllFriends(@PathVariable("userId") Long userId) {
+    public ResponseEntity<List<Relationship>> getAllFriends(@PathVariable("userId") Long userId) {
         return ResponseEntity.ok(friendShipService.getAllFriends(userId));
+    }
+
+    @GetMapping("/relationship/{userId}")
+    public ResponseEntity<FriendshipResponseDto> getFriendshipDetails(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(friendShipService.getFriendshipDetails(userId));
     }
 }
