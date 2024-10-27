@@ -13,7 +13,12 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findByOwnerId(Long ownerId);
 
-    @Query("SELECT p FROM Post p WHERE p.owner.id IN :friendIds")
+    @Query("SELECT p " +
+            "FROM Post p " +
+            "LEFT JOIN FETCH p.images " +
+            "LEFT JOIN FETCH p.likes " +
+            "LEFT JOIN FETCH p.comments " +
+            "WHERE p.owner.id IN :friendIds")
     List<Post> findAllFriendPosts(List<Long> friendIds);
 
     @Query(value = "SELECT COUNT(p) FROM Post p WHERE p.owner = :user")
