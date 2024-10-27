@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="/css/socialv.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include Select2 CSS and JS -->
+    <!-- CSS cho Select2 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!-- JS cho jQuery và Select2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 
 </head>
 <body>
@@ -27,6 +35,14 @@
 <script src="/js/slider.js" defer></script>
 <script src="/js/app.js" defer></script>
 <script src="/js/lottie.js" defer></script>
+<script>
+    $(document).ready(function() {
+        $('#search').select2({
+            placeholder: "Tìm kiếm bài viết theo nội dung hoặc tài khoản",
+            allowClear: true
+        });
+    });
+</script>
 
 </body>
 </html>

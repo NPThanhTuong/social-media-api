@@ -28511,3 +28511,14 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
     text-align: center;
     align-content: center;
 }
+
+/*select 2*/
+/* Ví dụ: Thay đổi chiều cao của select */
+.js-example-basic-single {
+    height: 40px; /* Thay đổi chiều cao nếu cần */
+}
+
+/* Ví dụ: Thay đổi màu nền khi hover */
+.js-example-basic-single:hover {
+    background-color: #f0f0f0; /* Màu nền khi hover */
+}

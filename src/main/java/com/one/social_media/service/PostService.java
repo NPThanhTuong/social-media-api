@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -139,4 +140,20 @@ public class PostService {
     public int totalPostOfUser(User user) {
         return postRepository.countByUser(user);
     }
+
+    public Page<Post> searchPostByDate(Date fromDate, Date toDate, Pageable pageable) {
+        if (fromDate != null && toDate != null) {
+            return postRepository.filterByDate(fromDate, toDate, pageable);
+        }
+        return Page.empty(pageable);
+    }
+
+    public Page<Post> findAllSortedByDateDesc(Pageable pageable) {
+        return postRepository.findAllByOrderByCreatedAtDesc(pageable);
+    }
+
+    public Page<Post> findAllSortedByDateAsc(Pageable pageable) {
+        return postRepository.findAllByOrderByCreatedAtAsc(pageable);
+    }
+
 }

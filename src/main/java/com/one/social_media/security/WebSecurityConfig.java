@@ -52,7 +52,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/api/auth/**", "/admin/login", "/admin/**", "/dashboard/**").permitAll()
                                 .requestMatchers("/css/**", "/js/**", "/fonts/**", "/avatars/**","/cover_images/**","/images/**","/avatars/**").permitAll()
-                                .anyRequest().permitAll()
+                                .anyRequest().authenticated()
 
                 )
                 .formLogin(login -> {

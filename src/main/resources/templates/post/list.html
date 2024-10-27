@@ -8,7 +8,6 @@
 </head>
 <body>
 <div layout:fragment="content">
-
     <div id="content-page" class="content-page">
         <div class="container pb-4">
             <div th:if="${message}" class="alert alert-success" role="alert">
@@ -28,7 +27,49 @@
                         <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
                             Danh sách bài đăng
                         </h3>
+                        <div th:if="${posts.isEmpty()}">
+                            <p class="alert alert-warning">Không có bài viết nào được tìm thấy.</p>
+                        </div>
                         <div class="card-body">
+                            <div class="row mb-1">
+                                <div class="col-12">
+                                    <select class="js-example-basic-single js-states form-control" id="search" onchange="location = this.value;">
+                                        <option value="" disabled selected>Tìm kiếm bài viết theo nội dung hoặc tài khoản</option>
+                                        <option th:each="post : ${posts}"
+                                                th:value="@{/dashboard/post/view/{postId}(postId=${post.id})}"
+                                                th:text="${post.content} + ' (' + ${post.owner.name} + ')'">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-1">
+                                <div class="col-9">
+                                    <form th:action="@{/dashboard/post/searchByDate}" method="get" class="d-flex align-items-end">
+                                        <div class="form-group me-2 mb-0">
+                                            <label class="form-label mb-0" for="fromDate">Từ ngày</label>
+                                            <input type="date" class="form-control" id="fromDate" name="fromDate" />
+                                        </div>
+                                        <div class="form-group me-2 mb-0">
+                                            <label class="form-label mb-0" for="toDate">Đến ngày</label>
+                                            <input type="date" class="form-control" id="toDate" name="toDate" />
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                                    </form>
+                                </div>
+
+                                <div class="col-3 d-flex align-items-end justify-content-end">
+                                    <form th:action="@{/dashboard/post/filterByDate}" method="get" class="d-flex">
+                                        <div class="form-group mb-0">
+                                            <select class="form-select" name="dateFilter" id="exampleFormControlSelect1" onchange="this.form.submit()">
+                                                <option value="" disabled selected>Ngày đăng</option>
+                                                <option value="latest">Gần nhất</option>
+                                                <option value="oldest">Xa nhất</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
 
                             <div id="table" class="table-editable">
                                 <table class="table table-bordered table-responsive-md table-striped text-center">
@@ -42,9 +83,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
-                                    <tr class="" th:each="post, iterStat : ${posts}">
-                                        <td style="display: none" th:text="${post.id}"></td>
+                                    <tr th:each="post, iterStat : ${posts}">
                                         <td th:text="${iterStat.index + 1}"></td>
                                         <td contenteditable="true" th:text="${post.owner.name}"></td>
                                         <td contenteditable="true" th:text="${post.content}"></td>
@@ -55,69 +94,51 @@
                                                     <path d="M12.0003 3C17.3924 3 21.8784 6.87976 22.8189 12C21.8784 17.1202 17.3924 21 12.0003 21C6.60812 21 2.12215 17.1202 1.18164 12C2.12215 6.87976 6.60812 3 12.0003 3ZM12.0003 19C16.2359 19 19.8603 16.052 20.7777 12C19.8603 7.94803 16.2359 5 12.0003 5C7.7646 5 4.14022 7.94803 3.22278 12C4.14022 16.052 7.7646 19 12.0003 19ZM12.0003 16.5C9.51498 16.5 7.50026 14.4853 7.50026 12C7.50026 9.51472 9.51498 7.5 12.0003 7.5C14.4855 7.5 16.5003 9.51472 16.5003 12C16.5003 14.4853 14.4855 16.5 12.0003 16.5ZM12.0003 14.5C13.381 14.5 14.5003 13.3807 14.5003 12C14.5003 10.6193 13.381 9.5 12.0003 9.5C10.6196 9.5 9.50026 10.6193 9.50026 12C9.50026 13.3807 10.6196 14.5 12.0003 14.5Z"></path>
                                                 </svg>
                                             </a>
-                                            <!-- Modal trigger button -->
-                                            <a th:href="@{/dashboard/post/delete/{post_id}(post_id=${post.id})}" class="trigger-btn" data-toggle="modal" th:data-target="'#myModal' + ${post.id}">
+                                            <a th:href="@{/dashboard/post/delete/{id}(id=${post.id})}" class="trigger-btn" data-toggle="modal" th:data-target="'#myModal' + ${post.id}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="rgba(230,22,22,1)">
                                                     <path d="M7 4V2H17V4H22V6H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V6H2V4H7ZM6 6V20H18V6H6ZM9 9H11V17H9V9ZM13 9H15V17H13V9Z"></path>
                                                 </svg>
                                             </a>
                                         </td>
 
-                                        <!-- Modal HTML for each post -->
+                                        <!-- Modal cho mỗi bài viết-->
                                         <div th:id="'myModal' + ${post.id}" class="modal fade">
                                             <div class="modal-dialog modal-confirm">
                                                 <div class="modal-content">
                                                     <div class="modal-header flex-column">
-
                                                         <h4 class="modal-title w-100">Xóa bài viết</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times; </i></button>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <p>Bạn có muốn xóa bài viết của tài khoản <span style="color: red; font-size: 17px" th:text="${post.owner.name}"></span>?</p>
                                                     </div>
                                                     <div class="modal-footer justify-content-center">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
-                                                        <a th:href="@{/dashboard/post/delete/{id}(id=${post.id})}" >
-                                                            <input type="hidden" name="_method" value="delete" />
+                                                        <a th:href="@{/dashboard/post/delete/{id}(id=${post.id})}">
                                                             <button type="submit" class="btn btn-danger">Xóa</button>
                                                         </a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </tr>
-
                                     </tbody>
                                 </table>
                                 <div class="pagination">
-                                    <!-- Mũi tên Previous -->
                                     <span th:if="${currentPage > 0}">
-                                        <a th:href="@{/dashboard/post/list(page=${currentPage - 1})}">« Previous</a>
+                                        <a th:href="@{/dashboard/post/list(page=${currentPage - 1})}">Trang trước</a>
                                     </span>
-
-                                    <!-- Hiển thị số trang -->
-                                    <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}" th:if="${i < 4 || i == totalPages - 1 || (i >= currentPage - 1 && i <= currentPage + 1)}">
-                                        <a th:href="@{/dashboard/post/list(page=${i})}" th:text="${i + 1}"
-                                           th:class="${i == currentPage} ? 'active' : ''"></a>
-                                    </span>
-                                                                    <!-- Hiển thị dấu chấm (...) nếu cần -->
-                                    <span th:if="${totalPages > 5}">
-                                        <span th:if="${currentPage > 2}">...</span>
-                                        <span th:if="${currentPage < totalPages - 3}">...</span>
-                                    </span>
-                                                                    <!-- Mũi tên Next -->
-                                   <span th:if="${currentPage < totalPages - 1}">
-                                        <a th:href="@{/dashboard/post/list(page=${currentPage + 1})}">Next »</a>
+                                    <span th:if="${currentPage < totalPages - 1}">
+                                        <a th:href="@{/dashboard/post/list(page=${currentPage + 1})}">Trang sau</a>
                                     </span>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+</body>
+</html>
