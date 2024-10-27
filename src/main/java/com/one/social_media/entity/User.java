@@ -6,19 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import lombok.Getter;
-
-
 import java.io.Serializable;
 import java.util.*;
 
@@ -49,31 +36,40 @@ public class User implements Serializable {
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-
     @ManyToMany
     @JoinTable(name = "user_room", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
     private Set<Room> rooms = new HashSet<>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender", fetch = FetchType.LAZY)
     private List<Message> messages = new ArrayList<>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "caller", fetch = FetchType.LAZY)
     private Set<Call> calls = new HashSet<>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.LAZY)
     private List<Post> posts = new ArrayList<>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Like> likes = new HashSet<>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<Comment> comments = new ArrayList<>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userOwner", fetch = FetchType.LAZY)
     private Set<Relationship> ownerRelationships = new HashSet<>();
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userReferenced", fetch = FetchType.LAZY)
     private Set<Relationship> referencedRelationships = new HashSet<>();
+
+    public User(String email, String password, String phone) {
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+        updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 
     @Override
     public boolean equals(Object o) {
