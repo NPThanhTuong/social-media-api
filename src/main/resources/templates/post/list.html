@@ -33,10 +33,11 @@
                         <div class="card-body">
                             <div class="row mb-1">
                                 <div class="col-12">
-                                    <select class="js-example-basic-single js-states form-control" id="search" onchange="location = this.value;">
-                                        <option value="" disabled selected>Tìm kiếm bài viết theo nội dung hoặc tài khoản</option>
+                                    <select th:value="${contentSearch}" class="js-example-basic-single js-states form-control" id="search" onchange="location = this.value;">
+                                        <option value="" disabled th:selected="${contentSearch == null}">Tìm kiếm bài viết theo nội dung hoặc tài khoản</option>
                                         <option th:each="post : ${posts}"
                                                 th:value="@{/dashboard/post/view/{postId}(postId=${post.id})}"
+                                                th:selected="${contentSearch == post.content}"
                                                 th:text="${post.content} + ' (' + ${post.owner.name} + ')'">
                                         </option>
                                     </select>
@@ -48,11 +49,12 @@
                                     <form th:action="@{/dashboard/post/searchByDate}" method="get" class="d-flex align-items-end">
                                         <div class="form-group me-2 mb-0">
                                             <label class="form-label mb-0" for="fromDate">Từ ngày</label>
-                                            <input type="date" class="form-control" id="fromDate" name="fromDate" />
+                                            <input onchange="setMinToDate()" type="date" class="form-control" id="fromDate" name="fromDate" th:value="${fromDate}" />
+
                                         </div>
                                         <div class="form-group me-2 mb-0">
                                             <label class="form-label mb-0" for="toDate">Đến ngày</label>
-                                            <input type="date" class="form-control" id="toDate" name="toDate" />
+                                             <input type="date" class="form-control" id="toDate" name="toDate" th:value="${toDate}" />
                                         </div>
                                         <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                                     </form>
@@ -62,9 +64,9 @@
                                     <form th:action="@{/dashboard/post/filterByDate}" method="get" class="d-flex">
                                         <div class="form-group mb-0">
                                             <select class="form-select" name="dateFilter" id="exampleFormControlSelect1" onchange="this.form.submit()">
-                                                <option value="" disabled selected>Ngày đăng</option>
-                                                <option value="latest">Gần nhất</option>
-                                                <option value="oldest">Xa nhất</option>
+                                                <option value="" disabled th:selected="${dateFilter == null}">Ngày đăng</option>
+                                                <option value="latest" th:selected="${dateFilter == 'latest'}">Gần nhất</option>
+                                                <option value="oldest" th:selected="${dateFilter == 'oldest'}">Xa nhất</option>
                                             </select>
                                         </div>
                                     </form>

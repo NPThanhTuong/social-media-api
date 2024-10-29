@@ -1,6 +1,7 @@
 package com.one.social_media.controller;
 
 import com.one.social_media.entity.*;
+import com.one.social_media.repository.CommentRepository;
 import com.one.social_media.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +36,7 @@ public class AdminPostController {
     private final CommentService commentService;
     private final LikeService likeService;
     private final RelationshipService relationshipService;
-
+    private final CommentRepository commentRepository;
     @GetMapping("/list")
     @PreAuthorize("hasRole('ADMIN')")
     public String list(@RequestParam(defaultValue = "0") int page,
@@ -53,12 +58,13 @@ public class AdminPostController {
         Post post = postService.findById(postId).orElse(null);
         User user = userService.findById(post.getOwner().getId()).orElse(null);
         List<Image> images = imageService.findByPost(post);
-        List<Comment> comments = commentService.findByPost(post);
+//        List<Comment> comments = commentService.findByPost(post);
         List<Like> likes = likeService.findByPostId(post.getId()).orElseGet(() -> new ArrayList<>());
-        ;
+
         String gridClass = getGridClass(images.size());
         int totalPost = postService.totalPostOfUser(user);
         int totalFriend = relationshipService.totalFriendsOfUser(user);
+        List<Comment> comments = commentRepository.findCommentsWithRepliesByPostId(postId);
 
         model.addAttribute("post", post);
         model.addAttribute("images", images);
@@ -116,13 +122,34 @@ public class AdminPostController {
             @DateTimeFormat(pattern = "yyyy-MM-dd") Date toDate,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "30") int size,
+            @RequestParam(required = false) String contentSearch,
+            @RequestParam(required = false) String dateFilter,
             Model model) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<Post> posts = postService.searchPostByDate(fromDate, toDate, pageable);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        if (fromDate != null) {
+            LocalDate localFromDate = fromDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            model.addAttribute("fromDate", localFromDate.format(formatter));
+        } else {
+            model.addAttribute("fromDate", null);
+        }
+
+        if (toDate != null) {
+            LocalDate localToDate = toDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            model.addAttribute("toDate", localToDate.format(formatter));
+        } else {
+            model.addAttribute("toDate", null);
+        }
+
         model.addAttribute("posts", posts);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", posts.getTotalPages());
+        model.addAttribute("contentSearch", contentSearch);
+        model.addAttribute("contentSearch", contentSearch);
+
         return "post/list";
     }
 
@@ -131,6 +158,9 @@ public class AdminPostController {
     public String filterPostsByDate(@RequestParam(value = "dateFilter", required = false) String dateFilter,
                                     @RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "30") int size,
+                                    @RequestParam(required = false) String contentSearch,
+                                    @RequestParam(required = false) String fromDate,
+                                    @RequestParam(required = false) String toDate,
                                     Model model) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Post> posts;
@@ -143,11 +173,23 @@ public class AdminPostController {
             posts = postService.getAllPosts(pageable);
         }
 
+
         model.addAttribute("posts", posts);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", posts.getTotalPages());
+        model.addAttribute("contentSearch", contentSearch);
+        model.addAttribute("fromDate", fromDate);
+        model.addAttribute("toDate", toDate);
+        model.addAttribute("dateFilter", dateFilter);
 
         return "post/list";
+    }
+
+
+    @GetMapping("/deleteComment/{post_id}/{commentId}")
+    public String deleteComment(@PathVariable Long commentId, @PathVariable("post_id") long postId) {
+        commentService.deleteCommentsByAdmin(commentId);
+        return "redirect:/dashboard/post/view/" + postId;
     }
 
 

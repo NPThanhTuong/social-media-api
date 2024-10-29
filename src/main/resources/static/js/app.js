@@ -1006,3 +1006,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+function setMinToDate() {
+    const fromDateInput = document.getElementById('fromDate');
+    const toDateInput = document.getElementById('toDate');
+
+    const fromDateValue = fromDateInput.value;
+
+    if (fromDateValue) {
+        toDateInput.min = fromDateValue;
+        if (toDateInput.value < fromDateValue) {
+            toDateInput.value = fromDateValue;
+        }
+    } else {
+        toDateInput.min = '';
+    }
+}
