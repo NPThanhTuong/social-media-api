@@ -25,17 +25,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("SELECT p FROM Post p WHERE p.createdAt BETWEEN :fromDate AND :toDate")
     Page<Post> filterByDate(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate, Pageable pageable);
 
-
     Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable);
 
     Page<Post> findAllByOrderByCreatedAtAsc(Pageable pageable);
-
-
-    @Query("SELECT p, COUNT(l) + COUNT(c) AS interactionCount " +
-            "FROM Post p LEFT JOIN p.likes l LEFT JOIN p.comments c " +
-            "GROUP BY p ORDER BY COUNT(l) + COUNT(c) DESC")
-    List<Object[]> findMostInteractedPosts(Pageable pageable);
-
 
     @Query("SELECT MONTH(p.createdAt), COUNT(p) FROM Post p WHERE YEAR(p.createdAt) = :year GROUP BY MONTH(p.createdAt)")
     List<Object[]> countPostsByMonth(@Param("year") int year);

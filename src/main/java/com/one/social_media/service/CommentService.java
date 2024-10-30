@@ -99,9 +99,6 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    public List<Comment> findByPost(Post post) {
-        return commentRepository.findByPost(post);
-    }
 
     @Transactional
     public void deleteCommentsByAdmin(Long commentId) {

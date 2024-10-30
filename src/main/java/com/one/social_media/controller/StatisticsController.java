@@ -23,7 +23,7 @@ public class StatisticsController {
     public String showStatistics(@RequestParam(value = "year", required = false) Integer selectedYear, Model model) {
         int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
 
-        if (selectedYear == null || selectedYear < 2020) {
+        if (selectedYear == null || selectedYear < 2019) {
             selectedYear = currentYear;
         }
 
@@ -31,7 +31,7 @@ public class StatisticsController {
         Map<Integer, Long> commentsCount = statisticsService.getCommentsCountByMonth(selectedYear);
         Map<Integer, Long> newUsersCount = statisticsService.getNewUsersCountByMonth(selectedYear);
         Map<Integer, Long> postsCount = statisticsService.getPostsCountByMonth(selectedYear);
-        List<Integer> years = IntStream.rangeClosed(2020, currentYear).boxed().collect(Collectors.toList());
+        List<Integer> years = IntStream.rangeClosed(2019, currentYear).boxed().collect(Collectors.toList());
 
         model.addAttribute("year", selectedYear);
         model.addAttribute("likesCount", likesCount);
