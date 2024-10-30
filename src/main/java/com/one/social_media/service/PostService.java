@@ -6,17 +6,21 @@ import com.one.social_media.dto.response.LikePostResDto;
 import com.one.social_media.dto.response.PostResDto;
 import com.one.social_media.dto.response.UserResDto;
 import com.one.social_media.entity.*;
+import com.one.social_media.exception.AppException;
+import com.one.social_media.exception.ErrorCode;
 import com.one.social_media.mapper.CommentMapper;
 import com.one.social_media.mapper.PostMapper;
 import com.one.social_media.repository.*;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.Hibernate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +32,8 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
 public class PostService {
-    private static final Logger log = LoggerFactory.getLogger(PostService.class);
     PostRepository postRepository;
     CommentRepository commentRepository;
     UserRepository userRepository;
@@ -40,8 +44,9 @@ public class PostService {
     PostMapper postMapper;
     CommentMapper commentMapper;
 
-
-    public List<PostResDto> getAllUserPosts(Long userId) {
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<PostResDto> getAllUserPosts() {
+        var userId = getLoginUserId();
         var posts = postRepository.findByOwnerId(userId);
         return postMapper.toListPostResDto(posts);
     }
@@ -51,10 +56,11 @@ public class PostService {
         return comments.size();
     }
 
-    public List<PostResDto> getAllFriendPosts(Long userId) {
-        // 1 is friend in database
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<PostResDto> getAllFriendPosts() {
         Long relationshipTypeId = 1L;
 
+        var userId = getLoginUserId();
         List<UserResDto> userFriends = userRepository.findAllFriends(userId, relationshipTypeId);
         List<Long> userFriendIds = new ArrayList<>();
 
@@ -65,8 +71,11 @@ public class PostService {
         return postMapper.toListPostResDto(posts);
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+
     @Transactional
-    public Post createNewPost(PostReqDto postReqDto, Long userId) {
+    public Post createNewPost(PostReqDto postReqDto) {
+        var userId = getLoginUserId();
         Post newPost = postMapper.toPost(postReqDto);
         newPost.setOwner(userRepository.getReferenceById(userId));
         Post savedPost = postRepository.save(newPost);
@@ -83,7 +92,11 @@ public class PostService {
         return savedPost;
     }
 
-    public LikePostResDto likePost(Long userId, LikePostReqDto likePostReqDto) {
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+
+    public LikePostResDto likePost(LikePostReqDto likePostReqDto) {
+        var userId = getLoginUserId();
+
         LikeKey likeKey = new LikeKey(userId, likePostReqDto.getPostId());
 
         Like likePost = likeRepository.findById(likeKey).orElse(null);
@@ -112,12 +125,17 @@ public class PostService {
         }
     }
 
-    public List<PostResDto> getLikedPost(Long userId) {
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<PostResDto> getLikedPost() {
+        var userId = getLoginUserId();
         List<Post> posts = likeRepository.findAllPostByUserId(userId);
         return postMapper.toListPostResDto(posts);
     }
 
-    public List<Long> getListLikePostIds(Long userId) {
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<Long> getListLikePostIds() {
+        var userId = getLoginUserId();
+
         var posts = likeRepository.findAllPostByUserId(userId);
 
         List<Long> listId = new ArrayList<>();
@@ -160,4 +178,14 @@ public class PostService {
 
 
 
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    private long getLoginUserId() {
+        var userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        var user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        return user.getId();
+    }
 }

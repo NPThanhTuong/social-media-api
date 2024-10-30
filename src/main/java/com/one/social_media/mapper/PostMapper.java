@@ -44,7 +44,10 @@ public interface PostMapper {
     @AfterMapping
     default void calculateTotalLike(@MappingTarget PostResDto postResDtoDto, Post post) {
         int totalLike = post.getLikes().size();
-        int totalComment = post.getComments().size();
+        int totalComment = post.getComments()
+                .stream()
+                .filter(comment -> comment.getDeletedAt() == null)
+                .toList().size();
 
         postResDtoDto.setTotalLike(totalLike);
         postResDtoDto.setTotalComment(totalComment);
