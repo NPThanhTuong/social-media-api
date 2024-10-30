@@ -26,4 +26,13 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
     @Query("SELECT c FROM Comment c LEFT JOIN FETCH c.replies WHERE c.id = :commentId")
     Optional<Comment> findCommentWithReplies(@Param("commentId") Long commentId);
 
+
+    @Query("SELECT c FROM Comment c WHERE c.post.owner.id = :userId")
+    List<Comment> findAllByUserId(@Param("userId") long userId);
+
+    @Query("SELECT MONTH(c.createdAt) AS month, COUNT(c) AS totalComments " +
+            "FROM Comment c WHERE YEAR(c.createdAt) = :year " +
+            "GROUP BY MONTH(c.createdAt)")
+    List<Object[]> countCommentsByMonth(@Param("year") int year);
+
 }

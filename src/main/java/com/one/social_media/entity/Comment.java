@@ -44,7 +44,7 @@ public class Comment implements Serializable {
     @JoinColumn(name = "parent_comment_id")
     private Comment parentComment;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentComment")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentComment", fetch = FetchType.EAGER)
     private List<Comment> replies = new ArrayList<>();
 
     @PrePersist

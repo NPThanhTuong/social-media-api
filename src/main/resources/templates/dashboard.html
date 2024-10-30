@@ -18,6 +18,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
@@ -45,5 +46,73 @@
     });
 </script>
 
+<script>
+    $(document).ready(function() {
+        console.log('Document is ready.');
+
+        // Khởi tạo Select2
+        $('#search').select2({
+            placeholder: "Tìm kiếm bài viết theo nội dung hoặc tài khoản",
+            allowClear: true
+        });
+
+
+    });
+</script>
+
+<script th:inline="javascript">
+    const likesCount = /*[[${likesCount}]]*/ {};
+    const commentsCount = /*[[${commentsCount}]]*/ {};
+    const newUsersCount = /*[[${newUsersCount}]]*/ {};
+    const postsCount = /*[[${postsCount}]]*/ {};
+
+    function updateCharts() {
+        const year = document.getElementById('yearSelect').value;
+
+        window.location.href = `/statistics/post?year=${year}`;
+    }
+
+    function drawBarChart(ctx, title, countData) {
+        const months = [...Array(12).keys()].map(i => i + 1);
+        const counts = months.map(month => Math.floor(countData[month] || 0));
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: title,
+                    data: counts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tháng'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Số lượng'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+    window.onload = function () {
+        drawBarChart(document.getElementById('likesChart'), 'Số lượt thích', likesCount);
+        drawBarChart(document.getElementById('commentsChart'), 'Số bình luận', commentsCount);
+        drawBarChart(document.getElementById('newUsersChart'), 'Số người dùng mới', newUsersCount);
+        drawBarChart(document.getElementById('postsChart'), 'Số bài đăng', postsCount);
+    };
+</script>
 </body>
 </html>

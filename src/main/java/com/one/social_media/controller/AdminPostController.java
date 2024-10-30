@@ -58,7 +58,6 @@ public class AdminPostController {
         Post post = postService.findById(postId).orElse(null);
         User user = userService.findById(post.getOwner().getId()).orElse(null);
         List<Image> images = imageService.findByPost(post);
-//        List<Comment> comments = commentService.findByPost(post);
         List<Like> likes = likeService.findByPostId(post.getId()).orElseGet(() -> new ArrayList<>());
 
         String gridClass = getGridClass(images.size());
