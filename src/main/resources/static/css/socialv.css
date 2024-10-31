@@ -28522,3 +28522,8 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
 .js-example-basic-single:hover {
     background-color: #f0f0f0; /* Màu nền khi hover */
 }
+ul.post-comments {
+    list-style-type: none; /* Loại bỏ dấu chấm */
+    padding-left: 0;       /* Loại bỏ khoảng cách thụt đầu dòng */
+    margin-left: 0;
+}

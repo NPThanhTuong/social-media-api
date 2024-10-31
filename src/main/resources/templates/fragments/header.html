@@ -26,7 +26,7 @@
                            class="   d-flex align-items-center dropdown-toggle"
                            data-bs-toggle="dropdown" href="#" id="drop-down-arrow">
                             <img alt="user" class="img-fluid rounded-circle me-3"
-                                 th:src="@{'/avatars/' + ${session.user.avatar}}"/>
+                                 th:src="${session.user.avatar}"/>
                             <div class="caption">
                                 <h6 class="mb-0 line-height" th:text="${session.user.name}"></h6>
                             </div>

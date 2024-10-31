@@ -16,11 +16,11 @@
                         <div class="card-body profile-page p-0">
                             <div class="profile-header">
                                 <div class="position-relative">
-                                    <img th:src="@{'/cover_images/' + ${user.coverImage}}" style="width: 100%; height: 250px; object-fit: cover; overflow: hidden" alt="profile-bg" class="rounded img-fluid">
+                                    <img th:src="${user.coverImage}" style="width: 100%; height: 250px; object-fit: cover; overflow: hidden" alt="profile-bg" class="rounded img-fluid">
                                 </div>
                                 <div class="user-detail text-center mb-3">
                                     <div class="profile-img">
-                                        <img th:src="@{'/avatars/' + ${user.avatar}}" src="" alt="profile-img" class="avatar-130 img-fluid">
+                                        <img th:src="${user.avatar}" src="" alt="profile-img" class="avatar-130  img-fluid" style="height: 130px">
                                     </div>
                                     <div class="profile-detail">
                                         <h3 class="" th:text="${user.name}"></h3>
@@ -60,7 +60,7 @@
                                                 <div class="user-post-data pb-0">
                                                     <div class="d-flex justify-content-between">
                                                         <div class="me-3">
-                                                            <img class="rounded-circle  avatar-60" th:src="@{'/avatars/' + ${user.avatar}}" alt="">
+                                                            <img class="rounded-circle  avatar-60" th:src="${user.avatar}" alt="">
                                                         </div>
                                                         <div class="w-100">
                                                             <div class="d-flex justify-content-between flex-wrap">
@@ -210,11 +210,13 @@
 
                                                         </div>
                                                         <hr>
+                                                        <!--  bình luận-->
+                                                        
                                                         <ul class="post-comments p-0 m-0" id="commentList">
-                                                            <li th:each="comment, iterStat : ${comments}"  th:if="${comment.deletedAt == null}">
-                                                                <div class="d-flex flex-wrap " th:if="${ comment.parentComment == null}">
+                                                            <li th:each="comment : ${comments}" th:if="${comment.deletedAt == null && comment.parentComment == null}">
+                                                                <div class="d-flex flex-wrap">
                                                                     <div class="user-img">
-                                                                        <img th:src="@{'/avatars/' + ${comment.user.avatar}}" alt="userimg" class="avatar-35 rounded-circle img-fluid">
+                                                                        <img th:src="${comment.user.avatar}" alt="userimg" class="avatar-35 rounded-circle img-fluid">
                                                                     </div>
                                                                     <div class="comment-data-block ms-3">
                                                                         <h6 th:text="${comment.user.name}"></h6>
@@ -224,62 +226,18 @@
                                                                                onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này không?');">
                                                                                 <i class="ri-delete-bin-line"></i>
                                                                             </a>
-                                                                            <span th:text="${#dates.format(comment.createdAt, 'HH:mm dd/MM/yyyy ')}"></span>
+                                                                            <span th:text="${#dates.format(comment.createdAt, 'HH:mm dd/MM/yyyy')}"></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
-                                                                <!-- Hiển thị bình luận con nếu có -->
-                                                                <ul class="reply-comments ms-4 post-comments p-0 m-0">
-                                                                    <li th:each="reply : ${comment.replies}" th:if="${(reply.parentComment.id == comment.id) && (reply.deletedAt == null)}">
-                                                                        <div class="d-flex flex-wrap">
-                                                                            <div class="user-img">
-                                                                                <img th:src="@{'/avatars/' + ${reply.user.avatar}}" alt="userimg" class="avatar-35 rounded-circle img-fluid">
-                                                                            </div>
-                                                                            <div class="comment-data-block ms-3">
-                                                                                <h6 th:text="${reply.user.name}"></h6>
-                                                                                <p class="mb-0" th:text="${reply.content}"></p>
-                                                                                <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                                    <a th:href="@{/dashboard/post/deleteComment/{post_id}/{commentId}(post_id=${reply.post.id}, commentId=${reply.id})}"
-                                                                                       onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này không?');">
-                                                                                        <i class="ri-delete-bin-line"></i>
-                                                                                    </a>
-                                                                                    <span th:text="${#dates.format(reply.createdAt, 'HH:mm dd/MM/yyyy ')}"></span>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <!-- Hiển thị bình luận con của bình luận con -->
-                                                                        <ul class="reply-comments ms-4 post-comments p-0 m-0">
-                                                                            <li th:each="subReply : ${reply.replies}">
-                                                                                <div class="d-flex flex-wrap">
-                                                                                    <div class="user-img">
-                                                                                        <img th:src="@{'/avatars/' + ${subReply.user.avatar}}" alt="userimg" class="avatar-35 rounded-circle img-fluid">
-                                                                                    </div>
-                                                                                    <div class="comment-data-block ms-3">
-                                                                                        <h6 th:text="${subReply.user.name}"></h6>
-                                                                                        <p class="mb-0" th:text="${subReply.content}"></p>
-                                                                                        <div class="d-flex flex-wrap align-items-center comment-activity">
-                                                                                            <a th:href="@{/dashboard/post/deleteComment/{post_id}/{commentId}(post_id=${subReply.post.id}, commentId=${subReply.id})}"
-                                                                                               onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này không?');">
-                                                                                                <i class="ri-delete-bin-line"></i>
-                                                                                            </a>
-                                                                                            <span th:text="${#dates.format(subReply.createdAt, 'HH:mm dd/MM/yyyy ')}"></span>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </li>
-                                                                        </ul>
-
-                                                                    </li>
-                                                                </ul>
+                                                                <!-- Hiển thị bình luận con sử dụng fragment đệ quy -->
+                                                                <ul style="list-style-type: none" th:if="${comment.replies.size() > 0}" th:insert="~{fragments/comment :: renderComment(replies=${comment.replies})}"></ul>
                                                             </li>
                                                         </ul>
-
-                                                        <!-- Nút "Xem thêm" -->
-                                                        <div id="loadMoreContainer" class="text-center mt-3">
-                                                            <button id="loadMore" class="btn btn-primary">Xem thêm</button>
-                                                        </div>
+<!--                                                        <div id="loadMoreContainer" class="text-center mt-3">-->
+<!--                                                            <button id="loadMore" class="btn btn-primary">Xem thêm</button>-->
+<!--                                                        </div>-->
 
 
                                                     </div>

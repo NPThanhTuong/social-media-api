@@ -5,10 +5,8 @@ import com.one.social_media.repository.LikeRepository;
 import com.one.social_media.repository.PostRepository;
 import com.one.social_media.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

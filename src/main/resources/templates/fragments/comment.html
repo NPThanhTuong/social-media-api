@@ -1,0 +1,30 @@
+<!-- fragments/comment.html -->
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Fragment Bình Luận</title>
+</head>
+<body>
+<th:block th:fragment="renderComment(replies)">
+    <li th:each="reply : ${replies}" th:if="${reply.deletedAt == null}">
+        <div class="d-flex flex-wrap">
+            <div class="user-img">
+                <img th:src="${reply.user.avatar}" alt="userimg" class="avatar-35 rounded-circle img-fluid">
+            </div>
+            <div class="comment-data-block ms-3">
+                <h6 th:text="${reply.user.name}"></h6>
+                <p class="mb-0" th:text="${reply.content}"></p>
+                <div class="d-flex flex-wrap align-items-center comment-activity">
+                    <a th:href="@{/dashboard/post/deleteComment/{post_id}/{commentId}(post_id=${post.id}, commentId=${reply.id})}"
+                       onclick="return confirm('Bạn có chắc chắn muốn xóa bình luận này không?');">
+                        <i class="ri-delete-bin-line"></i>
+                    </a>
+                    <span th:text="${#dates.format(reply.createdAt, 'HH:mm dd/MM/yyyy')}"></span>
+                </div>
+            </div>
+        </div>
+        <ul th:if="${reply.replies.size() > 0}" th:insert="~{fragments/comment :: renderComment(replies=${reply.replies})}" style="list-style-type: none"></ul>
+    </li>
+</th:block>
+</body>
+</html>
