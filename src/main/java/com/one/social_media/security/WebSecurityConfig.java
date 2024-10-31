@@ -72,13 +72,6 @@ public class WebSecurityConfig {
                         auth.requestMatchers("/api/auth/**", "/admin/login", "/admin/**", "/dashboard/**").permitAll()
                                 .requestMatchers("/css/**", "/js/**", "/fonts/**", "/avatars/**","/cover_images/**","/images/**","/avatars/**").permitAll()
                                 .anyRequest().authenticated()
-
-                        auth
-                                .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/admin/login", "/admin/**", "/dashboard/**").permitAll()
-                                .requestMatchers("/css/**", "/js/**", "/fonts/**", "/avatars/**", "/cover_images/**", "/images/**", "/avatars/**").permitAll()
-                                .anyRequest().permitAll()
-
                 )
                 .formLogin(login -> {
                     login.loginPage("/admin/login")

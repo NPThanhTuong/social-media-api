@@ -22,6 +22,10 @@ public class AdminController {
 
     @GetMapping("/login")
     public String login(Model model, HttpServletRequest request) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !auth.getPrincipal().equals("anonymousUser")) {
+            return "redirect:/admin/dashboard";
+        }
         return "login";
     }
 
