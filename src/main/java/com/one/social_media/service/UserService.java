@@ -1,12 +1,17 @@
 package com.one.social_media.service;
 
+import com.one.social_media.entity.Post;
 import com.one.social_media.entity.User;
 import com.one.social_media.repository.RoleRepository;
 import com.one.social_media.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
