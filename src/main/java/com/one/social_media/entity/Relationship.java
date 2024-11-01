@@ -34,5 +34,6 @@ public class Relationship implements Serializable {
     private RelationshipType relationshipType;
     
     private Date updatedAt;
+
 }
 
