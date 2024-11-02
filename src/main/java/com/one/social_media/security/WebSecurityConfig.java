@@ -69,12 +69,9 @@ public class WebSecurityConfig {
                 // for thymeleaf
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(auth ->
-                        auth
-                                .requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("/admin/login", "/admin/**", "/dashboard/**").permitAll()
-                                .requestMatchers("/css/**", "/js/**", "/fonts/**", "/avatars/**", "/cover_images/**", "/images/**", "/avatars/**").permitAll()
-                                .anyRequest().permitAll()
-
+                        auth.requestMatchers("/api/auth/**", "/admin/login", "/admin/**", "/dashboard/**").permitAll()
+                                .requestMatchers("/css/**", "/js/**", "/fonts/**", "/avatars/**","/cover_images/**","/images/**","/avatars/**").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .formLogin(login -> {
                     login.loginPage("/admin/login")

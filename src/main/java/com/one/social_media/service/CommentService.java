@@ -107,7 +107,11 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    public List<Comment> findByPost(Post post) {
-        return commentRepository.findByPost(post);
+
+    @Transactional
+    public void deleteCommentsByAdmin(Long commentId) {
+        Comment comment = commentRepository.findCommentWithReplies(commentId).orElseThrow(() -> new RuntimeException("Comment not found!"));
+
+        softDeleteRecursively(comment);
     }
 }
