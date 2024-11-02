@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,35 +26,36 @@ public class PostController {
     PostMapper postMapper;
 
 
-    @GetMapping("user/{userId}")
-    public ResponseEntity<List<PostResDto>> getAllPosts(@PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(postService.getAllUserPosts(userId));
+    @GetMapping
+    public ResponseEntity<List<PostResDto>> getAllPosts() {
+        return ResponseEntity.ok(postService.getAllUserPosts());
     }
 
-    @GetMapping("user/{userId}/friends")
-    public ResponseEntity<List<PostResDto>> getAllFriendPosts(@PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(postService.getAllFriendPosts(userId));
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("friends")
+    public ResponseEntity<List<PostResDto>> getAllFriendPosts() {
+        return ResponseEntity.ok(postService.getAllFriendPosts());
     }
 
-    @PostMapping("user/{userId}")
-    public ResponseEntity<PostResDto> createNewPost(@PathVariable("userId") Long userId, @RequestBody PostReqDto postReqDto) {
-        PostResDto createdPost = postMapper.toPostResDto(postService.createNewPost(postReqDto, userId));
+    @PostMapping
+    public ResponseEntity<PostResDto> createNewPost(@RequestBody PostReqDto postReqDto) {
+        PostResDto createdPost = postMapper.toPostResDto(postService.createNewPost(postReqDto));
 
         return ResponseEntity.ok(createdPost);
     }
 
-    @PostMapping("user/{userId}/like")
-    public ResponseEntity<LikePostResDto> likePost(@PathVariable("userId") Long userId, @RequestBody LikePostReqDto likePostReqDto) {
-        return ResponseEntity.ok(postService.likePost(userId, likePostReqDto));
+    @PostMapping("like")
+    public ResponseEntity<LikePostResDto> likePost(@RequestBody LikePostReqDto likePostReqDto) {
+        return ResponseEntity.ok(postService.likePost(likePostReqDto));
     }
 
-    @GetMapping("user/{userId}/liked")
-    public ResponseEntity<List<PostResDto>> likedPosts(@PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(postService.getLikedPost(userId));
+    @GetMapping("liked")
+    public ResponseEntity<List<PostResDto>> likedPosts() {
+        return ResponseEntity.ok(postService.getLikedPost());
     }
 
-    @GetMapping("user/{userId}/liked/id")
-    public ResponseEntity<List<Long>> getListLikePostIds(@PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(postService.getListLikePostIds(userId));
+    @GetMapping("liked/ids")
+    public ResponseEntity<List<Long>> getListLikePostIds() {
+        return ResponseEntity.ok(postService.getListLikePostIds());
     }
 }

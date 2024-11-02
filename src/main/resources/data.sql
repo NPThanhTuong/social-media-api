@@ -1,8 +1,8 @@
 
 INSERT INTO role ( name,description)
 VALUES
-('Admin', 'Quản trị viên có toàn quyền trên hệ thống') ,
-('User', 'Người dùng thường với quyền hạn hạn chế') ;
+('ADMIN', 'Quản trị viên có toàn quyền trên hệ thống') ,
+('USER', 'Người dùng thường với quyền hạn hạn chế') ;
 
 
 INSERT INTO user( role_id, name, dob, phone, email, password, avatar, bio, cover_image, created_at, updated_at, deleted_at, unblocked_at)

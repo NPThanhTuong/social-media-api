@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="dashboard.html">
+<head>
+  <meta charset="UTF-8">
+  <title>Thống kê</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+  <div id="content-page" class="content-page">
+    <div class="container pb-4 mr-0 ml-0">
+      <h1>Thống kê</h1>
+
+      <div class="row mb-4">
+        <div class="col-12">
+
+          <label for="yearSelect">Chọn năm:</label>
+          <select id="yearSelect" onchange="updateCharts()" class="form-select">
+            <option th:each="year : ${years}" th:value="${year}" th:text="${year}"
+                    th:selected="${year == selectedYear}"></option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Số lượt thích theo tháng</h5>
+                <canvas id="likesChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Số bình luận theo tháng</h5>
+                <canvas id="commentsChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Số tài khoản được tạo theo tháng</h5>
+              <canvas id="newUsersChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Số bài đăng theo tháng</h5>
+              <canvas id="postsChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

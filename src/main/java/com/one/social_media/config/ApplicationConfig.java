@@ -25,7 +25,6 @@ public class ApplicationConfig implements WebMvcConfigurer {
 
     }
 
-
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -39,6 +38,4 @@ public class ApplicationConfig implements WebMvcConfigurer {
 
         return new CorsFilter(urlBasedCorsConfigurationSource);
     }
-
-
 }

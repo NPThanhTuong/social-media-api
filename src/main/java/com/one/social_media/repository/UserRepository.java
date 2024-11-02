@@ -30,4 +30,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     Optional<User> findById(Long id);
+
+    @Query("SELECT MONTH(u.createdAt), COUNT(u) FROM User u WHERE YEAR(u.createdAt) = :year GROUP BY MONTH(u.createdAt)")
+    List<Object[]> countNewUsersByMonth(@Param("year") int year);
+    
+    Boolean existsByEmail(String email);
 }

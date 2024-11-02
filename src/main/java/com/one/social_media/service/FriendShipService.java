@@ -6,6 +6,8 @@ import com.one.social_media.entity.Relationship;
 import com.one.social_media.entity.RelationshipKey;
 import com.one.social_media.entity.RelationshipType;
 import com.one.social_media.entity.User;
+import com.one.social_media.exception.AppException;
+import com.one.social_media.exception.ErrorCode;
 import com.one.social_media.mapper.UserMapper;
 import com.one.social_media.repository.RelationshipRepository;
 import com.one.social_media.repository.RelationshipTypeRepository;
@@ -15,6 +17,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,16 +33,10 @@ public class FriendShipService {
     RelationshipTypeRepository relationshipTypeRepository;
     UserMapper userMapper;
 
-    public List<UserResDto> getAllFriends(Long userId) {
-        // 1 is friend in database
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<UserResDto> getAllFriends() {
+        var userId = getLoginUserId();
         Long relationshipTypeId = 1L;
-        // get user login.
-        // var context = SecurityContextHolder.getContext();
-        // String name = context.getAuthentication().getName();
-//        return userRepository.findAllRelationShipByUserOwner(userId);
-
-//        return relationshipRepository.findAllByUserOwnerId(userId);
-
 
         return userRepository.findAllFriends(userId, relationshipTypeId);
     }
@@ -116,5 +114,14 @@ public class FriendShipService {
                 .build();
         relationshipRepository.deleteById(relationshipKeyRef);
     }
+  
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public long getLoginUserId() {
+        var userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 
+        var user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        return user.getId();
+    }
 }

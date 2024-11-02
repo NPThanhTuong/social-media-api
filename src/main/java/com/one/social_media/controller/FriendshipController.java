@@ -19,9 +19,9 @@ import java.util.List;
 public class FriendshipController {
     FriendShipService friendShipService;
 
-    @GetMapping("{userId}")
-    public ResponseEntity<List<UserResDto>> getAllFriends(@PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(friendShipService.getAllFriends(userId));
+    @GetMapping
+    public ResponseEntity<List<UserResDto>> getAllFriends() {
+        return ResponseEntity.ok(friendShipService.getAllFriends());
     }
 
 

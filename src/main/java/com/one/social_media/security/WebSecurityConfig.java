@@ -1,4 +1,5 @@
 package com.one.social_media.security;
+
 import com.one.social_media.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,10 +9,12 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -20,12 +23,15 @@ import java.util.Arrays;
 
 @Configuration
 @EnableMethodSecurity
- (securedEnabled = true,
- jsr250Enabled = true,
- prePostEnabled = true)
+        (securedEnabled = true,
+                jsr250Enabled = true,
+                prePostEnabled = true)
 public class WebSecurityConfig {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+
+    @Autowired
+    private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
@@ -33,6 +39,11 @@ public class WebSecurityConfig {
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
+    }
+
+    @Bean
+    public AuthTokenFilter authenticationJwtTokenFilter() {
+        return new AuthTokenFilter();
     }
 
     @Bean
@@ -47,13 +58,20 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
+        http.csrf(AbstractHttpConfigurer::disable)
+                .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(auth ->
+//                        auth.requestMatchers("/api/auth/**").permitAll()
+//                                .anyRequest().authenticated()
+//                )
+                .addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
+                // for thymeleaf
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/auth/**", "/admin/login", "/admin/**", "/dashboard/**").permitAll()
-                                .requestMatchers("/css/**", "/js/**", "/fonts/**", "/avatars/**","/cover_images/**","/images/**","/avatars/**").permitAll()
-                                .anyRequest().permitAll()
-
+                        auth.requestMatchers("/api/**", "/admin/login", "/admin/**", "/dashboard/**").permitAll()
+                                .requestMatchers("/css/**", "/js/**", "/fonts/**", "/avatars/**", "/cover_images/**", "/images/**", "/avatars/**").permitAll()
+                                .anyRequest().authenticated()
                 )
                 .formLogin(login -> {
                     login.loginPage("/admin/login")
@@ -66,15 +84,21 @@ public class WebSecurityConfig {
                             .permitAll();
                 })
                 .logout(logout -> {
-                                logout.logoutUrl("/admin/logout")
-                                        .logoutSuccessUrl("/admin/login?logout=true")
-                                        .invalidateHttpSession(true)
-                                        .deleteCookies("JSESSIONID");
+                    logout.logoutUrl("/admin/logout")
+                            .logoutSuccessUrl("/admin/login?logout=true")
+                            .invalidateHttpSession(true)
+                            .deleteCookies("JSESSIONID");
                 });
 
         http.authenticationProvider(authenticationProvider());
         return http.build();
     }
+
+//    @Bean
+//    public AuthTokenFilter authenticationJwtTokenFilter() {
+//        return new AuthTokenFilter();
+//    }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
