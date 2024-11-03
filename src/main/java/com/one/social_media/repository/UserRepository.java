@@ -21,6 +21,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "r.userOwner.id = :userId")
     List<UserResDto> findAllFriends(Long userId, Long relationshipType);
 
+    @Query(value = "SELECT new com.one.social_media.dto.response.UserResDto(r.userReferenced.id, r.userReferenced.name, r.userReferenced.email, r.userReferenced.dob, r.userReferenced.phone, r.userReferenced.avatar, r.userReferenced.coverImage, r.userReferenced.bio, r.userReferenced.createdAt, r.userReferenced.updatedAt, r.userReferenced.deletedAt, r.userReferenced.unblockedAt)" +
+            " FROM Relationship r " +
+            " WHERE (r.userOwner.id = :userId) ")
+    List<UserResDto> findAllRelationShipByUserOwner(@Param("userId") Long userId);
+
+
     Optional<User> findByEmail(String email);
 
     Optional<User> findById(Long id);

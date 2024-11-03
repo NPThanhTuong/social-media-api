@@ -9,8 +9,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
+import lombok.Data;
 
 @Entity
+@Data
 public class Relationship implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -32,5 +34,6 @@ public class Relationship implements Serializable {
     private RelationshipType relationshipType;
     
     private Date updatedAt;
+
 }
 
