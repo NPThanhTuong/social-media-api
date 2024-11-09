@@ -69,7 +69,7 @@ public class FriendShipService {
     @Transactional
     public void acceptFriendRequest(Long requesterId, Long receiverId) {
         RelationshipType relationshipFriend = relationshipTypeRepository.findById(1L).orElseThrow(
-                () -> new AppException(HttpStatus.NOT_FOUND, "RelationshipType not found")
+                () -> new AppException(ErrorCode.RELATIONSHIP_TYPE_NOT_EXIST)
         );
         RelationshipKey relationshipKey = RelationshipKey
                 .builder()
@@ -79,7 +79,7 @@ public class FriendShipService {
         Relationship relationship = relationshipRepository
                 .findByIdAndRelationshipTypeId(relationshipKey, 2L)
                 .orElseThrow(
-                        () -> new AppException(HttpStatus.NOT_FOUND, "Relationship not found")
+                        () -> new AppException(ErrorCode.RELATIONSHIP_NOT_EXIST)
                 );
         relationship.setRelationshipType(relationshipFriend);
         relationshipRepository.save(relationship);
@@ -93,7 +93,7 @@ public class FriendShipService {
         Relationship relationshipRef = relationshipRepository
                 .findByIdAndRelationshipTypeId(relationshipKeyRef, 3L)
                 .orElseThrow(
-                        () -> new AppException(HttpStatus.NOT_FOUND, "Relationship not found")
+                        () -> new AppException(ErrorCode.RELATIONSHIP_NOT_EXIST)
                 );
         relationshipRef.setRelationshipType(relationshipFriend);
         relationshipRepository.save(relationshipRef);
