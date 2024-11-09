@@ -16,7 +16,9 @@ public enum ErrorCode {
     REFRESH_TOKEN_EXPIRED("Refresh token was expired. Please make a new signin request"),
     ROLE_NOT_FOUND("Role is not found!"),
     JWT_TOKEN_INVALID("Token is invalid!"),
-    POST_NOT_EXIST("Post is not exist");
+    POST_NOT_EXIST("Post is not exist"),
+    RELATIONSHIP_TYPE_NOT_EXIST("RelationshipType not found"),
+    RELATIONSHIP_NOT_EXIST("Relationship not found");
 
     private final String message;
 
