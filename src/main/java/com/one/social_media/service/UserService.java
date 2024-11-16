@@ -1,13 +1,16 @@
 package com.one.social_media.service;
 
 import com.one.social_media.dto.response.UserResDto;
+import com.one.social_media.entity.Image;
 import com.one.social_media.entity.Post;
 import com.one.social_media.entity.User;
 import com.one.social_media.exception.AppException;
 import com.one.social_media.exception.ErrorCode;
 import com.one.social_media.mapper.UserMapper;
+import com.one.social_media.repository.ImageRepository;
 import com.one.social_media.repository.RoleRepository;
 import com.one.social_media.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import com.one.social_media.dto.request.UpdateUserProfileDto; // Import DTO
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +30,8 @@ import java.util.Optional;
 public class UserService {
     UserRepository userRepository;
     RoleRepository roleRepository;
+    ImageRepository imageRepository;  // Sử dụng ImageRepository
+
 
     UserMapper userMapper;
 
@@ -57,5 +63,21 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         return user.getId();
+    }
+    // Phương thức cập nhật hồ sơ
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public UserResDto updateUserProfile(UpdateUserProfileDto userProfileDto) {
+        User user = userRepository.findById(this.getLoginUserId())
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        userMapper.updateToUser(userProfileDto,user);
+        return userMapper.toUserResDto( userRepository.save(user));
+    }
+
+    // Phương thức lấy danh sách hình ảnh của người dùng
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @Transactional   // Đảm bảo phiên vẫn mở khi truy xuất dữ liệu
+    public List<Image> getUserImages() {
+        Long userId = getLoginUserId();
+        return imageRepository.findAllImagesByUserId(userId);  // Gọi ImageRepository để lấy danh sách hình ảnh
     }
 }

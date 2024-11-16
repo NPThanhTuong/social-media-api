@@ -33,6 +33,8 @@ public class User implements Serializable {
     private Date deletedAt;
     private Date unblockedAt;
 
+
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
