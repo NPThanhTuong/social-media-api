@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
@@ -58,6 +59,22 @@ public class User implements Serializable {
         this.phone = phone;
         this.email = email;
         this.password = password;
+    }
+
+    public User(Role role, String name, Date dob, String phone, String email, String password, String avatar, String bio, String coverImage) {
+        this.role = role;
+        this.name = name;
+        this.dob = dob;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.bio = bio;
+        this.coverImage = coverImage;
+    }
+
+    public User(Long id) {
+        this.id = id;
     }
 
     @PrePersist
