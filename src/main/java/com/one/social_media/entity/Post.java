@@ -43,6 +43,15 @@ public class Post implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post", fetch = FetchType.LAZY)
     private Set<Image> images = new HashSet<>();
 
+    public Post(String content, Date createdAt, Date updatedAt, Date deletedAt, User owner) {
+        this.content = content;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
+        this.owner = owner;
+    }
+
+
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();
