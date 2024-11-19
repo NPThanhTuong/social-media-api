@@ -1,9 +1,11 @@
 package com.one.social_media.mapper;
 
 import com.one.social_media.dto.request.RegisterReqDto;
+import com.one.social_media.dto.request.UpdateUserProfileDto;
 import com.one.social_media.dto.response.UserResDto;
 import com.one.social_media.entity.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
@@ -16,4 +18,5 @@ public interface UserMapper {
 
     User toUser(RegisterReqDto registerReqDto);
 
+    void updateToUser(UpdateUserProfileDto updateUserProfileDto,@MappingTarget User user);
 }

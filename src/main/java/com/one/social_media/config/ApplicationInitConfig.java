@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -736,49 +737,49 @@ public class ApplicationInitConfig {
                                 userRepository.findById(1L).orElseThrow(),
                                 userRepository.findById(2L).orElseThrow(),
                                 relationshipTypeRepository.findById(1L).orElseThrow(),
-                                java.sql.Timestamp.valueOf("2022-09-19 08:16:34")
+                                Timestamp.valueOf("2022-09-19 08:16:34").toLocalDateTime()
                         ),
                         new Relationship(
                                 userRepository.findById(2L).orElseThrow(),
                                 userRepository.findById(1L).orElseThrow(),
                                 relationshipTypeRepository.findById(2L).orElseThrow(),
-                                new Date() // CURRENT_TIMESTAMP
+                                LocalDateTime.now() // CURRENT_TIMESTAMP
                         ),
                         new Relationship(
                                 userRepository.findById(3L).orElseThrow(),
                                 userRepository.findById(4L).orElseThrow(),
                                 relationshipTypeRepository.findById(1L).orElseThrow(),
-                                java.sql.Timestamp.valueOf("2023-01-15 12:00:00")
+                                Timestamp.valueOf("2023-01-15 12:00:00").toLocalDateTime()
                         ),
                         new Relationship(
                                 userRepository.findById(4L).orElseThrow(),
                                 userRepository.findById(3L).orElseThrow(),
                                 relationshipTypeRepository.findById(3L).orElseThrow(),
-                                java.sql.Timestamp.valueOf("2023-05-22 15:30:00")
+                                Timestamp.valueOf("2023-05-22 15:30:00").toLocalDateTime()
                         ),
                         new Relationship(
                                 userRepository.findById(5L).orElseThrow(), // User Owner ID = 5
                                 userRepository.findById(6L).orElseThrow(), // User Referenced ID = 6
                                 relationshipTypeRepository.findById(2L).orElseThrow(), // Relationship Type ID = 2
-                                java.sql.Timestamp.valueOf("2023-12-10 08:15:00") // Updated At
+                                Timestamp.valueOf("2023-12-10 08:15:00").toLocalDateTime() // Updated At
                         ),
                         new Relationship(
                                 userRepository.findById(7L).orElseThrow(),
                                 userRepository.findById(8L).orElseThrow(),
                                 relationshipTypeRepository.findById(1L).orElseThrow(),
-                                java.sql.Timestamp.valueOf("2024-03-01 10:45:00")
+                                Timestamp.valueOf("2024-03-01 10:45:00").toLocalDateTime()
                         ),
                         new Relationship(
                                 userRepository.findById(8L).orElseThrow(),
                                 userRepository.findById(7L).orElseThrow(),
                                 relationshipTypeRepository.findById(3L).orElseThrow(),
-                                new Date() // CURRENT_TIMESTAMP
+                                LocalDateTime.now() // CURRENT_TIMESTAMP
                         ),
                         new Relationship(
                                 userRepository.findById(9L).orElseThrow(),
                                 userRepository.findById(10L).orElseThrow(),
                                 relationshipTypeRepository.findById(2L).orElseThrow(),
-                                java.sql.Timestamp.valueOf("2024-05-20 14:00:00")
+                                Timestamp.valueOf("2024-05-20 14:00:00").toLocalDateTime()
                         )
                 );
 

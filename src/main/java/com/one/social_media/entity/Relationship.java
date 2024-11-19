@@ -37,7 +37,7 @@ public class Relationship implements Serializable {
     
     private LocalDateTime updatedAt;
 
-    public Relationship(User userOwner, User userReferenced, RelationshipType relationshipType, Date updatedAt) {
+    public Relationship(User userOwner, User userReferenced, RelationshipType relationshipType, LocalDateTime updatedAt) {
         this.id = new RelationshipKey(userOwner.getId(), userReferenced.getId());
         this.userOwner = userOwner;
         this.userReferenced = userReferenced;
