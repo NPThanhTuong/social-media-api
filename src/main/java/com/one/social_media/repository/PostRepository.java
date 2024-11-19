@@ -14,6 +14,13 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
+
+    @Query("SELECT p " +
+            "FROM Post p " +
+            "LEFT JOIN FETCH p.images " +
+            "LEFT JOIN FETCH p.likes " +
+            "LEFT JOIN FETCH p.comments " +
+            "WHERE p.owner.id = :ownerId")
     List<Post> findByOwnerId(Long ownerId);
 
     @Query("SELECT p " +
