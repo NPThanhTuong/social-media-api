@@ -1,18 +1,20 @@
 package com.one.social_media.entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Relationship implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -33,7 +35,15 @@ public class Relationship implements Serializable {
     @JoinColumn(name = "relationship_type_id")
     private RelationshipType relationshipType;
     
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
+
+    public Relationship(User userOwner, User userReferenced, RelationshipType relationshipType, Date updatedAt) {
+        this.id = new RelationshipKey(userOwner.getId(), userReferenced.getId());
+        this.userOwner = userOwner;
+        this.userReferenced = userReferenced;
+        this.relationshipType = relationshipType;
+        this.updatedAt = updatedAt;
+    }
 
 }
 

@@ -25,29 +25,42 @@ public class FriendshipController {
     }
 
 
-    @GetMapping("/relationship/{userId}")
-    public ResponseEntity<FriendshipResponseDto> getFriendshipDetails(@PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(friendShipService.getFriendshipDetails(userId));
+    @GetMapping("/relationship")
+    public ResponseEntity<FriendshipResponseDto> getFriendshipDetails() {
+        return ResponseEntity.ok(friendShipService.getFriendshipDetails());
     }
 
     // Chấp nhận yêu cầu kết bạn
-    @PostMapping("/accept/{userId}/{requesterId}")
-    public ResponseEntity<String> acceptFriendRequest(@PathVariable("userId") Long userId, @PathVariable("requesterId") Long requesterId) {
-        friendShipService.acceptFriendRequest(userId, requesterId);
+    @PostMapping("/accept/{requesterId}")
+    public ResponseEntity<String> acceptFriendRequest(@PathVariable("requesterId") Long requesterId) {
+        friendShipService.acceptFriendRequest(requesterId);
         return ResponseEntity.ok("Đã chấp nhận yêu cầu kết bạn.");
     }
 
     // Xóa bạn hoặc hủy yêu cầu
-    @DeleteMapping("/remove/{userId}/{friendId}")
-    public ResponseEntity<String> removeFriend(@PathVariable Long userId, @PathVariable Long friendId) {
-        friendShipService.removeFriendOrRequest(userId, friendId);
+    @DeleteMapping("/remove/{friendId}")
+    public ResponseEntity<String> removeFriend(@PathVariable Long friendId) {
+        friendShipService.removeFriendOrRequest(friendId);
         return ResponseEntity.ok("Đã xóa bạn");
     }
 
-    @DeleteMapping("/cancel/{userId}/{friendId}")
-    public ResponseEntity<String> cancelFriendRequest(@PathVariable Long userId, @PathVariable Long friendId) {
-        friendShipService.removeFriendOrRequest(userId, friendId);
+    @DeleteMapping("/cancel/{friendId}")
+    public ResponseEntity<String> cancelFriendRequest(@PathVariable Long friendId) {
+        friendShipService.removeFriendOrRequest(friendId);
         return ResponseEntity.ok("Đã hủy yêu cầu kết bạn");
+    }
+
+
+    @GetMapping("/suggestions")
+    public ResponseEntity<List<UserResDto>> getSuggestedFriends() {
+        List<UserResDto> suggestedFriends = friendShipService.getSuggestedFriends();
+        return ResponseEntity.ok(suggestedFriends);
+    }
+
+    @PostMapping("/send-request/{receiverId}")
+    public ResponseEntity<String> sendFriendRequest(@PathVariable("receiverId") Long receiverId) {
+        friendShipService.sendFriendRequest(receiverId);
+        return ResponseEntity.ok("Đã gửi yêu cầu kết bạn.");
     }
 
 }

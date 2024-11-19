@@ -14,8 +14,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Room implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -34,5 +40,15 @@ public class Room implements Serializable {
     
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
 //    private Set<Message> calls = new HashSet<>();
+
+    public Room(String theme, Date createdAt, Date deletedAt) {
+        this.theme = theme;
+        this.createdAt = createdAt;
+        this.deletedAt = deletedAt;
+    }
+
+    public Room(Long id) {
+        this.id = id;
+    }
 }
 

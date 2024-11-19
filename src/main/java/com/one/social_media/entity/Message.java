@@ -9,8 +9,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -28,4 +34,12 @@ public class Message implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User sender;
+
+    public Message(Room room, User sender, String content, Date sentAt, String status) {
+        this.room = room;
+        this.sender = sender;
+        this.content = content;
+        this.sentAt = sentAt;
+        this.status = status;
+    }
 }
