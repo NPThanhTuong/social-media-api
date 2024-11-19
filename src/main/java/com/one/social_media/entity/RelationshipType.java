@@ -10,7 +10,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class RelationshipType implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,5 +30,10 @@ public class RelationshipType implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "relationshipType")
     private Set<Relationship> relationships = new HashSet<>();
+
+    public RelationshipType(String name) {
+        this.name = name;
+    }
+
 }
 

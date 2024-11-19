@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Relationship implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -36,6 +36,14 @@ public class Relationship implements Serializable {
     private RelationshipType relationshipType;
     
     private LocalDateTime updatedAt;
+
+    public Relationship(User userOwner, User userReferenced, RelationshipType relationshipType, Date updatedAt) {
+        this.id = new RelationshipKey(userOwner.getId(), userReferenced.getId());
+        this.userOwner = userOwner;
+        this.userReferenced = userReferenced;
+        this.relationshipType = relationshipType;
+        this.updatedAt = updatedAt;
+    }
 
 }
 
