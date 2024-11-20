@@ -1,9 +1,11 @@
 package com.one.social_media.service;
 
+import com.one.social_media.dto.request.ChatUserReqDto;
 import com.one.social_media.dto.response.UserResDto;
 import com.one.social_media.entity.Image;
 import com.one.social_media.entity.Post;
 import com.one.social_media.entity.User;
+import com.one.social_media.enums.UserStatus;
 import com.one.social_media.exception.AppException;
 import com.one.social_media.exception.ErrorCode;
 import com.one.social_media.mapper.UserMapper;
@@ -14,8 +16,6 @@ import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -63,6 +63,28 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         return user.getId();
+    }
+
+    // chat service
+    public User connectUser(ChatUserReqDto chatUserReqDto) {
+        var user = findByEmail(chatUserReqDto.getEmail())
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        user.setStatus(UserStatus.ONLINE);
+
+        return userRepository.save(user);
+    }
+
+    public User disconnectUser(ChatUserReqDto chatUserReqDto) {
+        var storedUser = userRepository.findByEmail(chatUserReqDto.getEmail())
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+
+        storedUser.setStatus(UserStatus.OFFLINE);
+        return userRepository.save(storedUser);
+    }
+
+    public List<UserResDto> findConnectedUsers() {
+        return userMapper.toListUserResDto(userRepository.findAllByStatus(UserStatus.ONLINE));
     }
     // Phương thức cập nhật hồ sơ
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")

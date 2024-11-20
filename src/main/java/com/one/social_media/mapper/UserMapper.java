@@ -18,5 +18,5 @@ public interface UserMapper {
 
     User toUser(RegisterReqDto registerReqDto);
 
-    void updateToUser(UpdateUserProfileDto updateUserProfileDto,@MappingTarget User user);
+    void updateToUser(UpdateUserProfileDto updateUserProfileDto, @MappingTarget User user);
 }

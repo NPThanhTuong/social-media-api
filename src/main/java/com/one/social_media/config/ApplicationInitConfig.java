@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -801,140 +800,140 @@ public class ApplicationInitConfig {
                                 userRepository.findById(1L).orElseThrow(),
                                 "Xin chào các bạn!",
                                 java.sql.Timestamp.valueOf("2024-09-14 04:00:00"),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(1L).orElseThrow(),
                                 userRepository.findById(2L).orElseThrow(),
                                 "Chào bạn!",
                                 java.sql.Timestamp.valueOf("2024-09-14 04:10:00"),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(2L).orElseThrow(),
                                 userRepository.findById(3L).orElseThrow(),
                                 "Mọi người đã chuẩn bị xong chưa?",
                                 java.sql.Timestamp.valueOf("2024-01-14 02:07:00"),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(2L).orElseThrow(),
                                 userRepository.findById(4L).orElseThrow(),
                                 "Tôi đã xong rồi!",
                                 java.sql.Timestamp.valueOf("2024-01-14 04:00:00"),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(3L).orElseThrow(),
                                 userRepository.findById(5L).orElseThrow(),
                                 "Có ai muốn chơi game không?",
                                 java.sql.Timestamp.valueOf("2024-04-04 04:00:00"),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(3L).orElseThrow(),
                                 userRepository.findById(6L).orElseThrow(),
                                 "Chắc chắn rồi!",
                                 java.sql.Timestamp.valueOf("2024-04-14 14:28:00"),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(4L).orElseThrow(),
                                 userRepository.findById(7L).orElseThrow(),
                                 "Chúng ta sẽ thảo luận về vấn đề gì?",
                                 java.sql.Timestamp.valueOf("2022-09-19 08:16:34"),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(4L).orElseThrow(),
                                 userRepository.findById(8L).orElseThrow(),
                                 "Vấn đề bảo mật hệ thống.",
                                 java.sql.Timestamp.valueOf("2022-09-20 04:00:00"),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(5L).orElseThrow(),
                                 userRepository.findById(9L).orElseThrow(),
                                 "Tôi đã gửi tài liệu cho mọi người.",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(5L).orElseThrow(),
                                 userRepository.findById(10L).orElseThrow(),
                                 "Cảm ơn bạn!",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(6L).orElseThrow(),
                                 userRepository.findById(11L).orElseThrow(),
                                 "Mọi thứ đã chuẩn bị xong.",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(6L).orElseThrow(),
                                 userRepository.findById(12L).orElseThrow(),
                                 "Tốt lắm.",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(7L).orElseThrow(),
                                 userRepository.findById(13L).orElseThrow(),
                                 "Dự án đã tiến triển như thế nào?",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(7L).orElseThrow(),
                                 userRepository.findById(14L).orElseThrow(),
                                 "Đang đi đúng kế hoạch.",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(8L).orElseThrow(),
                                 userRepository.findById(15L).orElseThrow(),
                                 "Khi nào sự kiện sẽ bắt đầu?",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(8L).orElseThrow(),
                                 userRepository.findById(16L).orElseThrow(),
                                 "Bắt đầu lúc 10h sáng mai.",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(9L).orElseThrow(),
                                 userRepository.findById(17L).orElseThrow(),
                                 "Tôi sẽ tham gia buổi học trực tuyến.",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(9L).orElseThrow(),
                                 userRepository.findById(18L).orElseThrow(),
                                 "Tôi cũng vậy.",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(10L).orElseThrow(), // Room ID = 10
                                 userRepository.findById(19L).orElseThrow(), // User ID = 19
                                 "Tôi thích không gian thư giãn ở đây.",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         ),
                         new Message(
                                 roomRepository.findById(10L).orElseThrow(), // Room ID = 10
                                 userRepository.findById(20L).orElseThrow(), // User ID = 20
                                 "Cảm ơn bạn!",
                                 new Date(),
-                                "Đã gửi"
+                                true
                         )
                 );
 

@@ -1,5 +1,6 @@
 package com.one.social_media.entity;
 
+import com.one.social_media.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,13 +35,17 @@ public class User implements Serializable {
     private Date deletedAt;
     private Date unblockedAt;
 
-
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
     @ManyToMany
-    @JoinTable(name = "user_room", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "room_id"))
+    @JoinTable(
+            name = "user_room",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id"))
     private Set<Room> rooms = new HashSet<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sender", fetch = FetchType.LAZY)
     private List<Message> messages = new ArrayList<>();
@@ -83,6 +88,7 @@ public class User implements Serializable {
     protected void onCreate() {
         createdAt = new Date();
         updatedAt = new Date();
+        status = UserStatus.OFFLINE;
     }
 
     @PreUpdate
@@ -103,4 +109,8 @@ public class User implements Serializable {
         return Objects.hashCode(id);
     }
 
+    public void addRoom(Room room) {
+        rooms.add(room);
+        room.getUsers().add(this);
+    }
 }
