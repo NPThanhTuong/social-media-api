@@ -982,10 +982,10 @@ public class ApplicationInitConfig {
                                 Timestamp.valueOf("2023-05-22 15:30:00").toLocalDateTime()
                         ),
                         new Relationship(
-                                userRepository.findById(5L).orElseThrow(), // User Owner ID = 5
-                                userRepository.findById(6L).orElseThrow(), // User Referenced ID = 6
-                                relationshipTypeRepository.findById(2L).orElseThrow(), // Relationship Type ID = 2
-                                Timestamp.valueOf("2023-12-10 08:15:00").toLocalDateTime() // Updated At
+                                userRepository.findById(5L).orElseThrow(),
+                                userRepository.findById(6L).orElseThrow(),
+                                relationshipTypeRepository.findById(2L).orElseThrow(),
+                                Timestamp.valueOf("2023-12-10 08:15:00").toLocalDateTime()
                         ),
                         new Relationship(
                                 userRepository.findById(7L).orElseThrow(),
@@ -997,13 +997,31 @@ public class ApplicationInitConfig {
                                 userRepository.findById(8L).orElseThrow(),
                                 userRepository.findById(7L).orElseThrow(),
                                 relationshipTypeRepository.findById(3L).orElseThrow(),
-                                LocalDateTime.now() // CURRENT_TIMESTAMP
+                                LocalDateTime.now()
                         ),
                         new Relationship(
                                 userRepository.findById(9L).orElseThrow(),
                                 userRepository.findById(10L).orElseThrow(),
                                 relationshipTypeRepository.findById(2L).orElseThrow(),
                                 Timestamp.valueOf("2024-05-20 14:00:00").toLocalDateTime()
+                        ),
+                        new Relationship(
+                                userRepository.findById(3L).orElseThrow(),
+                                userRepository.findById(4L).orElseThrow(),
+                                relationshipTypeRepository.findById(1L).orElseThrow(),
+                                Timestamp.valueOf("2023-01-15 12:00:00").toLocalDateTime()
+                        ),
+                        new Relationship(
+                                userRepository.findById(3L).orElseThrow(),
+                                userRepository.findById(5L).orElseThrow(),
+                                relationshipTypeRepository.findById(2L).orElseThrow(),
+                                LocalDateTime.now()
+                        ),
+                        new Relationship(
+                                userRepository.findById(3L).orElseThrow(),
+                                userRepository.findById(6L).orElseThrow(),
+                                relationshipTypeRepository.findById(3L).orElseThrow(),
+                                LocalDateTime.now()
                         )
                 );
 
