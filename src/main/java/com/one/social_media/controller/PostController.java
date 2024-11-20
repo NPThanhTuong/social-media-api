@@ -58,4 +58,5 @@ public class PostController {
     public ResponseEntity<List<Long>> getListLikePostIds() {
         return ResponseEntity.ok(postService.getListLikePostIds());
     }
+
 }

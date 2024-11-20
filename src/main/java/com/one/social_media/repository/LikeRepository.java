@@ -17,6 +17,8 @@ public interface LikeRepository extends JpaRepository<Like, LikeKey> {
 
     @Query("SELECT p FROM Post p " +
             "JOIN FETCH p.likes l " +
+            "JOIN FETCH p.images i " +
+            "JOIN FETCH p.comments c " +
             "JOIN l.user u " +
             "WHERE u.id = :userId")
     List<Post> findAllPostByUserId(@Param("userId") Long userId);

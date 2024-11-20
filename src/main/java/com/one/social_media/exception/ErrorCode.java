@@ -19,7 +19,9 @@ public enum ErrorCode {
     POST_NOT_EXIST("Post is not exist"),
     RELATIONSHIP_TYPE_NOT_EXIST("RelationshipType not found"),
     RELATIONSHIP_NOT_EXIST("Relationship not found"),
-    ROOM_IS_NOT_EXIST("Chat room is not exist");
+    ROOM_IS_NOT_EXIST("Chat room is not exist"),
+    INVALID_REQUEST("Can't send friend requests to myself"),
+    RELATIONSHIP_ALREADY_EXISTS("Relationship already exists");
 
     private final String message;
 

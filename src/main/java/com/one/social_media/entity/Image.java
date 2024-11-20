@@ -1,5 +1,7 @@
 package com.one.social_media.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonKey;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +21,10 @@ public class Image implements Serializable {
     private Long id;
     private String path;
 
-    @ManyToOne
     @JoinColumn(name = "post_id")
+
+    // @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Post post;
 }
