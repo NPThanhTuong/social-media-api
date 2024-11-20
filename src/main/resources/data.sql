@@ -5,30 +5,30 @@ VALUES
 ('USER', 'Người dùng thường với quyền hạn hạn chế') ;
 
 
-INSERT INTO user( role_id, name, dob, phone, email, password, avatar, bio, cover_image, created_at, updated_at, deleted_at, unblocked_at)
+INSERT INTO user( role_id, name, dob, phone, email, password, avatar, bio, cover_image, created_at, updated_at, deleted_at, unblocked_at, status)
 VALUES
-( 1, 'Nguyễn Ngọc Ánh', '1990-01-01', '0912000001', 'nnanh124@gmail.com', '12345', 'hinh1.jpg', 'Lập trình viên', 'hinh1-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-( 2, 'Trần Thị Kim Liên', '1992-02-02', '0912000002', 'ttkl92@gmail.com', '12345', 'hinh2.jpg', 'Nhà thiết kế', 'hinh2-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+( 1, 'Nguyễn Ngọc Ánh', '1990-01-01', '0912000001', 'nnanh124@gmail.com', '12345', 'hinh1.jpg', 'Lập trình viên', 'hinh1-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'ONLINE'),
+( 2, 'Trần Thị Kim Liên', '1992-02-02', '0912000002', 'ttkl92@gmail.com', '12345', 'hinh2.jpg', 'Nhà thiết kế', 'hinh2-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'ONLINE'),
 
-(2, 'Phạm Thị Mỹ Tiên', '1994-04-04', '0912000004', 'ptmtien@gmail.com', '12345', 'hinh3.jpg', 'Kế toán viên', 'hinh3-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-( 2, 'Trần Phúc Minh', '1995-05-05', '0912000005', 'tpminh87@gmail.com', '12345', 'hinh4.jpg', 'Giáo viên', 'hinh4-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-( 2, 'Lê Minh Khái', '1996-06-06', '0912000006', 'lmkhai@gmail.com', '12345', 'hinh5.jpg', 'Bác sĩ', 'hinh5-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-(2, 'Trần Văn Bối', '1997-07-07', '0912000007', 'tvboi840@gmail.com', '12345', 'hinh6.jpg', 'Luật sư', 'hinh6-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+(2, 'Phạm Thị Mỹ Tiên', '1994-04-04', '0912000004', 'ptmtien@gmail.com', '12345', 'hinh3.jpg', 'Kế toán viên', 'hinh3-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'ONLINE'),
+( 2, 'Trần Phúc Minh', '1995-05-05', '0912000005', 'tpminh87@gmail.com', '12345', 'hinh4.jpg', 'Giáo viên', 'hinh4-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+( 2, 'Lê Minh Khái', '1996-06-06', '0912000006', 'lmkhai@gmail.com', '12345', 'hinh5.jpg', 'Bác sĩ', 'hinh5-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+(2, 'Trần Văn Bối', '1997-07-07', '0912000007', 'tvboi840@gmail.com', '12345', 'hinh6.jpg', 'Luật sư', 'hinh6-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
 
-( 2, 'Nguyễn Trần Thanh Thúy', '1999-09-09', '0912000009', 'ntthuy@gmail.com', '12345', 'hinh7.jpg', 'Nông dân', 'hinh7-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-(2, 'Huỳnh Ngọc Hiền', '1990-10-10', '0912000010', 'hnhien@gmail.com', '12345', 'hinh8.jpg', 'Kỹ sư xây dựng', 'hinh8-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-( 2, 'Trần Mạnh', '1991-11-11', '0912000011', 'tranmanh8h7@gmail.com', '12345', 'hinh9.jpg', 'Nhà báo', 'hinh9-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-(2, 'John Nguyễn', '1992-12-12', '0912000012', 'John87g@gmail.com', '12345', 'hinh10.jpg', 'Nhà nghiên cứu', 'hinh10-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-( 2, 'Selena', '1993-01-13', '0912000013', 'slena517@gmail.com', '12345', 'hinh11.jpg', 'Nhân viên IT', 'hinh11-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-(2, 'Ánh Minh', '1994-02-14', '0912000014', 'minh@gmail.com', '12345', 'hinh12.jpg', 'Kỹ sư phần mềm', 'hinh12-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-(2, 'Hoàng Hùng', '1995-03-15', '0912000015', 'hung123@gmail.com', '12345', 'hinh13.jpg', 'Kỹ thuật viên', 'hinh13-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-(2, 'Phan Tran My Truc', '1996-04-16', '0912000016', 'ptmytruc834@gmail.com', '12345', 'hinh14.jpg', 'Bác sĩ phẫu thuật', 'hinh14-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-(2, 'Văn Nguyên', '1997-05-17', '0912000017', 'nguyenvan872@gmail.com', '12345', 'hinh15.jpg', 'Chuyên viên bảo mật', 'hinh15-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-( 2, 'Lê Ngọc', '1998-06-18', '0912000018', 'lengoc77w@gmail.com', '12345', 'hinh16.jpg', 'Quản lý dự án', 'hinh16-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-(2, 'Trần Sáng', '1999-07-19', '0912000019', 'sangtran881@gmail.com', '12345', 'hinh17.jpg', 'Kỹ sư điện', 'hinh17-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-(2, 'Pham Uyển', '2000-08-20', '0912000020', 'phamuyen@gmail.com', '12345', 'hinh18.jpg', 'Chuyên viên nhân sự', 'hinh18-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-( 1, 'Nguyễn Ngọc Trân', '1990-01-01', '0912000001', 'nnanh124aa@gmail.com', '12345', 'hinh19.jpg', 'Lập trình viên', 'hinh19-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
-( 1, 'Trần Ngọc Ánh', '1990-01-01', '0912000001', 'tnanh124@gmail.com', '12345', 'hinh20.jpg', 'Lập trình viên', 'hinh20-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+( 2, 'Nguyễn Trần Thanh Thúy', '1999-09-09', '0912000009', 'ntthuy@gmail.com', '12345', 'hinh7.jpg', 'Nông dân', 'hinh7-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+(2, 'Huỳnh Ngọc Hiền', '1990-10-10', '0912000010', 'hnhien@gmail.com', '12345', 'hinh8.jpg', 'Kỹ sư xây dựng', 'hinh8-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+( 2, 'Trần Mạnh', '1991-11-11', '0912000011', 'tranmanh8h7@gmail.com', '12345', 'hinh9.jpg', 'Nhà báo', 'hinh9-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+(2, 'John Nguyễn', '1992-12-12', '0912000012', 'John87g@gmail.com', '12345', 'hinh10.jpg', 'Nhà nghiên cứu', 'hinh10-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+( 2, 'Selena', '1993-01-13', '0912000013', 'slena517@gmail.com', '12345', 'hinh11.jpg', 'Nhân viên IT', 'hinh11-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+(2, 'Ánh Minh', '1994-02-14', '0912000014', 'minh@gmail.com', '12345', 'hinh12.jpg', 'Kỹ sư phần mềm', 'hinh12-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+(2, 'Hoàng Hùng', '1995-03-15', '0912000015', 'hung123@gmail.com', '12345', 'hinh13.jpg', 'Kỹ thuật viên', 'hinh13-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+(2, 'Phan Tran My Truc', '1996-04-16', '0912000016', 'ptmytruc834@gmail.com', '12345', 'hinh14.jpg', 'Bác sĩ phẫu thuật', 'hinh14-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+(2, 'Văn Nguyên', '1997-05-17', '0912000017', 'nguyenvan872@gmail.com', '12345', 'hinh15.jpg', 'Chuyên viên bảo mật', 'hinh15-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+( 2, 'Lê Ngọc', '1998-06-18', '0912000018', 'lengoc77w@gmail.com', '12345', 'hinh16.jpg', 'Quản lý dự án', 'hinh16-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+(2, 'Trần Sáng', '1999-07-19', '0912000019', 'sangtran881@gmail.com', '12345', 'hinh17.jpg', 'Kỹ sư điện', 'hinh17-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+(2, 'Pham Uyển', '2000-08-20', '0912000020', 'phamuyen@gmail.com', '12345', 'hinh18.jpg', 'Chuyên viên nhân sự', 'hinh18-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+( 1, 'Nguyễn Ngọc Trân', '1990-01-01', '0912000001', 'nnanh124aa@gmail.com', '12345', 'hinh19.jpg', 'Lập trình viên', 'hinh19-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE'),
+( 1, 'Trần Ngọc Ánh', '1990-01-01', '0912000001', 'tnanh124@gmail.com', '12345', 'hinh20.jpg', 'Lập trình viên', 'hinh20-cover.png', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL, 'OFFLINE');
 
 INSERT INTO post ( content, created_at, updated_at, deleted_at, user_id)
 VALUES
@@ -158,7 +158,7 @@ VALUES
 ( 20, 10, 'Hoàn tất', '2024-09-14 04:00:00', '2024-09-14 05:00:00');
 
 
-INSERT INTO message( room_id, user_id, content, sent_at,status)
+INSERT INTO message( room_id, user_id, content, sent_at, is_read)
 VALUES
 (1, 1, 'Xin chào các bạn!', '2024-09-14 04:00:00', 1),
 (1, 2, 'Chào bạn!', '2024-09-14 04:10:00', 1),

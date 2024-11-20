@@ -1,5 +1,8 @@
 package com.one.social_media.dto.response;
 
+import com.one.social_media.enums.UserStatus;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -23,4 +26,7 @@ public class UserResDto {
     Date updatedAt;
     Date deletedAt;
     Date unblockedAt;
+
+    @Enumerated(EnumType.STRING)
+    UserStatus status;
 }

@@ -9,11 +9,19 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-
+    //    @Mappings({
+//            @Mapping(target = "status", source = "status", qualifiedByName = "statusToString")
+//    })
     UserResDto toUserResDto(User user);
 
     List<UserResDto> toListUserResDto(List<User> user);
 
     User toUser(RegisterReqDto registerReqDto);
+
+//    // Custom method to map UserStatus to String
+//    default String statusToString(UserStatus status) {
+//        return status != null ? status.name() : null;
+//    }
+
 
 }

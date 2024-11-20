@@ -18,7 +18,8 @@ public enum ErrorCode {
     JWT_TOKEN_INVALID("Token is invalid!"),
     POST_NOT_EXIST("Post is not exist"),
     RELATIONSHIP_TYPE_NOT_EXIST("RelationshipType not found"),
-    RELATIONSHIP_NOT_EXIST("Relationship not found");
+    RELATIONSHIP_NOT_EXIST("Relationship not found"),
+    ROOM_IS_NOT_EXIST("Chat room is not exist");
 
     private final String message;
 
