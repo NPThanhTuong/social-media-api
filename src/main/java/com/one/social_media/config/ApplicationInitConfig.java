@@ -69,24 +69,24 @@ public class ApplicationInitConfig {
                     User.builder()
                             .email("user@gmail.com")
                             .name("User")
-                            .dob(java.sql.Date.valueOf("1990-01-01"))
+                            .dob(java.sql.Date.valueOf("2000-01-01"))
                             .phone("0912000001")
                             .avatar("https://res.cloudinary.com/dmcqr73g4/image/upload/v1729995552/no-avatar_nj3kwi.png")
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1729995553/no-image_ow1ois.jpg")
                             .bio("Lập trình viên")
                             .role(userRole)
-                            .password(passwordEncoder.encode("user12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("ttkl92@gmail.com")
                             .name("Trần Thị Kim Liên")
-                            .dob(java.sql.Date.valueOf("1992-02-02"))
+                            .dob(java.sql.Date.valueOf("2002-02-02"))
                             .phone("0912000002")
                             .avatar("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731840200/mtw5iprak3i2bocijieh.jpg")
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841048/wacdxwdbbf7pjklsgkfo.jpg")
                             .bio("Nhà thiết kế")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("ptmtien@gmail.com")
@@ -97,7 +97,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841087/o9knsbwjevkbclrckmy7.jpg")
                             .bio("Kế toán viên")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("tpminh87@gmail.com")
@@ -108,7 +108,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841388/ue7axsza92ocswt23pg9.jpg")
                             .bio("Giáo viên")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("lmkhai@gmail.com")
@@ -119,7 +119,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841430/gsdasojgoj50nsllrhfw.jpg")
                             .bio("Bác sĩ")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("tvbao840@gmail.com")
@@ -130,7 +130,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841465/j4q4rwrwh1gqvnttfvsf.jpg")
                             .bio("Luật sư")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("ntthuy@gmail.com")
@@ -140,7 +140,7 @@ public class ApplicationInitConfig {
                             .avatar("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731840324/eubp2i16ujken2sqmzcr.jpg")
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841523/ntkvy5oqu7rjowqbatam.jpg")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("hnhien@gmail.com")
@@ -151,7 +151,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841561/w3p97p0ryyzeyrhkd46g.jpg")
                             .bio("Kỹ sư xây dựng")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("tranmanh8h7@gmail.com")
@@ -162,7 +162,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841625/mhwcthbrt9eqab2xisug.jpg")
                             .bio("Nhà báo")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("John87g@gmail.com")
@@ -173,7 +173,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841706/xzg03hzjdiqlo26knv5b.jpg")
                             .bio("Nhà nghiên cứu")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("slena517@gmail.com")
@@ -184,7 +184,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841763/kme33os6px85kydnduy9.jpg")
                             .bio("Nhân viên IT")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("minh@gmail.com")
@@ -195,7 +195,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841812/dkgf5h1drpontkxtzhvx.jpg")
                             .bio("Kỹ sư phần mềm")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("hung123@gmail.com")
@@ -206,7 +206,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731841851/bsgj3vllwdmq7tqt5lu1.jpg")
                             .bio("Kỹ thuật viên")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("ptmytruc834@gmail.com")
@@ -217,7 +217,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842020/debs09uy0qu0ymuknv2m.jpg")
                             .bio("Bác sĩ phẫu thuật")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("nguyenvan872@gmail.com")
@@ -228,7 +228,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842115/j7wdchdr1limooy1mvke.jpg")
                             .bio("Chuyên viên bảo mật")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("lengoc77w@gmail.com")
@@ -239,7 +239,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842144/dfdericc41skpuvktoaw.jpg")
                             .bio("Quản lý dự án")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("sangtran881@gmail.com")
@@ -250,7 +250,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842171/dwva1uokaq9tordigqi0.jpg")
                             .bio("Kỹ sư điện")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("phamuyen@gmail.com")
@@ -261,7 +261,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842204/n92yxdgcaywtrfllbjuo.jpg")
                             .bio("Chuyên viên nhân sự")
                             .role(userRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("nnanh124aa@gmail.com")
@@ -272,7 +272,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842231/diofj7fhozdpdttmai53.jpg")
                             .bio("Lập trình viên")
                             .role(adminRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build(),
                     User.builder()
                             .email("tnanh124@gmail.com")
@@ -283,7 +283,7 @@ public class ApplicationInitConfig {
                             .coverImage("https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842259/uavm4afleh65gkrjr4di.jpg")
                             .bio("Lập trình viên")
                             .role(adminRole)
-                            .password(passwordEncoder.encode("12345"))
+                            .password(passwordEncoder.encode("1234abcd"))
                             .build()
 
             );
@@ -295,8 +295,6 @@ public class ApplicationInitConfig {
                 }
             });
 
-
-            // Tạo Post
             if (postRepository.count() == 0) {
                 List<Post> posts = List.of(
                         new Post("Bài viết đầu tiên của tôi!", new Date(), new Date(), null, new User(1L)),
@@ -321,17 +319,243 @@ public class ApplicationInitConfig {
                         new Post("Hãy sống như không có ngày mai.", new Date(), new Date(), null, new User(10L)),
                         new Post("Cuộc sống là một món quà.", new Date(), new Date(), null, new User(3L)),
                         new Post("Học lập trình mỗi ngày.", new Date(), new Date(), null, new User(5L)),
-                        new Post("Tôi thích uống cà phê sáng.", new Date(), new Date(), null, new User(6L))
+                        new Post("Tôi thích uống cà phê sáng.", new Date(), new Date(), null, new User(6L)),
+                        new Post("Chuyến đi cuối tuần thật thú vị!", new Date(), new Date(), null, new User(19L)),
+                        new Post("Tôi đang học cách làm ứng dụng web!", java.sql.Timestamp.valueOf("2023-11-01 09:30:00"), new Date(), null, new User(17L)),
+                        new Post("Mỗi người đều có giá trị riêng.", new Date(), new Date(), null, new User(4L)),
+                        new Post("Học thêm một ngôn ngữ mới mỗi tháng.", new Date(), new Date(), null, new User(10L)),
+                        new Post("Khám phá điều kỳ diệu trong cuộc sống.", new Date(), new Date(), null, new User(2L)),
+                        new Post("Học cách cân bằng công việc và cuộc sống.", new Date(), new Date(), null, new User(8L)),
+                        new Post("Tập thể dục mỗi ngày để khỏe mạnh hơn!", new Date(), new Date(), null, new User(15L)),
+                        new Post("Làm thế nào để trở thành một lập trình viên giỏi?", new Date(), new Date(), null, new User(6L)),
+                        new Post("Trải nghiệm thú vị khi đi du lịch.", new Date(), new Date(), null, new User(12L)),
+                        new Post("Mùa hè năm nay thật nóng bức!", new Date(), new Date(), null, new User(10L)),
+                        new Post("Cà phê sáng với bạn bè là điều tuyệt vời.", new Date(), new Date(), null, new User(5L)),
+                        new Post("Tôi vừa hoàn thành một khóa học lập trình.", java.sql.Timestamp.valueOf("2023-12-01 14:20:00"), new Date(), null, new User(3L)),
+                        new Post("Cùng nhau học hỏi và phát triển.", new Date(), new Date(), null, new User(9L)),
+                        new Post("Mỗi ngày là một hành trình mới.", new Date(), new Date(), null, new User(13L)),
+                        new Post("Hãy đặt mục tiêu rõ ràng và hành động.", new Date(), new Date(), null, new User(7L)),
+                        new Post("Đọc sách mỗi ngày giúp tôi thư giãn.", new Date(), new Date(), null, new User(4L)),
+                        new Post("Làm việc nhóm là chìa khóa để thành công.", new Date(), new Date(), null, new User(14L)),
+                        new Post("Kỷ niệm ngày đầu tiên đi học thật khó quên!", new Date(), new Date(), null, new User(11L)),
+                        new Post("Nấu ăn là niềm đam mê của tôi.", new Date(), new Date(), null, new User(18L)),
+                        new Post("Thiền giúp tôi thư giãn và tập trung hơn.", new Date(), new Date(), null, new User(19L)),
+                        new Post("Chăm sóc sức khỏe là ưu tiên hàng đầu.", new Date(), new Date(), null, new User(20L)),
+                        new Post("Tôi yêu công việc hiện tại của mình.", new Date(), new Date(), null, new User(16L)),
+                        new Post("Cuộc sống đầy những điều bất ngờ.", new Date(), new Date(), null, new User(1L)),
+                        new Post("Kết bạn mới là trải nghiệm thú vị.", new Date(), new Date(), null, new User(5L)),
+                        new Post("Hôm nay tôi học được điều mới!", new Date(), new Date(), null, new User(1L)),
+                        new Post("Cuộc sống thật thú vị khi khám phá những điều mới.", new Date(), new Date(), null, new User(2L)),
+                        new Post("Thời tiết hôm nay thật tuyệt!", new Date(), new Date(), null, new User(3L)),
+                        new Post("Cùng nhau xây dựng tương lai.", java.sql.Timestamp.valueOf("2023-08-01 12:00:00"), new Date(), null, new User(4L)),
+                        new Post("Tôi đã đạt được mục tiêu của mình!", new Date(), new Date(), null, new User(5L)),
+                        new Post("Làm việc hiệu quả hơn mỗi ngày.", new Date(), new Date(), null, new User(6L)),
+                        new Post("Tôi vừa hoàn thành một dự án lớn!", new Date(), new Date(), null, new User(7L)),
+                        new Post("Học cách yêu thương bản thân nhiều hơn.", new Date(), new Date(), null, new User(8L)),
+                        new Post("Chinh phục thử thách để trưởng thành.", new Date(), new Date(), null, new User(9L)),
+                        new Post("Nghỉ ngơi là cách tốt nhất để nạp năng lượng.", new Date(), new Date(), null, new User(10L)),
+                        new Post("Tôi vừa tham gia một khóa học online thú vị.", java.sql.Timestamp.valueOf("2023-09-15 14:30:00"), new Date(), null, new User(11L)),
+                        new Post("Tôi yêu thiên nhiên và thích đi dạo trong rừng.", new Date(), new Date(), null, new User(12L)),
+                        new Post("Cuối tuần là thời gian để thư giãn.", new Date(), new Date(), null, new User(13L)),
+                        new Post("Chia sẻ niềm vui là cách tốt nhất để kết nối.", new Date(), new Date(), null, new User(14L)),
+                        new Post("Sự kiên nhẫn là chìa khóa dẫn đến thành công.", new Date(), new Date(), null, new User(15L)),
+                        new Post("Tôi vừa thử nghiệm một công thức nấu ăn mới!", new Date(), new Date(), null, new User(16L)),
+                        new Post("Học cách tận hưởng từng khoảnh khắc.", new Date(), new Date(), null, new User(17L)),
+                        new Post("Tôi đã tìm thấy nguồn cảm hứng mới để làm việc.", new Date(), new Date(), null, new User(18L)),
+                        new Post("Hôm nay tôi giúp đỡ được một người bạn.", new Date(), new Date(), null, new User(19L)),
+                        new Post("Tôi rất biết ơn vì những điều mình đang có.", new Date(), new Date(), null, new User(20L)),
+                        new Post("Khám phá vẻ đẹp thiên nhiên quanh ta.", new Date(), new Date(), null, new User(1L)),
+                        new Post("Tôi vừa hoàn thành một bài tập khó.", new Date(), new Date(), null, new User(2L)),
+                        new Post("Làm thế nào để duy trì động lực mỗi ngày?", new Date(), new Date(), null, new User(3L)),
+                        new Post("Cuộc sống là những chuyến đi.", java.sql.Timestamp.valueOf("2023-05-10 08:45:00"), new Date(), null, new User(4L)),
+                        new Post("Tôi vừa thử món ăn mới và thật ngon!", new Date(), new Date(), null, new User(5L)),
+                        new Post("Chia sẻ những khoảnh khắc ý nghĩa.", new Date(), new Date(), null, new User(6L)),
+                        new Post("Học cách viết code hiệu quả hơn.", new Date(), new Date(), null, new User(7L)),
+                        new Post("Tôi vừa đọc xong một cuốn sách hay.", new Date(), new Date(), null, new User(8L)),
+                        new Post("Chinh phục mục tiêu năm nay!", new Date(), new Date(), null, new User(9L)),
+                        new Post("Tập thể dục mỗi sáng giúp tôi khỏe mạnh.", new Date(), new Date(), null, new User(10L)),
+                        new Post("Hôm nay là ngày tuyệt vời để bắt đầu.", new Date(), new Date(), null, new User(11L)),
+                        new Post("Tôi thích học thêm những điều mới.", new Date(), new Date(), null, new User(12L)),
+                        new Post("Mùa thu là mùa tôi yêu thích nhất.", java.sql.Timestamp.valueOf("2023-10-15 17:20:00"), new Date(), null, new User(13L)),
+                        new Post("Cùng nhau xây dựng đội nhóm mạnh mẽ.", new Date(), new Date(), null, new User(14L)),
+                        new Post("Tôi vừa hoàn thành mục tiêu tháng này.", new Date(), new Date(), null, new User(15L)),
+                        new Post("Thưởng thức ly cà phê sáng thật tuyệt.", new Date(), new Date(), null, new User(16L)),
+                        new Post("Tôi vừa học cách giải quyết vấn đề hiệu quả.", new Date(), new Date(), null, new User(17L)),
+                        new Post("Kết nối với những người bạn mới.", new Date(), new Date(), null, new User(18L)),
+                        new Post("Tôi rất biết ơn vì có gia đình luôn bên cạnh.", new Date(), new Date(), null, new User(19L)),
+                        new Post("Hôm nay tôi đạt được một thành tựu nhỏ.", new Date(), new Date(), null, new User(20L)),
+                        new Post("Học cách sống trọn vẹn từng khoảnh khắc.", new Date(), new Date(), null, new User(1L)),
+                        new Post("Tôi vừa tìm được một sở thích mới: chụp ảnh.", new Date(), new Date(), null, new User(2L)),
+                        new Post("Học lập trình không khó, chỉ cần kiên nhẫn.", new Date(), new Date(), null, new User(3L)),
+                        new Post("Thời tiết hôm nay thật dễ chịu.", new Date(), new Date(), null, new User(4L)),
+                        new Post("Thử nghiệm một dự án cá nhân thật thú vị!", new Date(), new Date(), null, new User(5L)),
+                        new Post("Tôi vừa tìm được một quán ăn ngon.", new Date(), new Date(), null, new User(6L)),
+                        new Post("Cùng nhau giải quyết vấn đề trong nhóm.", new Date(), new Date(), null, new User(7L)),
+                        new Post("Tôi rất thích làm việc với mọi người.", new Date(), new Date(), null, new User(8L)),
+                        new Post("Học cách tiết kiệm thời gian hiệu quả.", new Date(), new Date(), null, new User(9L)),
+                        new Post("Tôi vừa đi dạo trong công viên buổi sáng.", new Date(), new Date(), null, new User(10L)),
+                        new Post("Tập yoga giúp tôi thư giãn mỗi ngày.", new Date(), new Date(), null, new User(11L)),
+                        new Post("Tôi đang thử viết một ứng dụng di động.", new Date(), new Date(), null, new User(12L)),
+                        new Post("Chia sẻ kiến thức là cách tốt nhất để học hỏi.", new Date(), new Date(), null, new User(13L)),
+                        new Post("Tôi vừa xem xong một bộ phim cảm động.", java.sql.Timestamp.valueOf("2023-11-05 21:00:00"), new Date(), null, new User(14L)),
+                        new Post("Kế hoạch cho tuần này là gì?", new Date(), new Date(), null, new User(15L)),
+                        new Post("Tôi vừa thử vẽ tranh và rất thích.", new Date(), new Date(), null, new User(16L)),
+                        new Post("Công việc hôm nay rất bận rộn nhưng thú vị.", new Date(), new Date(), null, new User(17L)),
+                        new Post("Tôi vừa hoàn thành một trò chơi mới.", new Date(), new Date(), null, new User(18L)),
+                        new Post("Những kỷ niệm đẹp không bao giờ phai.", new Date(), new Date(), null, new User(19L)),
+                        new Post("Tôi đang thử nghiệm một bài tập thể dục mới.", new Date(), new Date(), null, new User(20L)),
+                        new Post("Khám phá một nơi mới thật tuyệt vời.", new Date(), new Date(), null, new User(1L)),
+                        new Post("Tôi vừa học cách làm món bánh yêu thích.", new Date(), new Date(), null, new User(2L)),
+                        new Post("Thử sức với một thử thách mới trong công việc.", new Date(), new Date(), null, new User(3L)),
+                        new Post("Tôi đang đọc một cuốn sách truyền cảm hứng.", new Date(), new Date(), null, new User(4L)),
+                        new Post("Cùng nhau tổ chức một sự kiện nhỏ.", new Date(), new Date(), null, new User(5L)),
+                        new Post("Hôm nay tôi có thời gian nghỉ ngơi và thư giãn.", new Date(), new Date(), null, new User(6L)),
+                        new Post("Tôi vừa thử một công thức nấu ăn lạ.", new Date(), new Date(), null, new User(1L)),
+                        new Post("Hôm nay tôi đã hoàn thành tất cả công việc.", new Date(), new Date(), null, new User(2L)),
+                        new Post("Trải nghiệm một buổi sáng yên bình.", new Date(), new Date(), null, new User(3L)),
+                        new Post("Tôi đang học cách chơi một nhạc cụ mới.", new Date(), new Date(), null, new User(4L)),
+                        new Post("Cùng nhau làm việc để đạt mục tiêu lớn.", new Date(), new Date(), null, new User(5L)),
+                        new Post("Tôi vừa thử tham gia một môn thể thao mới.", new Date(), new Date(), null, new User(6L)),
+                        new Post("Cuối tuần là thời gian dành cho gia đình.", new Date(), new Date(), null, new User(7L)),
+                        new Post("Tôi vừa mua một cuốn sách mà tôi rất thích.", new Date(), new Date(), null, new User(8L)),
+                        new Post("Học cách giữ sức khỏe trong cuộc sống bận rộn.", new Date(), new Date(), null, new User(9L)),
+                        new Post("Một ngày mệt mỏi nhưng đầy ý nghĩa.", new Date(), new Date(), null, new User(10L)),
+                        new Post("Tôi đang tìm cách cải thiện kỹ năng của mình.", new Date(), new Date(), null, new User(11L)),
+                        new Post("Hãy tận hưởng từng khoảnh khắc nhỏ bé.", new Date(), new Date(), null, new User(12L)),
+                        new Post("Tôi vừa tham gia một lớp yoga.", new Date(), new Date(), null, new User(13L)),
+                        new Post("Tôi yêu thích công việc sáng tạo của mình.", new Date(), new Date(), null, new User(14L)),
+                        new Post("Học thêm một ngôn ngữ mới thật thú vị!", new Date(), new Date(), null, new User(15L)),
+                        new Post("Tôi vừa hoàn thành một bài tập khó.", new Date(), new Date(), null, new User(16L)),
+                        new Post("Tôi thích buổi sáng sớm khi thành phố yên tĩnh.", new Date(), new Date(), null, new User(17L)),
+                        new Post("Chia sẻ niềm vui với mọi người là điều tuyệt vời.", new Date(), new Date(), null, new User(18L)),
+                        new Post("Cùng bạn bè tham gia một buổi dã ngoại.", new Date(), new Date(), null, new User(19L)),
+                        new Post("Tôi đang tìm hiểu thêm về phát triển bản thân.", new Date(), new Date(), null, new User(20L)),
+                        new Post("Tôi vừa làm quen với một người bạn mới.", new Date(), new Date(), null, new User(1L)),
+                        new Post("Cà phê sáng nay ngon hơn mọi ngày.", new Date(), new Date(), null, new User(2L)),
+                        new Post("Tôi thích đi dạo vào buổi chiều.", new Date(), new Date(), null, new User(3L)),
+                        new Post("Một ngày tuyệt vời khi làm việc hiệu quả.", new Date(), new Date(), null, new User(4L)),
+                        new Post("Tôi đang lên kế hoạch cho chuyến đi tiếp theo.", new Date(), new Date(), null, new User(5L)),
+                        new Post("Bạn đã bao giờ thử thức dậy lúc 4 giờ sáng chưa?", new Date(), new Date(), null, new User(1L)),
+                        new Post("Cách tôi tổ chức lại không gian làm việc chỉ với 30 phút.", new Date(), new Date(), null, new User(2L)),
+                        new Post("Tôi vừa trải nghiệm lần đầu cắm trại giữa rừng, thật đáng nhớ!", new Date(), new Date(), null, new User(3L)),
+                        new Post("Làm sao để ăn uống lành mạnh mà vẫn tiết kiệm?", new Date(), new Date(), null, new User(4L)),
+                        new Post("5 điều nhỏ nhưng thay đổi hoàn toàn cách tôi làm việc.", new Date(), new Date(), null, new User(5L)),
+                        new Post("Tôi vừa thử đi bộ 10km qua những con đường mới, thật thú vị!", new Date(), new Date(), null, new User(6L)),
+                        new Post("Bạn có biết thói quen nhỏ nào giúp giảm stress hiệu quả?", new Date(), new Date(), null, new User(7L)),
+                        new Post("Chơi một trò chơi mới giúp tôi thư giãn và sáng tạo hơn.", new Date(), new Date(), null, new User(8L)),
+                        new Post("Hành trình khám phá những quán cà phê nhỏ tại thành phố.", new Date(), new Date(), null, new User(9L)),
+                        new Post("Tôi vừa tạo một khu vườn nhỏ trên ban công của mình.", new Date(), new Date(), null, new User(10L)),
+                        new Post("Thử thách 7 ngày không dùng mạng xã hội, và đây là kết quả.", new Date(), new Date(), null, new User(11L)),
+                        new Post("Tôi đã học cách chỉnh sửa ảnh chỉ bằng điện thoại!", new Date(), new Date(), null, new User(12L)),
+                        new Post("Những khoảnh khắc đẹp nhất trong chuyến đi biển gần đây của tôi.", new Date(), new Date(), null, new User(13L)),
+                        new Post("Cách tôi sử dụng âm nhạc để tăng năng suất làm việc.", new Date(), new Date(), null, new User(14L)),
+                        new Post("Một buổi sáng mà tôi dành trọn để ngắm bình minh.", new Date(), new Date(), null, new User(15L)),
+                        new Post("Tôi vừa thử vẽ tranh bằng bút chì màu, đây là kết quả.", new Date(), new Date(), null, new User(16L)),
+                        new Post("Bạn đã từng thử chế biến món ăn với nguyên liệu lạ chưa?", new Date(), new Date(), null, new User(17L)),
+                        new Post("Khám phá công viên quốc gia gần nhà, thật tuyệt vời!", new Date(), new Date(), null, new User(18L)),
+                        new Post("Hành trình chụp ảnh đường phố vào ban đêm của tôi.", new Date(), new Date(), null, new User(19L)),
+                        new Post("Cuộc sống không có deadline, liệu bạn có thấy thú vị?", new Date(), new Date(), null, new User(20L)),
+                        new Post("Tôi vừa học được cách làm một chiếc bánh ngọt từ đầu.", new Date(), new Date(), null, new User(1L)),
+                        new Post("Hành trình một ngày sống chậm và tận hưởng từng phút giây.", new Date(), new Date(), null, new User(2L)),
+                        new Post("Bạn có bao giờ nghĩ đến việc vẽ một bản đồ tâm trí?", new Date(), new Date(), null, new User(3L)),
+                        new Post("Tôi vừa thử viết nhật ký mỗi ngày, cảm giác rất khác.", new Date(), new Date(), null, new User(4L)),
+                        new Post("Làm thế nào tôi chinh phục được nỗi sợ độ cao?", new Date(), new Date(), null, new User(5L))
                 );
 
-                // Thêm hình ảnh liên kết với mỗi bài viết
                 posts.get(0).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842326/gdypzdgp0bd4iiyq1qup.jpg", posts.get(0)));
                 posts.get(0).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842362/fuc7a4qtrippmlrikllm.jpg", posts.get(0)));
                 posts.get(1).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842407/ik6p5muylj3nlshf0nkt.jpg", posts.get(1)));
                 posts.get(2).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842462/tmelr5uisjov5qmpgekb.jpg", posts.get(2)));
                 posts.get(3).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1731842512/sbdqwtbysjt3g7h5iytx.jpg", posts.get(3)));
+                posts.get(4).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732004541/x7iczvkq8ugwp2pywnwv.jpg", posts.get(4)));
+                posts.get(5).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732004644/vhk5sj4ex4fadccdtxy0.jpg", posts.get(5)));
+                posts.get(5).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732005338/zcqizptbnskwlfbbhgfz.jpg", posts.get(5)));
+                posts.get(6).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732005544/gui3md3ovdhbs7drz1l9.jpg", posts.get(6)));
+                posts.get(6).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732005637/crewtq3ljbukbaxiufpo.jpg", posts.get(6)));
+                posts.get(7).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732005812/miwiz1lba4hktwdeh7wm.jpg", posts.get(7)));
+                posts.get(8).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732007538/p8zwc2mtstrnyva2fldz.jpg", posts.get(8)));
+                posts.get(9).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732007597/ekicznqwx3bzsnhrtfjc.jpg", posts.get(9)));
+                posts.get(9).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732007681/xfrjfah1gmef8zn4ym0l.png", posts.get(9)));
+                posts.get(10).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732007739/mi8eqq7fo8agc0ifbpfv.jpg", posts.get(10)));
+                posts.get(10).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732007779/dov1bxvgrphib4ypiwth.jpg", posts.get(10)));
+                posts.get(11).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732007853/mr5mdczsgqkaspsxm9fj.jpg", posts.get(11)));
+                posts.get(13).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732009306/n9hd6pglgkbmvfpq4gg8.jpg", posts.get(13)));
+                posts.get(14).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732009428/okssctvtjotaib8yb9qp.jpg", posts.get(14)));
+                posts.get(15).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732009528/ddvegvadksyu9pgeqvdj.jpg", posts.get(15)));
+                posts.get(15).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732009571/z6xnwm4zl5a9mkckmn7s.jpg", posts.get(15)));
+                posts.get(16).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732009615/zd5w6plg6qvjeo6jmfxx.jpg", posts.get(16)));
+                posts.get(16).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732009666/vob9gnzouaa3qw8uvwb3.png", posts.get(16)));
+                posts.get(17).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732009740/fetactohpptzouhvft6b.jpg", posts.get(17)));
+                posts.get(17).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732009803/yqr0gcknmxwetpznogvy.jpg", posts.get(17)));
+                posts.get(18).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010055/wwvj7xytlv6qnczs7lec.jpg", posts.get(18)));
+                posts.get(18).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010056/iyikvrfarsm8mkr8dqnq.jpg", posts.get(18)));
+                posts.get(19).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010177/dirdxxiwoyvlmojj0cos.jpg", posts.get(19)));
+                posts.get(19).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010279/wyg7pe9c4w4d7pyo0bmt.jpg", posts.get(19)));
+                posts.get(20).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010357/tz1ygsnj4jkknlqvma16.jpg", posts.get(20)));
+                posts.get(20).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010358/m2ulqcofbzesg2qlre4l.jpg", posts.get(20)));
+                posts.get(21).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010487/jq6mnojohgngdfu4fjlh.webp", posts.get(21)));
+                posts.get(22).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010523/b8ul6wqfleujzlfaj2yl.jpg", posts.get(22)));
+                posts.get(22).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010563/s1s2rxahvrv7beqyhwa5.webp", posts.get(22)));
+                posts.get(23).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010654/ezu9goy2n0wgh1wsxk81.webp", posts.get(23)));
+                posts.get(23).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010653/eokf4cdhcpbkh2lbffjg.jpg", posts.get(23)));
+                posts.get(23).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010653/sk1cbjjllarae1v5yekz.jpg", posts.get(23)));
+                posts.get(24).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010721/ubnr5uunvgegvjfnte6o.jpg", posts.get(24)));
+                posts.get(25).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010787/hjndid9tmfq1etacplzj.webp", posts.get(25)));
+                posts.get(26).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732004828/htsdoaga1cdfu0lh6dso.jpg", posts.get(26)));
+                posts.get(26).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010830/jnhd7p9zfktje0lz6cm9.jpg", posts.get(26)));
+                posts.get(26).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010909/gyocolj1v3oegtphyleq.jpg", posts.get(26)));
+                posts.get(26).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732010909/jggp1adogh0f4tcisnd3.jpg", posts.get(26)));
+                posts.get(27).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011028/jydewn1suvd2rmheffg7.png", posts.get(27)));
+                posts.get(28).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011077/rz8p3eayu2rffkp5siei.jpg", posts.get(28)));
+                posts.get(28).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011141/s4ddhxokf3oxn3z3w32v.jpg", posts.get(28)));
+                posts.get(29).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011202/jojgjd4g7ghplfzt7rw4.jpg", posts.get(29)));
+                posts.get(30).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011271/nftjkj3jnw5xnhqja23m.jpg", posts.get(30)));
+                posts.get(30).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011271/o7ckkwh4j7u0znnsbmf9.jpg", posts.get(30)));
+                posts.get(31).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011411/vcxpfil8lvusuwext1nq.jpg", posts.get(31)));
+                posts.get(31).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011411/vcxpfil8lvusuwext1nq.jpg", posts.get(31)));
+                posts.get(32).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011470/f7vzxhuwutelc5sgxuz5.webp", posts.get(32)));
+                posts.get(32).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011470/ysijcut7ben8fsetzcus.jpg", posts.get(32)));
+                posts.get(33).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011600/xcm2khlvnegcyt2eeuxb.jpg", posts.get(33)));
+                posts.get(33).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011600/jzh3jhpkgl4pm4vbqnda.jpg", posts.get(33)));
+                posts.get(34).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011665/ge9bhrrqty7n5dvmvrmm.jpg", posts.get(34)));
+                posts.get(36).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011745/ly2caps4vw10bijoznpe.jpg", posts.get(36)));
+                posts.get(37).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011786/yzd7msesoeqdnsbllv7b.jpg", posts.get(37)));
+                posts.get(38).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011895/swwh54eqfw3du888y277.jpg", posts.get(38)));
+                posts.get(38).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732011895/swwh54eqfw3du888y277.jpg", posts.get(38)));
+                posts.get(40).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012096/av21mugad7sevaphcfdq.webp", posts.get(40)));
+                posts.get(40).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012197/wxq55vhak7sotoucomm0.jpg", posts.get(40)));
+                posts.get(41).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012293/cgxjmkmhnhoxwqmidysi.jpg", posts.get(41)));
+                posts.get(41).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012293/wf7cptu4wgcu3febc4vj.jpg", posts.get(41)));
+                posts.get(41).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012335/gecnggrquzgjyy0mxbpx.webp", posts.get(41)));
+                posts.get(42).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012418/fu9mjxafz6uwv4vmkmuk.jpg", posts.get(42)));
+                posts.get(43).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012504/siyi1pljumu0pqvituct.jpg", posts.get(43)));
+                posts.get(44).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012553/ei7c6ehjrjhfrdf6dssb.jpg", posts.get(44)));
+                posts.get(45).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012616/zeoufomky11bfiwygna8.jpg", posts.get(45)));
+                posts.get(46).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012661/hb15y6lukvbnupc5okng.jpg", posts.get(46)));
+                posts.get(47).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012731/kpnmaj9nx5jwuwrnr5xa.jpg", posts.get(47)));
+                posts.get(47).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012775/eugjn67azkp3ov8y8ktx.jpg", posts.get(47)));
+                posts.get(47).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012776/ibolhzimxzcaomsrlrcn.jpg", posts.get(47)));
+                posts.get(48).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012852/ilsbqombos4jrvst7jze.jpg", posts.get(48)));
+                posts.get(48).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012852/uhfflmhlhqcxnsrw34jj.jpg", posts.get(48)));
+                posts.get(49).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012903/xuajttg53ct1ne29oxjt.jpg", posts.get(49)));
+                posts.get(50).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012971/j1d2jnspzm6rlpw2sccq.jpg", posts.get(50)));
+                posts.get(50).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732012996/suoeowexbyevjody85sm.jpg", posts.get(50)));
+                posts.get(51).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013094/lczevp0wwbthtrccqsuq.jpg", posts.get(51)));
+                posts.get(52).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013181/vb7auh8d7txmfz6fgftj.jpg", posts.get(52)));
+                posts.get(54).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013359/pvjxp8j79mlpuoyeuthp.jpg", posts.get(54)));
+                posts.get(55).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013417/g673z5un7ew75nfysiau.jpg", posts.get(55)));
+                posts.get(55).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013468/jsbn5kdfzxbsb0iois6y.jpg", posts.get(55)));
+                posts.get(56).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013512/yzinubiakiqu7s2xs4xy.jpg", posts.get(56)));
+                posts.get(58).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013578/ozigsk5mbp8ccwvlqqyi.jpg", posts.get(58)));
+                posts.get(58).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013616/pihglla1qgojjgyoipr7.jpg", posts.get(58)));
+                posts.get(58).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013617/m9pwnt1ugxbpsypsezzp.jpg", posts.get(58)));
+                posts.get(59).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013703/uww8tqkgihsyf5gn1bha.jpg", posts.get(59)));
+                posts.get(60).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013780/hmxfdqfxiyrofqfxdzb8.jpg", posts.get(60)));
+                posts.get(62).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013847/cwtbwlqhmz17vondnegf.jpg", posts.get(62)));
+                posts.get(63).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013900/umotpixyhb0gmftogqbq.jpg", posts.get(63)));
+                posts.get(64).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013970/x2ziab57a57hpysyucnl.webp", posts.get(64)));
+                posts.get(64).getImages().add(new Image(null, "https://res.cloudinary.com/dmcqr73g4/image/upload/v1732013970/ez4hli3emt16wpsqixbr.jpg", posts.get(64)));
 
-                // Lưu tất cả bài viết cùng hình ảnh
                 postRepository.saveAll(posts);
                 log.info("Posts and images have been initialized.");
             }
