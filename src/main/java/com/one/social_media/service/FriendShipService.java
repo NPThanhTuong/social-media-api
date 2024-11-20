@@ -143,27 +143,39 @@ public class FriendShipService {
             throw new AppException(ErrorCode.INVALID_REQUEST);
         }
 
+        // Kiểm tra nếu đã tồn tại bất kỳ mối quan hệ nào giữa sender và receiver
         boolean alreadyRelated = relationshipRepository
                 .findById(RelationshipKey.builder()
                         .userOwnerId(senderId)
                         .userReferencedId(receiverId)
                         .build())
-                .isPresent();
+                .isPresent() ||
+                relationshipRepository
+                        .findById(RelationshipKey.builder()
+                                .userOwnerId(receiverId)
+                                .userReferencedId(senderId)
+                                .build())
+                        .isPresent();
 
         if (alreadyRelated) {
             throw new AppException(ErrorCode.RELATIONSHIP_ALREADY_EXISTS);
         }
 
         // Loại mối quan hệ "gửi yêu cầu"
-        RelationshipType requestType = relationshipTypeRepository.findById(2L).orElseThrow(
+        RelationshipType requestType = relationshipTypeRepository.findById(3L).orElseThrow(
                 () -> new AppException(ErrorCode.RELATIONSHIP_TYPE_NOT_EXIST)
         );
 
-        // Tạo mối quan hệ gửi yêu cầu
-        Relationship request = Relationship.builder()
+        // Loại mối quan hệ "nhận yêu cầu"
+        RelationshipType requestReceivedType = relationshipTypeRepository.findById(2L).orElseThrow(
+                () -> new AppException(ErrorCode.RELATIONSHIP_TYPE_NOT_EXIST)
+        );
+
+        // Tạo mối quan hệ "gửi yêu cầu" từ sender -> receiver
+        Relationship sendRequest = Relationship.builder()
                 .id(RelationshipKey.builder()
-                        .userOwnerId(receiverId) // Người gửi là userOwner
-                        .userReferencedId(senderId) // Người nhận là userReferenced
+                        .userOwnerId(senderId) // Người gửi là userOwner
+                        .userReferencedId(receiverId) // Người nhận là userReferenced
                         .build())
                 .userOwner(userRepository.findById(senderId).orElseThrow(
                         () -> new AppException(ErrorCode.USER_NOT_EXISTED)
@@ -174,18 +186,13 @@ public class FriendShipService {
                 .updatedAt(LocalDateTime.now())
                 .relationshipType(requestType)
                 .build();
-        relationshipRepository.save(request);
+        relationshipRepository.save(sendRequest);
 
-        // Loại mối quan hệ "nhận yêu cầu"
-        RelationshipType requestReceivedType = relationshipTypeRepository.findById(3L).orElseThrow(
-                () -> new AppException(ErrorCode.RELATIONSHIP_TYPE_NOT_EXIST)
-        );
-
-        // Tạo mối quan hệ nhận yêu cầu
-        Relationship requestRef = Relationship.builder()
+        // Tạo mối quan hệ "nhận yêu cầu" từ receiver -> sender
+        Relationship receiveRequest = Relationship.builder()
                 .id(RelationshipKey.builder()
-                        .userOwnerId(senderId) // Người nhận là userOwner
-                        .userReferencedId(receiverId) // Người gửi là userReferenced
+                        .userOwnerId(receiverId) // Người nhận là userOwner
+                        .userReferencedId(senderId) // Người gửi là userReferenced
                         .build())
                 .userOwner(userRepository.findById(receiverId).orElseThrow(
                         () -> new AppException(ErrorCode.USER_NOT_EXISTED)
@@ -196,8 +203,9 @@ public class FriendShipService {
                 .updatedAt(LocalDateTime.now())
                 .relationshipType(requestReceivedType)
                 .build();
-        relationshipRepository.save(requestRef);
+        relationshipRepository.save(receiveRequest);
     }
+
 
 
 }
