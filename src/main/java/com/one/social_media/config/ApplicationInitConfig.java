@@ -954,56 +954,80 @@ public class ApplicationInitConfig {
 
             var relationshipTypes = relationshipTypeRepository.findAll();
 
-            // Tạo Relationship
+            //Tạo Relationship
             if (relationshipRepository.count() == 0) {
                 List<Relationship> relationships = List.of(
+
                         new Relationship(
                                 userRepository.findById(1L).orElseThrow(),
                                 userRepository.findById(2L).orElseThrow(),
-                                relationshipTypeRepository.findById(1L).orElseThrow(),
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
                                 Timestamp.valueOf("2022-09-19 08:16:34").toLocalDateTime()
                         ),
+
                         new Relationship(
                                 userRepository.findById(2L).orElseThrow(),
                                 userRepository.findById(1L).orElseThrow(),
-                                relationshipTypeRepository.findById(2L).orElseThrow(),
-                                LocalDateTime.now() // CURRENT_TIMESTAMP
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
+                                Timestamp.valueOf("2022-09-19 08:16:34").toLocalDateTime()
                         ),
+
+
                         new Relationship(
                                 userRepository.findById(3L).orElseThrow(),
                                 userRepository.findById(4L).orElseThrow(),
-                                relationshipTypeRepository.findById(1L).orElseThrow(),
+                                relationshipTypeRepository.findById(2L).orElseThrow(), // Yêu cầu
                                 Timestamp.valueOf("2023-01-15 12:00:00").toLocalDateTime()
                         ),
+
                         new Relationship(
                                 userRepository.findById(4L).orElseThrow(),
                                 userRepository.findById(3L).orElseThrow(),
-                                relationshipTypeRepository.findById(3L).orElseThrow(),
-                                Timestamp.valueOf("2023-05-22 15:30:00").toLocalDateTime()
+                                relationshipTypeRepository.findById(3L).orElseThrow(), // Đang chờ xác nhận
+                                Timestamp.valueOf("2023-01-15 12:00:00").toLocalDateTime()
                         ),
+
+
                         new Relationship(
-                                userRepository.findById(5L).orElseThrow(), // User Owner ID = 5
-                                userRepository.findById(6L).orElseThrow(), // User Referenced ID = 6
-                                relationshipTypeRepository.findById(2L).orElseThrow(), // Relationship Type ID = 2
-                                Timestamp.valueOf("2023-12-10 08:15:00").toLocalDateTime() // Updated At
+                                userRepository.findById(8L).orElseThrow(),
+                                userRepository.findById(3L).orElseThrow(),
+                                relationshipTypeRepository.findById(2L).orElseThrow(), // Yêu cầu
+                                Timestamp.valueOf("2023-12-10 08:15:00").toLocalDateTime()
                         ),
+
+                        new Relationship(
+                                userRepository.findById(3L).orElseThrow(),
+                                userRepository.findById(8L).orElseThrow(),
+                                relationshipTypeRepository.findById(3L).orElseThrow(), // Đang chờ xác nhận
+                                Timestamp.valueOf("2023-12-10 08:15:00").toLocalDateTime()
+                        ),
+
+                        // Quan hệ bạn bè (hai chiều giữa user7 và user8)
                         new Relationship(
                                 userRepository.findById(7L).orElseThrow(),
                                 userRepository.findById(8L).orElseThrow(),
-                                relationshipTypeRepository.findById(1L).orElseThrow(),
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
                                 Timestamp.valueOf("2024-03-01 10:45:00").toLocalDateTime()
                         ),
                         new Relationship(
                                 userRepository.findById(8L).orElseThrow(),
                                 userRepository.findById(7L).orElseThrow(),
-                                relationshipTypeRepository.findById(3L).orElseThrow(),
-                                LocalDateTime.now() // CURRENT_TIMESTAMP
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
+                                Timestamp.valueOf("2024-03-01 10:45:00").toLocalDateTime()
+                        ),
+
+                        // Quan hệ bạn bè (hai chiều giữa user3 và user5)
+                        new Relationship(
+                                userRepository.findById(3L).orElseThrow(),
+                                userRepository.findById(5L).orElseThrow(),
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
+                                LocalDateTime.now()
                         ),
                         new Relationship(
-                                userRepository.findById(9L).orElseThrow(),
-                                userRepository.findById(10L).orElseThrow(),
-                                relationshipTypeRepository.findById(2L).orElseThrow(),
-                                Timestamp.valueOf("2024-05-20 14:00:00").toLocalDateTime()
+                                userRepository.findById(5L).orElseThrow(),
+                                userRepository.findById(3L).orElseThrow(),
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
+                                LocalDateTime.now()
                         )
                 );
 
