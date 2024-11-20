@@ -34,13 +34,23 @@ public class Room implements Serializable {
         this.theme = theme.toUpperCase();
     }
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = new Date();
+    public Room(String theme, Date createdAt, Date deletedAt) {
+        this.theme = theme;
+        this.createdAt = createdAt;
+        this.deletedAt = deletedAt;
     }
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "room")
 //    private Set<Message> calls = new HashSet<>();
+
+    public Room(Long id) {
+        this.id = id;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
 
     public void addUser(User user) {
         users.add(user);

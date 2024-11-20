@@ -47,6 +47,18 @@ public class Comment implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parentComment", fetch = FetchType.EAGER)
     private List<Comment> replies = new ArrayList<>();
 
+
+    public Comment(String content, Date createdAt, Date updatedAt, Date deletedAt, Post post, User user, Comment parentComment) {
+        this.content = content;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
+        this.post = post;
+        this.user = user;
+        this.parentComment = parentComment;
+    }
+
+
     @PrePersist
     protected void onCreate() {
         createdAt = new Date();

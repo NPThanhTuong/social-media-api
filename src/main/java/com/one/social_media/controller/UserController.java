@@ -1,10 +1,13 @@
 package com.one.social_media.controller;
 
 import com.one.social_media.dto.request.ChatUserReqDto;
+import com.one.social_media.dto.request.UpdateUserProfileDto;
 import com.one.social_media.dto.response.ApiResDto;
 import com.one.social_media.dto.response.UserResDto;
+import com.one.social_media.entity.Image;
 import com.one.social_media.mapper.UserMapper;
 import com.one.social_media.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,6 +17,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -59,4 +64,17 @@ public class UserController {
                 .result(users)
                 .build());
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUserProfile(@RequestBody @Valid UpdateUserProfileDto userProfileDto) {
+        UserResDto updatedUser = userService.updateUserProfile(userProfileDto);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @GetMapping("/images")
+    public ResponseEntity<List<Image>> getUserImages() {
+        List<Image> images = userService.getUserImages();
+        return ResponseEntity.ok(images);  // Trả về danh sách hình ảnh
+    }
+
 }

@@ -32,6 +32,14 @@ public class Message implements Serializable {
     @JoinColumn(name = "user_id")
     private User sender;
 
+    public Message(Room room, User sender, String content, Date sentAt, boolean isRead) {
+        this.room = room;
+        this.sender = sender;
+        this.content = content;
+        this.sentAt = sentAt;
+        this.isRead = isRead;
+    }
+
     @PrePersist
     protected void onCreate() {
         sentAt = new Date();

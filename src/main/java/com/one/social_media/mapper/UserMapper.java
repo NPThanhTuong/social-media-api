@@ -1,27 +1,21 @@
 package com.one.social_media.mapper;
 
 import com.one.social_media.dto.request.RegisterReqDto;
+import com.one.social_media.dto.request.UpdateUserProfileDto;
 import com.one.social_media.dto.response.UserResDto;
 import com.one.social_media.entity.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    //    @Mappings({
-//            @Mapping(target = "status", source = "status", qualifiedByName = "statusToString")
-//    })
     UserResDto toUserResDto(User user);
 
     List<UserResDto> toListUserResDto(List<User> user);
 
     User toUser(RegisterReqDto registerReqDto);
 
-//    // Custom method to map UserStatus to String
-//    default String statusToString(UserStatus status) {
-//        return status != null ? status.name() : null;
-//    }
-
-
+    void updateToUser(UpdateUserProfileDto updateUserProfileDto, @MappingTarget User user);
 }

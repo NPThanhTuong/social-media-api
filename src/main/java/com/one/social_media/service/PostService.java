@@ -176,9 +176,6 @@ public class PostService {
     }
 
 
-
-
-
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     private long getLoginUserId() {
         var userEmail = SecurityContextHolder.getContext().getAuthentication().getName();

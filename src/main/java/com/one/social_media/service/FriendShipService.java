@@ -16,11 +16,12 @@ import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,7 @@ public class FriendShipService {
     RelationshipRepository relationshipRepository;
     RelationshipTypeRepository relationshipTypeRepository;
     UserMapper userMapper;
+    AuthService authService;
 
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public List<UserResDto> getAllFriends() {
@@ -41,8 +43,8 @@ public class FriendShipService {
         return userRepository.findAllFriends(userId, relationshipTypeId);
     }
 
-    public FriendshipResponseDto getFriendshipDetails(Long userId) {
-
+    public FriendshipResponseDto getFriendshipDetails() {
+        Long userId = getLoginUserId();
         User user = userRepository.findById(userId).orElseThrow();
 
         // Lấy danh sách các mối quan hệ với từng relationshipType
@@ -67,7 +69,8 @@ public class FriendShipService {
     }
 
     @Transactional
-    public void acceptFriendRequest(Long requesterId, Long receiverId) {
+    public void acceptFriendRequest(Long receiverId) {
+        Long requesterId = getLoginUserId();
         RelationshipType relationshipFriend = relationshipTypeRepository.findById(1L).orElseThrow(
                 () -> new AppException(ErrorCode.RELATIONSHIP_TYPE_NOT_EXIST)
         );
@@ -100,7 +103,8 @@ public class FriendShipService {
     }
 
     @Transactional
-    public void removeFriendOrRequest(Long requesterId, Long receiverId) {
+    public void removeFriendOrRequest(Long receiverId) {
+        Long requesterId = getLoginUserId();
         RelationshipKey relationshipKey = RelationshipKey
                 .builder()
                 .userOwnerId(requesterId)
@@ -114,7 +118,13 @@ public class FriendShipService {
                 .build();
         relationshipRepository.deleteById(relationshipKeyRef);
     }
-  
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<UserResDto> getSuggestedFriends() {
+        Long userId = getLoginUserId();
+        return userRepository.findSuggestedFriends(userId);
+    }
+
+
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public long getLoginUserId() {
         var userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -124,4 +134,78 @@ public class FriendShipService {
 
         return user.getId();
     }
+
+    @Transactional
+    public void sendFriendRequest(Long receiverId) {
+        Long senderId = getLoginUserId();
+
+        if (senderId.equals(receiverId)) {
+            throw new AppException(ErrorCode.INVALID_REQUEST);
+        }
+
+        // Kiểm tra nếu đã tồn tại bất kỳ mối quan hệ nào giữa sender và receiver
+        boolean alreadyRelated = relationshipRepository
+                .findById(RelationshipKey.builder()
+                        .userOwnerId(senderId)
+                        .userReferencedId(receiverId)
+                        .build())
+                .isPresent() ||
+                relationshipRepository
+                        .findById(RelationshipKey.builder()
+                                .userOwnerId(receiverId)
+                                .userReferencedId(senderId)
+                                .build())
+                        .isPresent();
+
+        if (alreadyRelated) {
+            throw new AppException(ErrorCode.RELATIONSHIP_ALREADY_EXISTS);
+        }
+
+        // Loại mối quan hệ "gửi yêu cầu"
+        RelationshipType requestType = relationshipTypeRepository.findById(3L).orElseThrow(
+                () -> new AppException(ErrorCode.RELATIONSHIP_TYPE_NOT_EXIST)
+        );
+
+        // Loại mối quan hệ "nhận yêu cầu"
+        RelationshipType requestReceivedType = relationshipTypeRepository.findById(2L).orElseThrow(
+                () -> new AppException(ErrorCode.RELATIONSHIP_TYPE_NOT_EXIST)
+        );
+
+        // Tạo mối quan hệ "gửi yêu cầu" từ sender -> receiver
+        Relationship sendRequest = Relationship.builder()
+                .id(RelationshipKey.builder()
+                        .userOwnerId(senderId) // Người gửi là userOwner
+                        .userReferencedId(receiverId) // Người nhận là userReferenced
+                        .build())
+                .userOwner(userRepository.findById(senderId).orElseThrow(
+                        () -> new AppException(ErrorCode.USER_NOT_EXISTED)
+                ))
+                .userReferenced(userRepository.findById(receiverId).orElseThrow(
+                        () -> new AppException(ErrorCode.USER_NOT_EXISTED)
+                ))
+                .updatedAt(LocalDateTime.now())
+                .relationshipType(requestType)
+                .build();
+        relationshipRepository.save(sendRequest);
+
+        // Tạo mối quan hệ "nhận yêu cầu" từ receiver -> sender
+        Relationship receiveRequest = Relationship.builder()
+                .id(RelationshipKey.builder()
+                        .userOwnerId(receiverId) // Người nhận là userOwner
+                        .userReferencedId(senderId) // Người gửi là userReferenced
+                        .build())
+                .userOwner(userRepository.findById(receiverId).orElseThrow(
+                        () -> new AppException(ErrorCode.USER_NOT_EXISTED)
+                ))
+                .userReferenced(userRepository.findById(senderId).orElseThrow(
+                        () -> new AppException(ErrorCode.USER_NOT_EXISTED)
+                ))
+                .updatedAt(LocalDateTime.now())
+                .relationshipType(requestReceivedType)
+                .build();
+        relationshipRepository.save(receiveRequest);
+    }
+
+
+
 }
