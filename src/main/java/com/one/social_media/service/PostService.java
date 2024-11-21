@@ -51,6 +51,12 @@ public class PostService {
         return postMapper.toListPostResDto(posts);
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<PostResDto> getAllUserPosts(Long userId) {
+        var posts = postRepository.findByOwnerId(userId);
+        return postMapper.toListPostResDto(posts);
+    }
+
     public int countTotalCommentsForPost(Long postId) {
         List<Comment> comments = commentRepository.findByPostIdAndDeletedAtIsNull(postId);
         return comments.size();

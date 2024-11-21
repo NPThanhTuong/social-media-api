@@ -43,6 +43,13 @@ public class FriendShipService {
         return userRepository.findAllFriends(userId, relationshipTypeId);
     }
 
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<UserResDto> getAllFriends(Long userId) {
+        Long relationshipTypeId = 1L;
+
+        return userRepository.findAllFriends(userId, relationshipTypeId);
+    }
+
     public FriendshipResponseDto getFriendshipDetails() {
         Long userId = getLoginUserId();
         User user = userRepository.findById(userId).orElseThrow();

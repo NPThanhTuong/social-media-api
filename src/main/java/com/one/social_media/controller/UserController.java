@@ -17,6 +17,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -33,6 +34,13 @@ public class UserController {
     public ResponseEntity<ApiResDto<UserResDto>> getInfo() {
         return ResponseEntity.ok(ApiResDto.<UserResDto>builder()
                 .result(userService.getUserInfo())
+                .build());
+    }
+
+    @GetMapping("/api/users/{userId}")
+    public ResponseEntity<ApiResDto<UserResDto>> getInfo(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(ApiResDto.<UserResDto>builder()
+                .result(userService.getUserInfo(userId))
                 .build());
     }
 
