@@ -25,10 +25,14 @@ public class PostController {
     UserService userService;
     PostMapper postMapper;
 
-
     @GetMapping
     public ResponseEntity<List<PostResDto>> getAllPosts() {
         return ResponseEntity.ok(postService.getAllUserPosts());
+    }
+
+    @GetMapping("users/{userId}")
+    public ResponseEntity<List<PostResDto>> getAllPostsDetailUser(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(postService.getAllUserPosts(userId));
     }
 
     @PreAuthorize("hasRole('USER')")

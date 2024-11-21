@@ -56,6 +56,12 @@ public class UserService {
     }
 
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public UserResDto getUserInfo(Long userId) {
+        var user = findUserById(userId);
+        return userMapper.toUserResDto(user);
+    }
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     private long getLoginUserId() {
         var userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
 

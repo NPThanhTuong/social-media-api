@@ -24,6 +24,11 @@ public class FriendshipController {
         return ResponseEntity.ok(friendShipService.getAllFriends());
     }
 
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<List<UserResDto>> getAllFriendsDetailUser(@PathVariable("userId") Long userId) {
+        return ResponseEntity.ok(friendShipService.getAllFriends(userId));
+    }
+
 
     @GetMapping("/relationship")
     public ResponseEntity<FriendshipResponseDto> getFriendshipDetails() {

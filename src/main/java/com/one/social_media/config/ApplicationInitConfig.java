@@ -934,6 +934,20 @@ public class ApplicationInitConfig {
                                 "Cảm ơn bạn!",
                                 new Date(),
                                 true
+                        ),
+                        new Message(
+                                roomRepository.findById(3L).orElseThrow(), // Room ID = 10
+                                userRepository.findById(2L).orElseThrow(), // User ID = 20
+                                "Xin Chào!",
+                                new Date(),
+                                true
+                        ),
+                        new Message(
+                                roomRepository.findById(4L).orElseThrow(), // Room ID = 10
+                                userRepository.findById(2L).orElseThrow(), // User ID = 20
+                                "Hello mấy bạn!",
+                                new Date(),
+                                true
                         )
                 );
 
@@ -1027,6 +1041,30 @@ public class ApplicationInitConfig {
                                 userRepository.findById(3L).orElseThrow(),
                                 relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
                                 LocalDateTime.now()
+                        ),
+                        new Relationship(
+                                userRepository.findById(1L).orElseThrow(),
+                                userRepository.findById(5L).orElseThrow(),
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
+                                LocalDateTime.now()
+                        ),
+                        new Relationship(
+                                userRepository.findById(5L).orElseThrow(),
+                                userRepository.findById(1L).orElseThrow(),
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
+                                LocalDateTime.now()
+                        ),
+                        new Relationship(
+                                userRepository.findById(1L).orElseThrow(),
+                                userRepository.findById(3L).orElseThrow(),
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
+                                LocalDateTime.now()
+                        ),
+                        new Relationship(
+                                userRepository.findById(3L).orElseThrow(),
+                                userRepository.findById(1L).orElseThrow(),
+                                relationshipTypeRepository.findById(1L).orElseThrow(), // Bạn bè
+                                LocalDateTime.now()
                         )
                 );
 
@@ -1056,7 +1094,11 @@ public class ApplicationInitConfig {
                         new UserRoom(new UserRoomKey(17L, 9L), new User(17L), new Room(9L)),
                         new UserRoom(new UserRoomKey(18L, 9L), new User(18L), new Room(9L)),
                         new UserRoom(new UserRoomKey(19L, 10L), new User(19L), new Room(10L)),
-                        new UserRoom(new UserRoomKey(20L, 10L), new User(20L), new Room(10L))
+                        new UserRoom(new UserRoomKey(20L, 10L), new User(20L), new Room(10L)),
+                        new UserRoom(new UserRoomKey(2L, 3L), new User(2L), new Room(3L)),
+                        new UserRoom(new UserRoomKey(20L, 3L), new User(20L), new Room(3L)),
+                        new UserRoom(new UserRoomKey(2L, 4L), new User(2L), new Room(4L)),
+                        new UserRoom(new UserRoomKey(19L, 4L), new User(19L), new Room(4L))
                 ));
             }
 
